@@ -1,7 +1,7 @@
-import { createServer } from 'http'
-import { createApp } from 'h3'
-import serveStatic from 'serve-static'
+import { createApp, sendError } from 'h3'
+import { createServer, IncomingMessage, ServerResponse } from 'http'
 import path from 'path'
+import serveStatic from 'serve-static'
 import { createPageRenderer } from 'vite-plugin-ssr'
 
 const isProduction = process.env.NODE_ENV === 'production'
@@ -10,7 +10,7 @@ const root = path.join(__dirname, '..')
 startServer()
 
 async function startServer() {
-  const app = createApp()
+  const app = createApp({ onError })
 
   let viteDevServer
   if (isProduction) {
@@ -40,4 +40,12 @@ async function startServer() {
   const port = process.env.PORT || 3000
   createServer(app).listen(port)
   console.log(`Server running at http://localhost:${port}`)
+}
+
+function onError(error: Error, req: IncomingMessage, res: ServerResponse) {
+  if (res.headersSent) {
+    res.end()
+    return
+  }
+  sendError(res, error, false)
 }

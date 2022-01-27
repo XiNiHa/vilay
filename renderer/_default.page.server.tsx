@@ -20,9 +20,6 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
   const { initialCompletion, totalCompletion, pipe, getStoreSource } =
     renderReact(pageContext)
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  totalCompletion.catch(() => {}) // ignored for now, I don't have any idea how to handle this
-
   // Merge config's head data and page's head data
   const { pageExports } = pageContext
   const headTags: string[] = []
@@ -67,9 +64,11 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
     documentHtml,
     // Sends Relay store data to client, after the streaming ends.
     // This ensures that the store data is extracted after getting filled with fetched data.
-    pageContext: totalCompletion.then(() => ({
-      relayInitialData: getStoreSource().toJSON(),
-    })),
+    pageContext: totalCompletion
+        .then(() => ({
+          relayInitialData: getStoreSource().toJSON(),
+        }))
+        .catch(() => ({})),
   }
 }
 
