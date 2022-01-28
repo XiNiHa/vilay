@@ -32,12 +32,6 @@ You should have these installed:
 1. Clone this repository.
 2. Run `yarn` to install dependencies.
 
-> Latest version (v13.0.1) of `relay-compiler` has [an issue with ESM in some features](https://github.com/facebook/relay/issues/3726), which breaks pagination in Vite environment.
->
-> This issue was fixed in https://github.com/facebook/relay/commit/8ac91d7e9783af11e0f6aef545d3cb5e206d3372,
-> therefore, before the version with the fix is ready, you can build `facebook/relay/compiler` by yourself and
-> replace the binary at `node_modules/relay-compiler/<OS_ARCH>` to temporarily work around the issue.
-
 ## NPM Scripts
 
 - `dev`: Runs dev server in local. The script is located at `server/index.ts`, and it runs in Node.js.

@@ -32,12 +32,6 @@
 1. 이 저장소를 클론하세요.
 2. `yarn`을 실행해 의존성을 다운받으세요.
 
-> Relay 컴파일러의 현재 최신 버전(v13.0.1)이 [일부 상황에서 ESM을 지원하지 않는 이슈](https://github.com/facebook/relay/issues/3726)가 있어, Vite 환경에서 페이지네이션이 작동하지 않습니다.
->
-> 이 이슈는 https://github.com/facebook/relay/commit/8ac91d7e9783af11e0f6aef545d3cb5e206d3372 에서 수정되었으며,
-> 따라서 수정 사항이 적용된 버전이 출시되기 전까지는 `facebook/relay/compiler`를 직접 컴파일하여
-> `node_modules/relay-compiler/<OS_ARCH>`의 바이너리를 직접 교체하는 방식으로 우회가 가능합니다.
-
 ## NPM 스크립트 목록
 
 - `dev`: 로컬에서 개발 서버를 실행합니다. 해당 스크립트는 `server/index.ts`에 존재하며, Node.js 환경에서 실행됩니다.
