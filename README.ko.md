@@ -71,6 +71,7 @@ renderer/                   # 앱의 기반으로써 사용되는 파일들
   PageShell.tsx             # 각종 Provider들을 포함하는 최상단 컴포넌트
   ReactDOMServer.d.ts       # React 18의 Streaming SSR API에 대한 타입 정의
   RelayEnvironment.tsx      # Relay의 Environment 구성 스크립트
+  routeManager.ts           # vite-plugin-ssr의 라우터와 React를 연동시키기 위한 유틸
   types.ts                  # 각종 공통 타입 정의
   usePageContext.tsx        # vite-plugin-ssr의 PageContext를 위한 Provider와 Hook
 server/

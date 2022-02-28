@@ -71,6 +71,7 @@ renderer/                   # Files used as a base for the app
   PageShell.tsx             # Root component that contains some providers and layout components
   ReactDOMServer.d.ts       # Type definitions for React 18's Streaming SSR API
   RelayEnvironment.tsx      # Relay Environment definition
+  routeManager.ts           # Contains route manager that's for integrating vite-plugin-ssr's router and React
   types.ts                  # Common type definitions
   usePageContext.tsx        # React provider and hook for vite-plugin-ssr's PageContext
 server/

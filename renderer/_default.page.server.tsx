@@ -8,6 +8,7 @@ import { renderToPipeableStream } from 'react-dom/server'
 import type { PageContext } from './types'
 import { initEnvironment } from './RelayEnvironment'
 import preloadQuery from './preloadQuery'
+import { RouteManager } from './routeManager'
 import { PageShell } from './PageShell'
 import config from '../config'
 
@@ -28,8 +29,8 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
     ...pageExports?.documentProps?.head,
     meta: {
       ...config.head.meta,
-      ...pageExports?.documentProps?.head?.meta
-    }
+      ...pageExports?.documentProps?.head?.meta,
+    },
   }
 
   // Add header tags from merged data
@@ -65,10 +66,10 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
     // Sends Relay store data to client, after the streaming ends.
     // This ensures that the store data is extracted after getting filled with fetched data.
     pageContext: totalCompletion
-        .then(() => ({
-          relayInitialData: getStoreSource().toJSON(),
-        }))
-        .catch(() => ({})),
+      .then(() => ({
+        relayInitialData: getStoreSource().toJSON(),
+      }))
+      .catch(() => ({})),
   }
 }
 
@@ -111,9 +112,13 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
   const { pipe, abort: _abort } = renderToPipeableStream(
     <PageShell
       pageContext={pageContext}
-      childComponent={Page}
       relayEnvironment={relayEnvironment}
-      relayQueryRef={relayQueryRef}
+      routeManager={
+        new RouteManager({
+          initialPage: Page,
+          queryRef: relayQueryRef,
+        })
+      }
     />,
     {
       onCompleteAll: () => {

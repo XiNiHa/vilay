@@ -1,29 +1,26 @@
 import React from 'react'
-import {
-  RelayEnvironmentProvider,
-  type Environment,
-  type PreloadedQuery,
-} from 'react-relay'
-import type { OperationType } from 'relay-runtime'
+import { RelayEnvironmentProvider, type Environment } from 'react-relay'
 import { ErrorBoundary } from 'react-error-boundary'
 import type { PageContext } from './types'
+import { RouteManager, useRouteManager } from './routeManager'
 import { PageContextProvider } from './usePageContext'
 import ErrorFallback from './ErrorFallback'
 
 interface Props {
   pageContext: PageContext
   relayEnvironment: Environment
-  relayQueryRef: PreloadedQuery<OperationType> | undefined
-  childComponent: React.FC<{ queryRef?: PreloadedQuery<OperationType> }>
+  routeManager: RouteManager
 }
 
 // Page root component
 export const PageShell: React.FC<Props> = ({
   pageContext,
   relayEnvironment,
-  relayQueryRef,
-  childComponent: ChildComponent,
+  routeManager,
 }) => {
+  const [CurrentPage, queryRef, routeTransitioning] =
+    useRouteManager(routeManager)
+
   const links = {
     '/': 'Home',
     '/repo/xiniha/vite-ssr-relay-template/issues': 'Issues',
@@ -34,6 +31,7 @@ export const PageShell: React.FC<Props> = ({
     <React.StrictMode>
       <RelayEnvironmentProvider environment={relayEnvironment}>
         <PageContextProvider pageContext={pageContext}>
+          <LoadingIndicator transitioning={routeTransitioning} />
           <Layout>
             <Sidebar>
               <h1 className="my-4 text-2xl">
@@ -52,7 +50,7 @@ export const PageShell: React.FC<Props> = ({
             <Content>
               <ErrorBoundary FallbackComponent={ErrorFallback}>
                 <React.Suspense fallback={'Loading...'}>
-                  <ChildComponent queryRef={relayQueryRef} />
+                  {CurrentPage && <CurrentPage queryRef={queryRef} />}
                 </React.Suspense>
               </ErrorBoundary>
             </Content>
@@ -60,6 +58,17 @@ export const PageShell: React.FC<Props> = ({
         </PageContextProvider>
       </RelayEnvironmentProvider>
     </React.StrictMode>
+  )
+}
+
+const LoadingIndicator: React.FC<{ transitioning: boolean }> = ({
+  transitioning,
+}) => {
+  return (
+    <div
+      className="absolute left-0 right-0 top-0 h-2 bg-green-200 transition-opacity duration-300"
+      style={{ opacity: transitioning ? 100 : 0 }}
+    />
   )
 }
 
