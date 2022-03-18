@@ -1310,14 +1310,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-relay@npm:^13.0.2":
-  version: 13.0.2
-  resolution: "babel-plugin-relay@npm:13.0.2"
+"babel-plugin-relay@npm:^13.2.0":
+  version: 13.2.0
+  resolution: "babel-plugin-relay@npm:13.2.0"
   dependencies:
     babel-plugin-macros: ^2.0.0
     cosmiconfig: ^5.0.5
     graphql: 15.3.0
-  checksum: 6a0d5049bd56635dd47d29a70719f2379d4cf93154714fd0f379e7c267305caf6fdfa87ea86118f6ce80a361cd4016e198eb73615f7c32fca946e289f2f8fa10
+  checksum: 6f4e5203db933d7944e79bb3aff3a99ae4a3a45887e80a08ac81a26015146fdeb4481f306f2644e153c86b97b9d5e15d2ddca8b7b72d23e41f09b1b0055add60
   languageName: node
   linkType: hard
 
@@ -3493,7 +3493,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-assign@npm:^4.1.0, object-assign@npm:^4.1.1":
+"object-assign@npm:^4.1.0":
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
   checksum: fcc6e4ea8c7fe48abfbb552578b1c53e0d194086e2e6bbbf59e0a536381a292f39943c6e9628af05b5528aa5e3318bb30d6b2e53cadaf5b8fe9e12c4b69af23f
@@ -3756,15 +3756,14 @@ __metadata:
   linkType: hard
 
 "react-dom@npm:rc":
-  version: 18.0.0-rc.0
-  resolution: "react-dom@npm:18.0.0-rc.0"
+  version: 18.0.0-rc.2
+  resolution: "react-dom@npm:18.0.0-rc.2"
   dependencies:
     loose-envify: ^1.1.0
-    object-assign: ^4.1.1
-    scheduler: ^0.21.0-rc.0
+    scheduler: ^0.21.0-rc.2
   peerDependencies:
-    react: ^18.0.0-rc.0
-  checksum: 713db349fad704527d328275d43c57ca670c801a6592e5f308c5572a7559540d0dcfc0b065a878cea4764f742d27fb2ed1065092ca40589759d5b51ecce6773b
+    react: ^18.0.0-rc.2
+  checksum: d22c2b7c84cb351b30b9d1542f5aafa7e45ab4c7d040dacc0a42f539a2606f92250530aaaffde8828bddf06f0645930ca9b260b932645fc2e824c6cba00b97d7
   languageName: node
   linkType: hard
 
@@ -3786,28 +3785,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-relay@npm:^13.0.2":
-  version: 13.0.2
-  resolution: "react-relay@npm:13.0.2"
+"react-relay@npm:^13.2.0":
+  version: 13.2.0
+  resolution: "react-relay@npm:13.2.0"
   dependencies:
     "@babel/runtime": ^7.0.0
     fbjs: ^3.0.2
     invariant: ^2.2.4
     nullthrows: ^1.1.1
-    relay-runtime: 13.0.2
+    relay-runtime: 13.2.0
   peerDependencies:
-    react: ^16.9.0 || ^17
-  checksum: c3f837eebe2a51474e1a9199c193b6cd2fd68a0f74f4680ca3b500dcdb709948372b5631bacd114c04a4cc034c83f8f077d8aab77e509e4032788ad5e16e167c
+    react: ^16.9.0 || ^17 || ^18
+  checksum: 2fcf09cc9f7799c2c27f8a931e103651f26077088320e994e17171ffd18a249a5a64e0d314330497e3ed0530579b1987506df89fd5fb4e391d4e4bc4b66312ee
   languageName: node
   linkType: hard
 
 "react@npm:rc":
-  version: 18.0.0-rc.0
-  resolution: "react@npm:18.0.0-rc.0"
+  version: 18.0.0-rc.2
+  resolution: "react@npm:18.0.0-rc.2"
   dependencies:
     loose-envify: ^1.1.0
-    object-assign: ^4.1.1
-  checksum: bb886ab411d7732ca8aace98bf0015a31f30b010bd674accdbbf4a474429b656b4463a58e677f33972bab9b820e949765e27fc6c468b13833b515e50b2d0b999
+  checksum: 9f12332e68d87b91bbb4e4cb857b486b04aed321f327a14f440226b6ef0fc8ea2f368ac75b33f4052a97fcb989db9ec7aa83adadd99eb1ad546f3fedc3363c26
   languageName: node
   linkType: hard
 
@@ -3845,23 +3843,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"relay-compiler@npm:^13.0.2":
-  version: 13.0.2
-  resolution: "relay-compiler@npm:13.0.2"
+"relay-compiler@npm:^13.2.0":
+  version: 13.2.0
+  resolution: "relay-compiler@npm:13.2.0"
   bin:
     relay-compiler: cli.js
-  checksum: 72ddca947a59398b7c5a6b7405884e9d03d750609b7b5d23e7779f5fc4e1c86d04b41cef64c5974c2cebd884a769d9c5bd394a21e4fc87ba231bd04b9a42d27a
+  checksum: 54adaf22ef408c7452ae6a27538730fe30f47449a2c129e26fc0b8667abc3faba7862b386d5658b0c5dcfe1a9bc3bcf400ede6f0fdd07a6c24366a4b4a4e0739
   languageName: node
   linkType: hard
 
-"relay-runtime@npm:13.0.2, relay-runtime@npm:^13.0.2":
-  version: 13.0.2
-  resolution: "relay-runtime@npm:13.0.2"
+"relay-runtime@npm:13.2.0, relay-runtime@npm:^13.2.0":
+  version: 13.2.0
+  resolution: "relay-runtime@npm:13.2.0"
   dependencies:
     "@babel/runtime": ^7.0.0
     fbjs: ^3.0.2
     invariant: ^2.2.4
-  checksum: d91966af3a13bacb7060bf41167af56906965751578e5f10f890eded42aeaf0962a9f254476b2abbb84f6082c01671a936a0f54bd2a20988a1658d3d9f616df4
+  checksum: 4e03d5d3fabb12bd2e5f29da4e4664336af4077b215893e5e6cf4256e4b8f56a6ad1693b75465f1f6118bc682456714404e3f0fcdd51b5b6433a2ddd63ba8160
   languageName: node
   linkType: hard
 
@@ -3963,9 +3961,9 @@ __metadata:
     react: rc
     react-dom: rc
     react-error-boundary: ^3.1.4
-    react-relay: ^13.0.2
-    relay-compiler: ^13.0.2
-    relay-runtime: ^13.0.2
+    react-relay: ^13.2.0
+    relay-compiler: ^13.2.0
+    relay-runtime: ^13.2.0
     serve-static: ^1.14.2
     typescript: ^4.5.4
     unocss: ^0.22.4
@@ -4005,13 +4003,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.21.0-rc.0":
-  version: 0.21.0-rc.0-next-f2a59df48-20211208
-  resolution: "scheduler@npm:0.21.0-rc.0-next-f2a59df48-20211208"
+"scheduler@npm:^0.21.0-rc.2":
+  version: 0.21.0-rc.2-next-b9de50d2f-20220308
+  resolution: "scheduler@npm:0.21.0-rc.2-next-b9de50d2f-20220308"
   dependencies:
     loose-envify: ^1.1.0
-    object-assign: ^4.1.1
-  checksum: 77b5bea0d3c0399e1d98fceb27368312c3cff5be49becd5ac81414155b6d8d04dd6ba8552d6bc5fa038b95b351e7134f02a653b5bebc9ed1548d70e2ea26f7d7
+  checksum: 760b89623a0589727e7f2ae8eec5f34f3dde60e7fc762f8d86ce7ccccd28991479a2599a02d19f00aecda4b60aafb25f8e32f845c1f2c9dbd9bfbec6f9dea6e7
   languageName: node
   linkType: hard
 

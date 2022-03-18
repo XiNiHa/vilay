@@ -14,8 +14,8 @@ declare module 'react-dom/server' {
       bootstrapScripts?: string[]
       bootstrapModules?: string[]
       progressiveChunkSize?: number
-      onCompleteShell?: () => void
-      onCompleteAll?: () => void
+      onShellReady?: () => void
+      onAllReady?: () => void
       onError?: (error: Error) => void
     }
   ): {

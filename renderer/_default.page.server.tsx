@@ -121,7 +121,7 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
       }
     />,
     {
-      onCompleteAll: () => {
+      onAllReady: () => {
         // If the initial promise isn't resolved until total completion, resolve it.
         if (!initialResolved) resolveInitial()
         if (!totalResolved) resolveTotal()
