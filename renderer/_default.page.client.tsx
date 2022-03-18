@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom'
+import ReactDOMClient from 'react-dom/client'
 import type { Environment } from 'react-relay'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
 import { useClientRouter } from 'vite-plugin-ssr/client/router'
@@ -10,7 +10,7 @@ import { RouteManager } from './routeManager'
 import '@unocss/reset/tailwind.css'
 import 'uno.css'
 
-let containerRoot: ReactDOM.Root | null = null
+let containerRoot: ReactDOMClient.Root | null = null
 let relayEnvironment: Environment | null = null
 let routeManager: RouteManager | null = null
 
@@ -49,9 +49,9 @@ useClientRouter({
           'Element with id "page-view" not found, which was expected to be a container root.'
         )
       if (pageContext.isHydration) {
-        containerRoot = ReactDOM.hydrateRoot(container, page)
+        containerRoot = ReactDOMClient.hydrateRoot(container, page)
       } else {
-        containerRoot = ReactDOM.createRoot(container)
+        containerRoot = ReactDOMClient.createRoot(container)
       }
     }
   },
