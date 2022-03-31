@@ -13,13 +13,12 @@ import { PageShell } from './PageShell'
 import config from '../config'
 
 // Only props listed here are passed to client's PageContext, see https://vite-plugin-ssr.com/passToClient for more info.
-export const passToClient = ['routeParams', 'relayInitialData']
+export const passToClient = ['routeParams']
 
 // This is the main render function that is called by vite-plugin-ssr.
 export async function render(pageContext: PageContextBuiltIn & PageContext) {
   // Performs React Streaming SSR
-  const { initialCompletion, totalCompletion, pipe, getStoreSource } =
-    renderReact(pageContext)
+  const { initialCompletion, totalCompletion, pipe } = renderReact(pageContext)
 
   // Merge config's head data and page's head data
   const { pageExports } = pageContext
@@ -46,7 +45,7 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
 
   // This awaits for initial completion of streaming rendering.
   // Max wait time is `config.ssr.initialSendTimeout`, it will end early if there's no part suspended.
-  await initialCompletion
+  // await initialCompletion
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">
@@ -63,13 +62,7 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
 
   return {
     documentHtml,
-    // Sends Relay store data to client, after the streaming ends.
-    // This ensures that the store data is extracted after getting filled with fetched data.
-    pageContext: totalCompletion
-      .then(() => ({
-        relayInitialData: getStoreSource().toJSON(),
-      }))
-      .catch(() => ({})),
+    pageContext: totalCompletion.then(() => ({})).catch(() => ({})),
   }
 }
 
@@ -80,7 +73,7 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
   // Initialize server-side Relay environment
   const relayEnvironment = initEnvironment(true)
   // Preload query for the page to render.
-  const relayQueryRef = preloadQuery(pageContext, relayEnvironment)
+  const { variables } = preloadQuery(pageContext, relayEnvironment) ?? {}
 
   // Variables for storing promise resolve/reject functions and states.
   let resolveInitial: () => void
@@ -116,7 +109,7 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
       routeManager={
         new RouteManager({
           initialPage: Page,
-          queryRef: relayQueryRef,
+          variables,
         })
       }
     />,

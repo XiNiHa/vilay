@@ -19,7 +19,7 @@ export const PageShell: React.FC<Props> = ({
   relayEnvironment,
   routeManager,
 }) => {
-  const [CurrentPage, queryRef, routeTransitioning] =
+  const [CurrentPage, variables, routeTransitioning] =
     useRouteManager(routeManager)
 
   const links = {
@@ -52,7 +52,7 @@ export const PageShell: React.FC<Props> = ({
             <Content>
               <ErrorBoundary FallbackComponent={ErrorFallback}>
                 <Suspense fallback={'Loading...'}>
-                  {CurrentPage && <CurrentPage queryRef={queryRef} />}
+                  {CurrentPage && <CurrentPage variables={variables} />}
                 </Suspense>
               </ErrorBoundary>
             </Content>

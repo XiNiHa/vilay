@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, type PreloadedQuery } from 'react-relay'
 import { indexPageQuery } from './__generated__/indexPageQuery.graphql'
-import { usePreloadedQuery } from '../renderer/relayWrapper'
+import { useLazyLoadQuery } from '../renderer/relayWrapper'
 
 interface Props {
   queryRef: PreloadedQuery<indexPageQuery>
@@ -24,9 +24,9 @@ export const query = graphql`
 `
 
 // Basic data fetching example using Relay.
-export const Page: React.FC<Props> = ({ queryRef }) => {
+export const Page: React.FC<Props> = () => {
   // This will either pull the preloaded data or suspend.
-  const data = usePreloadedQuery<indexPageQuery>(query, queryRef)
+  const data = useLazyLoadQuery<indexPageQuery>(query, {})
 
   const listItems = [
     <>Name: {data.repository?.name}</>,

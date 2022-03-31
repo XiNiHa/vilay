@@ -3,7 +3,7 @@ import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
 import { useClientRouter } from 'vite-plugin-ssr/client/router'
 import type { PageContext } from './types'
 import { initEnvironment } from './RelayEnvironment' 
-import preloadQuery from './preloadQuery'
+import { getQueryVariables } from './preloadQuery'
 import { PageShell } from './PageShell'
 import { RouteManager } from './routeManager'
 import './bootstrap'
@@ -23,12 +23,12 @@ useClientRouter({
 
     // Load the query needed for the page. 
     // Preloading through links is not supported yet, see https://github.com/brillout/vite-plugin-ssr/issues/246 for details.
-    const relayQueryRef = preloadQuery(pageContext, window.relayEnv)
+    const variables = getQueryVariables(pageContext)
 
     // Create a new route manager if haven't.
     routeManager ??= new RouteManager()
     // Update the route manager with the new route.
-    routeManager.setPage(Page, relayQueryRef)
+    routeManager.setPage(Page, variables)
 
     // If not initially hydrated/rendered, hydrate/render the page with React.
     if (!containerRoot) {

@@ -2,10 +2,20 @@ import React from 'react'
 import {
   useRelayEnvironment,
   usePreloadedQuery,
-  GraphQLTaggedNode,
-  PreloadedQuery,
+  useLazyLoadQuery,
+  type PreloadedQuery,
 } from 'react-relay'
-import type { Environment, OperationType, RenderPolicy } from 'relay-runtime'
+import type {
+  GraphQLTaggedNode,
+  CacheConfig,
+  Environment,
+  FetchPolicy,
+  OperationType,
+  RenderPolicy,
+  VariablesOf,
+} from 'relay-runtime'
+
+const InjectionStateMap = new Map<string, true | Promise<unknown> | null>()
 
 const getInjectionScript = (env: Environment) => {
   const data = JSON.stringify(env.getStore().getSource())
@@ -14,8 +24,7 @@ const getInjectionScript = (env: Environment) => {
 
 const Context = React.createContext<{
   handler: ((p: Promise<unknown>) => unknown) | null
-  state: Promise<unknown> | true | null,
-}>({ handler: null, state: null })
+}>({ handler: null })
 
 const WrappedSuspense: React.FC<{ fallback: React.ReactNode }> = ({
   fallback,
@@ -27,7 +36,7 @@ const WrappedSuspense: React.FC<{ fallback: React.ReactNode }> = ({
   }, [])
 
   return (
-    <Context.Provider value={{ handler, state: null }}>
+    <Context.Provider value={{ handler }}>
       <React.Suspense fallback={fallback ?? null}>
         {children}
         <InjectionScript promises={() => loadPromises.current} />
@@ -39,21 +48,30 @@ const WrappedSuspense: React.FC<{ fallback: React.ReactNode }> = ({
 const InjectionScript: React.FC<{
   promises: () => (Promise<unknown> | null)[]
 }> = ({ promises }) => {
-  const context = React.useContext(Context)
-  const resolved = React.useRef<boolean>(false)
-  if (promises().length > 0 && !resolved.current) {
-    if (!context.state) {
-      context.state =
-        Promise.all(promises().filter(Boolean))
-          .then(() => new Promise((resolve) => setTimeout(resolve, 2000)))
-          .then(() => context.state = true)
+  const id = React.useId()
+  const isInitialRender = React.useRef(true)
+  if (promises().length > 0) {
+    let state = InjectionStateMap.get(id)
+    if (!state) {
+      state = Promise.all(promises().filter(Boolean))
+        // .then(() => new Promise((resolve) => setTimeout(resolve, 2000)))
+        .then(() => InjectionStateMap.set(id, true))
+      InjectionStateMap.set(id, state)
     }
-    if (context.state !== true) throw context.state
+    if (state !== true) throw state
   }
   const relayEnvironment = useRelayEnvironment()
+  const isServer = typeof window === 'undefined'
+
+  if (isServer) InjectionStateMap.delete(id)
+  React.useEffect(() => { InjectionStateMap.delete(id) })
+  
+  const renderScript = isServer || isInitialRender.current
+  React.useEffect(() => { isInitialRender.current = false }, [])
 
   return (
-    relayEnvironment && (
+    relayEnvironment &&
+    (renderScript || null) && (
       <script
         dangerouslySetInnerHTML={{
           __html: getInjectionScript(relayEnvironment),
@@ -79,7 +97,27 @@ const useWrappedPreloadedQuery = <TQuery extends OperationType>(
   }
 }
 
+const useWrappedLazyLoadQuery = <TQuery extends OperationType>(
+  gqlQuery: GraphQLTaggedNode,
+  variables: VariablesOf<TQuery>,
+  options?: {
+    fetchKey?: string | number | undefined
+    fetchPolicy?: FetchPolicy | undefined
+    networkCacheConfig?: CacheConfig | undefined
+    UNSTABLE_renderPolicy?: RenderPolicy | undefined
+  }
+) => {
+  const context = React.useContext(Context)
+  try {
+    return useLazyLoadQuery(gqlQuery, variables, options)
+  } catch (e) {
+    if (e instanceof Promise) context.handler?.(e)
+    throw e
+  }
+}
+
 export {
   WrappedSuspense as Suspense,
   useWrappedPreloadedQuery as usePreloadedQuery,
+  useWrappedLazyLoadQuery as useLazyLoadQuery,
 }

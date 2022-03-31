@@ -1,16 +1,15 @@
 import React from 'react'
-import {
-  graphql,
-  usePreloadedQuery,
-  useMutation,
-  type PreloadedQuery,
-} from 'react-relay'
+import { graphql, useMutation } from 'react-relay'
+import { useLazyLoadQuery } from '../renderer/relayWrapper'
 import Button from '../components/Button'
-import type { createIssueQuery } from './__generated__/createIssueQuery.graphql'
+import type {
+  createIssueQuery,
+  createIssueQuery$variables,
+} from './__generated__/createIssueQuery.graphql'
 import type { createIssueMutation } from './__generated__/createIssueMutation.graphql'
 
 interface Props {
-  queryRef: PreloadedQuery<createIssueQuery>
+  variables: createIssueQuery$variables
 }
 
 // Query for fetching the repository's ID.
@@ -23,8 +22,8 @@ export const query = graphql`
 `
 
 // Basic mutation example using Relay.
-export const Page: React.FC<Props> = ({ queryRef }) => {
-  const data = usePreloadedQuery<createIssueQuery>(query, queryRef)
+export const Page: React.FC<Props> = ({ variables }) => {
+  const data = useLazyLoadQuery<createIssueQuery>(query, variables)
   const [commit, isInFlight] = useMutation<createIssueMutation>(graphql`
     mutation createIssueMutation($input: CreateIssueInput!) {
       createIssue(input: $input) {
