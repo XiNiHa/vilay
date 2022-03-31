@@ -7,8 +7,6 @@ import {
 } from 'react-relay'
 import type { Environment, OperationType, RenderPolicy } from 'relay-runtime'
 
-const InjectionStateMap = new Map<string, true | Promise<unknown> | null>()
-
 const getInjectionScript = (env: Environment) => {
   const data = JSON.stringify(env.getStore().getSource())
   return `var d=${data};window.$updateRelay?window.$updateRelay(d):window.$caches=[].concat(window.$caches||[],d)`
@@ -16,7 +14,8 @@ const getInjectionScript = (env: Environment) => {
 
 const Context = React.createContext<{
   handler: ((p: Promise<unknown>) => unknown) | null
-}>({ handler: null })
+  state: Promise<unknown> | true | null,
+}>({ handler: null, state: null })
 
 const WrappedSuspense: React.FC<{ fallback: React.ReactNode }> = ({
   fallback,
@@ -28,7 +27,7 @@ const WrappedSuspense: React.FC<{ fallback: React.ReactNode }> = ({
   }, [])
 
   return (
-    <Context.Provider value={{ handler }}>
+    <Context.Provider value={{ handler, state: null }}>
       <React.Suspense fallback={fallback ?? null}>
         {children}
         <InjectionScript promises={() => loadPromises.current} />
@@ -40,21 +39,17 @@ const WrappedSuspense: React.FC<{ fallback: React.ReactNode }> = ({
 const InjectionScript: React.FC<{
   promises: () => (Promise<unknown> | null)[]
 }> = ({ promises }) => {
+  const context = React.useContext(Context)
   const resolved = React.useRef<boolean>(false)
-  const id = React.useId()
   if (promises().length > 0 && !resolved.current) {
-    if (!InjectionStateMap.has(id)) {
-      InjectionStateMap.set(
-        id,
+    if (!context.state) {
+      context.state =
         Promise.all(promises().filter(Boolean))
           .then(() => new Promise((resolve) => setTimeout(resolve, 2000)))
-          .then(() => InjectionStateMap.set(id, true))
-      )
+          .then(() => context.state = true)
     }
-    const state = InjectionStateMap.get(id)
-    if (state !== true) throw state
+    if (context.state !== true) throw context.state
   }
-  InjectionStateMap.delete(id)
   const relayEnvironment = useRelayEnvironment()
 
   return (
