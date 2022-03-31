@@ -2,7 +2,7 @@ import ReactDOMClient from 'react-dom/client'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
 import { useClientRouter } from 'vite-plugin-ssr/client/router'
 import type { PageContext } from './types'
-import { initEnvironment } from './RelayEnvironment' 
+import { initEnvironment } from './RelayEnvironment'
 import { getQueryVariables } from './preloadQuery'
 import { PageShell } from './PageShell'
 import { RouteManager } from './routeManager'
@@ -21,7 +21,7 @@ useClientRouter({
 
     window.relayEnv ??= initEnvironment(false)
 
-    // Load the query needed for the page. 
+    // Load the query needed for the page.
     // Preloading through links is not supported yet, see https://github.com/brillout/vite-plugin-ssr/issues/246 for details.
     const variables = getQueryVariables(pageContext)
 
