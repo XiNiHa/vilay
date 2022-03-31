@@ -4,7 +4,7 @@ import IssueListComponent from '../components/issues/IssueList'
 import type { GetQueryVariables } from '../renderer/types'
 import type {
   issuesPageQuery,
-  issuesPageQueryVariables,
+  issuesPageQuery$variables,
 } from './__generated__/issuesPageQuery.graphql'
 
 interface Props {
@@ -20,7 +20,7 @@ interface RouteParams {
 // If it's not exported, route params will be directly used as variables.
 export const getQueryVariables: GetQueryVariables<
   RouteParams,
-  issuesPageQueryVariables
+  issuesPageQuery$variables
 > = (routeParams) => ({
   ...routeParams,
   first: 10,

@@ -1136,7 +1136,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react@npm:^1.1.4":
+"@vitejs/plugin-react@npm:1.1.4":
   version: 1.1.4
   resolution: "@vitejs/plugin-react@npm:1.1.4"
   dependencies:
@@ -1149,6 +1149,22 @@ __metadata:
     react-refresh: ^0.11.0
     resolve: ^1.20.0
   checksum: a0362c3cd6e393ba224436a6d1597dab2b49d32eb608eb562d4672c3899d24cf1b0dde94676da1055a63838c676365c3c1110955b8c8d10a2b98e9543d6ba582
+  languageName: node
+  linkType: hard
+
+"@vitejs/plugin-react@patch:@vitejs/plugin-react@npm:1.1.4#.yarn/patches/@vitejs-plugin-react-npm-1.1.4-a08a54ae19::locator=root-workspace-0b6124%40workspace%3A.":
+  version: 1.1.4
+  resolution: "@vitejs/plugin-react@patch:@vitejs/plugin-react@npm%3A1.1.4#.yarn/patches/@vitejs-plugin-react-npm-1.1.4-a08a54ae19::version=1.1.4&hash=4eea41&locator=root-workspace-0b6124%40workspace%3A."
+  dependencies:
+    "@babel/core": ^7.16.5
+    "@babel/plugin-transform-react-jsx": ^7.16.5
+    "@babel/plugin-transform-react-jsx-development": ^7.16.5
+    "@babel/plugin-transform-react-jsx-self": ^7.16.5
+    "@babel/plugin-transform-react-jsx-source": ^7.16.5
+    "@rollup/pluginutils": ^4.1.2
+    react-refresh: ^0.11.0
+    resolve: ^1.20.0
+  checksum: d720c23ceabc4b12a3a5831d20b266a622dfa55c19f2d989695afc546486eff87b5af5dc83598b3ee0e5c1375e422125d32924225cef1a80a18200089b286156
   languageName: node
   linkType: hard
 

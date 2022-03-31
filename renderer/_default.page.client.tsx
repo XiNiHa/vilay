@@ -1,31 +1,29 @@
 import ReactDOMClient from 'react-dom/client'
-import type { Environment } from 'react-relay'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
 import { useClientRouter } from 'vite-plugin-ssr/client/router'
 import type { PageContext } from './types'
-import { initEnvironment } from './RelayEnvironment'
+import { initEnvironment } from './RelayEnvironment' 
 import preloadQuery from './preloadQuery'
 import { PageShell } from './PageShell'
 import { RouteManager } from './routeManager'
+import './bootstrap'
 import '@unocss/reset/tailwind.css'
 import 'uno.css'
 
 let containerRoot: ReactDOMClient.Root | null = null
-let relayEnvironment: Environment | null = null
 let routeManager: RouteManager | null = null
 
 // Use vite-plugin-ssr's client router.
 useClientRouter({
   // `render()` is called on every navigation.
   render(pageContext: PageContextBuiltInClient & PageContext) {
-    const { Page, relayInitialData } = pageContext
+    const { Page } = pageContext
 
-    if (!relayEnvironment)
-      relayEnvironment = initEnvironment(false, relayInitialData)
+    window.relayEnv ??= initEnvironment(false)
 
-    // Load the query needed for the page.
+    // Load the query needed for the page. 
     // Preloading through links is not supported yet, see https://github.com/brillout/vite-plugin-ssr/issues/246 for details.
-    const relayQueryRef = preloadQuery(pageContext, relayEnvironment)
+    const relayQueryRef = preloadQuery(pageContext, window.relayEnv)
 
     // Create a new route manager if haven't.
     routeManager ??= new RouteManager()
@@ -37,7 +35,7 @@ useClientRouter({
       const page = (
         <PageShell
           pageContext={pageContext}
-          relayEnvironment={relayEnvironment}
+          relayEnvironment={window.relayEnv}
           routeManager={routeManager}
         />
       )

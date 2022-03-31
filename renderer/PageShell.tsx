@@ -5,6 +5,7 @@ import type { PageContext } from './types'
 import { RouteManager, useRouteManager } from './routeManager'
 import { PageContextProvider } from './usePageContext'
 import ErrorFallback from './ErrorFallback'
+import { Suspense } from './relayWrapper'
 
 interface Props {
   pageContext: PageContext
@@ -37,6 +38,7 @@ export const PageShell: React.FC<Props> = ({
               <h1 className="my-4 text-2xl">
                 Vite Plugin SSR + React 18 + Relay
               </h1>
+              <ShellCounter />
               {Object.entries(links).map(([href, text]) => (
                 <a
                   href={href}
@@ -49,9 +51,9 @@ export const PageShell: React.FC<Props> = ({
             </Sidebar>
             <Content>
               <ErrorBoundary FallbackComponent={ErrorFallback}>
-                <React.Suspense fallback={'Loading...'}>
+                <Suspense fallback={'Loading...'}>
                   {CurrentPage && <CurrentPage queryRef={queryRef} />}
-                </React.Suspense>
+                </Suspense>
               </ErrorBoundary>
             </Content>
           </Layout>
@@ -87,3 +89,9 @@ const Content: React.FC = ({ children }) => (
     {children}
   </div>
 )
+
+const ShellCounter: React.FC = () => {
+  const [count, setCount] = React.useState(0)
+
+  return <button className="bg-gray-400 px-4" onClick={() => setCount(count + 1)}>{count}</button>
+}
