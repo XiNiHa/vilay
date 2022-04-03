@@ -24,7 +24,10 @@ const IssueComponent: React.FC<Props> = ({ issue }) => {
 
   return (
     <div>
-      <a href={data.url} className="text-lg underline transition-colors hover:text-gray-500">
+      <a
+        href={data.url}
+        className="text-lg underline transition-colors hover:text-gray-500"
+      >
         <h3>{data.title}</h3>
       </a>
       <p>{data.author?.login}</p>

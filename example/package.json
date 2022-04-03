@@ -1,0 +1,23 @@
+{
+  "name": "vite-ssr-relay-example",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "relay": "relay-compiler",
+    "dev": "vite-ssr-relay dev",
+    "build": "vite-ssr-relay build",
+    "preview": "vite-ssr-relay preview"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-relay": "^13.2.0",
+    "relay-runtime": "^13.2.0",
+    "vite-ssr-relay": "workspace:^*"
+  },
+  "devDependencies": {
+    "@unocss/reset": "^0.30.8",
+    "relay-compiler": "^13.2.0",
+    "unocss": "^0.30.8"
+  }
+}

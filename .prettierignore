@@ -1,3 +1,4 @@
 .vscode/
 .yarn/
 dist/
+__generated__/

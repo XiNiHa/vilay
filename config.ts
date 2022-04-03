@@ -5,7 +5,7 @@ export default {
     title: 'Vite SSR app',
     meta: {
       description: 'App using Vite + vite-plugin-ssr',
-    }
+    },
   },
   ssr: {
     initialSendTimeout: 0,
