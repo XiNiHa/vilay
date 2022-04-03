@@ -81,8 +81,7 @@ function rendererPlugin(): PluginOption {
           const pageContext = await renderPage(pageContextInit)
           const { httpResponse } = pageContext
           if (!httpResponse) return next()
-          const stream = await httpResponse.getNodeStream()
-          stream.pipe(res)
+          httpResponse.pipeToNodeWritable(res)
         })
       }
     },

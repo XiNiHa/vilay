@@ -1,3 +1,4 @@
 declare module 'babel-plugin-relay' {
-  export default () => unknown  
+  const plugin: () => unknown
+  export default plugin
 }

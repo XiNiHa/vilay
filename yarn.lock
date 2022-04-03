@@ -4578,16 +4578,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-glob@npm:^0.2.3":
-  version: 0.2.3
-  resolution: "vite-plugin-glob@npm:0.2.3"
+"vite-plugin-glob@npm:^0.2.5":
+  version: 0.2.5
+  resolution: "vite-plugin-glob@npm:0.2.5"
   dependencies:
     acorn: ^8.7.0
     fast-glob: ^3.2.11
     magic-string: ^0.26.1
     micromatch: ^4.0.5
     ufo: ^0.8.1
-  checksum: 3ed81a2915f42e596ccade4819cbfed29245000e147726cc74fdd05c49ebec90446e55e31f16b082b6f923707bffecc08a00c78773b3b085f168f06ce6a2af49
+  checksum: 144fe9fe2dda768eda79187eff8605242fd885db7e963c81fec4a5995744466cda18e56a3f43d8b1fa65c6b70870950cfc75b3b16c6d704e7e965450c28eb3e9
   languageName: node
   linkType: hard
 
@@ -4610,9 +4610,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-ssr@npm:^0.4.0-beta.2":
-  version: 0.4.0-beta.2
-  resolution: "vite-plugin-ssr@npm:0.4.0-beta.2"
+"vite-plugin-ssr@npm:^0.4.0-beta.4":
+  version: 0.4.0-beta.4
+  resolution: "vite-plugin-ssr@npm:0.4.0-beta.4"
   dependencies:
     "@brillout/json-s": ^0.4.3
     "@brillout/libassert": ^0.5.4
@@ -4623,13 +4623,13 @@ __metadata:
     p-limit: ^3.1.0
     resolve: ^1.22.0
     symlink-dir: ^5.0.1
-    vite-plugin-glob: ^0.2.3
+    vite-plugin-glob: ^0.2.5
     vite-plugin-import-build: ^0.1.3
   peerDependencies:
     vite: ^2.8.4
   bin:
     vite-plugin-ssr: node/bin/vite-plugin-ssr.js
-  checksum: 2fb9e1b2e1553c56af73cd95b2f9056f30065d091470cc3149bb8ceb2ad3273d8677fcbb4cea67aa8d97ee140434f7e4e4f2d0bae2d0a19b56ec402b36311164
+  checksum: 8715a4f58759f87c7486d7245a025cdf79c0db4bf4e984fd855708f3dac2aed32018c8518bbf5b5568ca005570d610235c77d95c7864eaac126913ed94589ce1
   languageName: node
   linkType: hard
 
@@ -4680,7 +4680,7 @@ __metadata:
     typescript: ^4.6.3
     vite: ^2.9.1
     vite-plugin-relay: ^1.0.7
-    vite-plugin-ssr: ^0.4.0-beta.2
+    vite-plugin-ssr: ^0.4.0-beta.4
     yargs: ^17.4.0
   peerDependencies:
     react: ^18.0.0

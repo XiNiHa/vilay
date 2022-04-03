@@ -9,8 +9,11 @@ import { RouteManager } from './routeManager'
 import '@unocss/reset/tailwind.css'
 import 'uno.css'
 
+let containerRoot: ReactDOMClient.Root | null = null
 let relayEnvironment: Environment | null = null
 let routeManager: RouteManager | null = null
+
+export const clientRouting = true
 
 // `render()` is called on every navigation.
 export async function render(
@@ -30,19 +33,27 @@ export async function render(
   // Update the route manager with the new route.
   routeManager.setPage(Page, relayQueryRef)
 
-  const page = (
-    <PageShell
-      pageContext={pageContext}
-      relayEnvironment={relayEnvironment}
-      routeManager={routeManager}
-    />
-  )
-
-  // Hydrate the page.
-  const container = document.getElementById('page-view')
-  if (!container)
-    throw new Error(
-      'Element with id "page-view" not found, which was expected to be a container root.'
+  if (!containerRoot) {
+    const page = (
+      <PageShell
+        pageContext={pageContext}
+        relayEnvironment={relayEnvironment}
+        routeManager={routeManager}
+      />
     )
-  ReactDOMClient.hydrateRoot(container, page)
+
+    // Hydrate the page.
+    const container = document.getElementById('page-view')
+    if (!container)
+      throw new Error(
+        'Element with id "page-view" not found, which was expected to be a container root.'
+      )
+
+    if (pageContext.isHydration) {
+      containerRoot = ReactDOMClient.hydrateRoot(container, page)
+    } else {
+      containerRoot = ReactDOMClient.createRoot(container)
+      containerRoot.render(page)
+    }
+  }
 }

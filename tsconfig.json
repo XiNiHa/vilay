@@ -11,5 +11,9 @@
     "skipLibCheck": true,
     "esModuleInterop": true
   },
-  "exclude": ["./dist/**/*", "./example/**/*"]
+  "include": [
+    "cli.ts",
+    "plugin.ts",
+    "babelPluginRelay.d.ts"
+  ]
 }

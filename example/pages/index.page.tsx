@@ -42,17 +42,17 @@ export const Page: React.FC<Props> = ({ queryRef }) => {
       <p>
         This is the main page for the template, rendered with some of the actual
         information about the template repository:
-        <ul className="pl-4">
-          {listItems.map((item, i) => (
-            <li
-              key={i}
-              className="my-2 w-fit list-disc border-b border-black border-dashed hover:bg-blue-50 transition-colors duration-400"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
       </p>
+      <ul className="pl-4">
+        {listItems.map((item, i) => (
+          <li
+            key={i}
+            className="my-2 w-fit list-disc border-b border-black border-dashed hover:bg-blue-50 transition-colors duration-400"
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
     </>
   )
 }
