@@ -1,5 +1,5 @@
+import { join } from 'node:path'
 import { CompatibilityEvent, createApp, sendError } from 'h3'
-import { join } from 'path'
 import serveStatic from 'serve-static'
 import { renderPage } from 'vite-plugin-ssr'
 
