@@ -6,8 +6,6 @@ import { initEnvironment } from './RelayEnvironment'
 import preloadQuery from './preloadQuery'
 import { PageShell } from './PageShell'
 import { RouteManager } from './routeManager'
-import '@unocss/reset/tailwind.css'
-import 'uno.css'
 
 let containerRoot: ReactDOMClient.Root | null = null
 let relayEnvironment: Environment | null = null
