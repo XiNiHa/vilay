@@ -6,7 +6,8 @@
     "example"
   ],
   "exports": {
-    "./plugin": "./dist/plugin.js"
+    "./plugin": "./dist/plugin.js",
+    "./types": "./dist/types.js"
   },
   "bin": "./dist/cli.js",
   "scripts": {

@@ -5,7 +5,7 @@ import {
   type PageContextBuiltIn,
 } from 'vite-plugin-ssr'
 import { renderToPipeableStream } from 'react-dom/server'
-import type { PageContext } from './types'
+import type { PageContext } from '../types'
 import { initEnvironment } from './RelayEnvironment'
 import preloadQuery from './preloadQuery'
 import { RouteManager } from './routeManager'
@@ -22,14 +22,14 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
     renderReact(pageContext)
 
   // Merge config's head data and page's head data
-  const { pageExports } = pageContext
+  const { exports } = pageContext
   const headTags: string[] = []
   const merged = {
     ...config.head,
-    ...pageExports?.documentProps?.head,
+    ...exports?.documentProps?.head,
     meta: {
       ...config.head.meta,
-      ...pageExports?.documentProps?.head?.meta,
+      ...exports?.documentProps?.head?.meta,
     },
   }
 

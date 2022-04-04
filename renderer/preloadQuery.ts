@@ -1,14 +1,7 @@
-import {
-  loadQuery,
-  type Environment,
-  type GraphQLTaggedNode,
-  type Variables,
-} from 'react-relay'
+import { loadQuery, type Environment } from 'react-relay'
 import type { PageContextBuiltIn } from 'vite-plugin-ssr'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
-import type { PageContext } from './types'
-
-type GetQueryVariables = (routeParams: unknown) => Variables
+import type { PageContext } from '../types'
 
 // Utility function for preloading page queries.
 export default (
@@ -16,12 +9,9 @@ export default (
   relayEnvironment: Environment
 ) => {
   // Look for page query from page exports.
-  const query =
-    (pageContext.pageExports?.query as GraphQLTaggedNode) ?? undefined
+  const query = pageContext.exports?.query
   // Look for function for getting query variables.
-  const getQueryVariables =
-    (pageContext.pageExports?.getQueryVariables as GetQueryVariables) ??
-    undefined
+  const getQueryVariables = pageContext.exports?.getQueryVariables
   const routeParams = pageContext.routeParams ?? {}
 
   // Load query if query export exists

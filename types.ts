@@ -1,7 +1,9 @@
+import type { GraphQLTaggedNode, Variables } from 'relay-runtime'
+
 // The `pageContext` that are available in both on the server-side and browser-side
 export type PageContext = {
   Page: () => React.ReactElement
-  pageExports?: {
+  exports?: {
     documentProps?: {
       head?: {
         title?: string
@@ -10,6 +12,8 @@ export type PageContext = {
         }
       }
     }
+    query?: GraphQLTaggedNode
+    getQueryVariables: GetQueryVariables<unknown, Variables>
   }
   routeParams: Record<string, unknown>
   relayInitialData: Record<string, unknown>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { RelayEnvironmentProvider, type Environment } from 'react-relay'
 import { ErrorBoundary } from 'react-error-boundary'
-import type { PageContext } from './types'
+import type { PageContext } from '../types'
 import { RouteManager, useRouteManager } from './routeManager'
 import { PageContextProvider } from './usePageContext'
 import ErrorFallback from './ErrorFallback'

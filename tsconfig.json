@@ -3,6 +3,7 @@
     "outDir": "dist",
     "strict": true,
     "module": "ESNext",
+    "declaration": true,
     "moduleResolution": "Node",
     "target": "ES2017",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -14,6 +15,7 @@
   "include": [
     "cli.ts",
     "plugin.ts",
-    "babelPluginRelay.d.ts"
+    "types.ts",
+    "**/*.d.ts"
   ]
 }

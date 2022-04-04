@@ -1,7 +1,7 @@
 import ReactDOMClient from 'react-dom/client'
 import type { Environment } from 'react-relay'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
-import type { PageContext } from './types'
+import type { PageContext } from '../types'
 import { initEnvironment } from './RelayEnvironment'
 import preloadQuery from './preloadQuery'
 import { PageShell } from './PageShell'

@@ -1,1 +1,1 @@
-export const customExports = ['query']
+export const customExports = ['query', 'getQueryVariables']

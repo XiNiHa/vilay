@@ -5,7 +5,7 @@ import { existsSync } from 'node:fs'
 import { build, createServer, preview, type PluginOption } from 'vite'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { createPageRenderer } from 'vite-plugin-ssr'
+import { renderPage } from 'vite-plugin-ssr'
 import { prerender } from 'vite-plugin-ssr/cli'
 
 const workDir = cwd()
@@ -63,18 +63,9 @@ yargs(hideBin(argv))
   .parse()
 
 function rendererPlugin(): PluginOption {
-  let renderPage: ReturnType<typeof createPageRenderer>
-
   return {
     name: 'vite-ssr-relay:rendererPlugin',
     configureServer(server) {
-      if (!renderPage)
-        renderPage = createPageRenderer({
-          viteDevServer: server,
-          root: workDir,
-          isProduction: false,
-        })
-
       return () => {
         server.middlewares.use(async (req, res, next) => {
           const pageContextInit = { url: req.originalUrl ?? '' }
