@@ -1,15 +1,12 @@
 import { CompatibilityEvent, createApp, sendError } from 'h3'
-import path, { dirname } from 'path'
+import { join } from 'path'
 import serveStatic from 'serve-static'
-import { fileURLToPath } from 'url'
 import { renderPage } from 'vite-plugin-ssr'
 
-const root = path.join(dirname(fileURLToPath(import.meta.url)), '..')
-
-export async function createServer() {
+export async function createServer(root: string) {
   const app = createApp({ onError })
 
-  // app.use(serveStatic(path.join(root, 'dist', 'client')))
+  app.use(serveStatic(join(root, 'dist', 'client')))
   app.use((req, res, next) => {
     if (req.method !== 'GET') return next()
     if (req.url == null) return next(new Error('url is null'))

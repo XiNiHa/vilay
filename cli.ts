@@ -2,7 +2,12 @@
 
 import { cwd, argv } from 'node:process'
 import { existsSync } from 'node:fs'
-import { build, createServer as createDevServer, preview, type PluginOption } from 'vite'
+import {
+  createServer as createDevServer,
+  build,
+  preview,
+  type PluginOption,
+} from 'vite'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import { renderPage } from 'vite-plugin-ssr'
@@ -27,10 +32,7 @@ yargs(hideBin(argv))
       const server = await createDevServer({
         root: workDir,
         plugins: [rendererPlugin()],
-        server: {
-          host: true,
-          port,
-        },
+        server: { host: true, port },
       })
       await server.listen()
       server.printUrls()
@@ -38,15 +40,15 @@ yargs(hideBin(argv))
   )
   .command('build', 'build for production', async () => {
     await build({ root: workDir })
-    await build({
-      root: workDir,
-      build: { ssr: true },
-    })
+    await build({ root: workDir, build: { ssr: true } })
     await prerender()
   })
   .command('start', 'launch production SSR server', async () => {
-    const app = await createProdServer()
-    listen(app, { port: 3000 })
+    if (!existsSync(`${workDir}/dist`)) {
+      throw new Error('Call `build` before calling `start`.')
+    }
+    const app = await createProdServer(workDir)
+    await listen(app, { port: 3000 })
   })
   .command(
     'preview',
@@ -59,10 +61,7 @@ yargs(hideBin(argv))
       const previewServer = await preview({
         root: workDir,
         build: { outDir: 'dist/client' },
-        preview: {
-          host: true,
-          port,
-        },
+        preview: { host: true, port },
       })
       previewServer.printUrls()
     }
