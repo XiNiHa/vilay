@@ -6,36 +6,39 @@
     "example"
   ],
   "exports": {
-    "./plugin": "./dist/plugin.js",
-    "./types": "./dist/types.js"
+    "./plugin": "./dist/plugin.js"
   },
   "bin": "./dist/cli.js",
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx",
-    "format": "prettier --write \"**/*.[jt]s?(x)\""
+    "format": "prettier --write \"**/*.[jt]s?(x)\"",
+    "build": "tsc"
   },
   "dependencies": {
     "@babel/core": "^7.17.8",
     "@babel/runtime": "^7.17.8",
     "@vitejs/plugin-react": "^1.3.0",
-    "babel-plugin-relay": "^13.2.0",
+    "babel-plugin-relay": "*",
     "cross-env": "^7.0.3",
     "esno": "^0.14.1",
     "h3": "^0.5.3",
+    "listhen": "^0.2.6",
     "ohmyfetch": "^0.4.15",
     "react-error-boundary": "^3.1.4",
-    "react-relay": "^13.2.0",
-    "relay-runtime": "^13.2.0",
+    "react-relay": "*",
+    "relay-runtime": "*",
     "serve-static": "^1.15.0",
     "typescript": "^4.6.3",
     "vite": "^2.9.1",
-    "vite-plugin-relay": "^1.0.7",
     "vite-plugin-ssr": "^0.4.0-beta.4",
     "yargs": "^17.4.0"
   },
   "peerDependencies": {
+    "babel-plugin-relay": "^13.2.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-relay": "^13.2.0",
+    "relay-runtime": "^13.2.0"
   },
   "devDependencies": {
     "@types/babel__core": "^7.1.19",
@@ -51,9 +54,6 @@
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.6.1"
-  },
-  "resolutions": {
-    "babel-plugin-relay": "^13.2.0"
   },
   "packageManager": "yarn@3.1.1"
 }

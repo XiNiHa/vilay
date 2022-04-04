@@ -12,10 +12,5 @@
     "skipLibCheck": true,
     "esModuleInterop": true
   },
-  "include": [
-    "cli.ts",
-    "plugin.ts",
-    "types.ts",
-    "**/*.d.ts"
-  ]
+  "exclude": ["dist", "node_modules", "renderer", "example"]
 }

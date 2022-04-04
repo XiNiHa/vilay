@@ -16,7 +16,7 @@ const config: PluginOption[] = [
           plugins: [[relay, { eagerEsModules: true }]],
           code: true,
         })
-        if (!out?.code) throw new Error('vite-plugin-react Failed to build')
+        if (!out?.code) throw new Error('Vite Relay transpilation failed')
         code = out.code
       }
       return { code, map: null }

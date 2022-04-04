@@ -2,11 +2,13 @@
 
 import { cwd, argv } from 'node:process'
 import { existsSync } from 'node:fs'
-import { build, createServer, preview, type PluginOption } from 'vite'
+import { build, createServer as createDevServer, preview, type PluginOption } from 'vite'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import { renderPage } from 'vite-plugin-ssr'
 import { prerender } from 'vite-plugin-ssr/cli'
+import { listen } from 'listhen'
+import { createServer as createProdServer } from './server/index.js'
 
 const workDir = cwd()
 
@@ -22,7 +24,7 @@ yargs(hideBin(argv))
     'starts the dev server',
     (yargs) => yargs.option('port', { default: 3000 }),
     async ({ port }) => {
-      const server = await createServer({
+      const server = await createDevServer({
         root: workDir,
         plugins: [rendererPlugin()],
         server: {
@@ -35,11 +37,16 @@ yargs(hideBin(argv))
     }
   )
   .command('build', 'build for production', async () => {
+    await build({ root: workDir })
     await build({
       root: workDir,
       build: { ssr: true },
     })
     await prerender()
+  })
+  .command('start', 'launch production SSR server', async () => {
+    const app = await createProdServer()
+    listen(app, { port: 3000 })
   })
   .command(
     'preview',

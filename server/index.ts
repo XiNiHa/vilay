@@ -1,30 +1,15 @@
-import { createApp, sendError } from 'h3'
-import { createServer, IncomingMessage, ServerResponse } from 'http'
-import path from 'path'
+import { CompatibilityEvent, createApp, sendError } from 'h3'
+import path, { dirname } from 'path'
 import serveStatic from 'serve-static'
-import { createPageRenderer } from 'vite-plugin-ssr'
+import { fileURLToPath } from 'url'
+import { renderPage } from 'vite-plugin-ssr'
 
-const isProduction = process.env.NODE_ENV === 'production'
-const root = path.join(__dirname, '..')
+const root = path.join(dirname(fileURLToPath(import.meta.url)), '..')
 
-startServer()
-
-async function startServer() {
+export async function createServer() {
   const app = createApp({ onError })
 
-  let viteDevServer
-  if (isProduction) {
-    app.use(serveStatic(path.join(root, 'dist', 'client')))
-  } else {
-    const vite = await import('vite')
-    viteDevServer = await vite.createServer({
-      root,
-      server: { middlewareMode: 'ssr' },
-    })
-    app.use(viteDevServer.middlewares)
-  }
-
-  const renderPage = createPageRenderer({ viteDevServer, isProduction, root })
+  // app.use(serveStatic(path.join(root, 'dist', 'client')))
   app.use((req, res, next) => {
     if (req.method !== 'GET') return next()
     if (req.url == null) return next(new Error('url is null'))
@@ -32,20 +17,17 @@ async function startServer() {
     renderPage({ url: req.url }).then((pageContext) => {
       const { httpResponse } = pageContext
       if (!httpResponse) return next()
-
       httpResponse.pipeToNodeWritable(res)
     })
   })
 
-  const port = process.env.PORT || 3000
-  createServer(app).listen(port)
-  console.log(`Server running at http://localhost:${port}`)
+  return app
 }
 
-function onError(error: Error, req: IncomingMessage, res: ServerResponse) {
-  if (res.headersSent) {
-    res.end()
+function onError(error: Error, event: CompatibilityEvent) {
+  if (event.res.headersSent) {
+    event.res.end()
     return
   }
-  sendError(res, error, false)
+  sendError(event.res, error, false)
 }

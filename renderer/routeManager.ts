@@ -6,7 +6,7 @@ import type { OperationType } from 'relay-runtime'
 // Used for connecting between those.
 export class RouteManager {
   #currentPage: React.FC<{ queryRef: unknown }> | null = null
-  #queryRef: PreloadedQuery<OperationType> | null = null
+  #queryRef: PreloadedQuery<OperationType> | undefined | null = null
   #listeners = new Set<() => void>()
 
   get currentPage() {
@@ -19,7 +19,7 @@ export class RouteManager {
 
   constructor(params?: {
     initialPage: React.FC<{ queryRef: unknown }>
-    queryRef: PreloadedQuery<OperationType>
+    queryRef: PreloadedQuery<OperationType> | undefined
   }) {
     if (params) {
       this.#currentPage = params.initialPage
@@ -30,7 +30,7 @@ export class RouteManager {
   // Sets a new page with queryRef preloaded for that page.
   setPage(
     page: React.FC<{ queryRef: unknown }>,
-    queryRef: PreloadedQuery<OperationType>
+    queryRef: PreloadedQuery<OperationType> | undefined
   ) {
     this.#currentPage = page
     this.#queryRef = queryRef
