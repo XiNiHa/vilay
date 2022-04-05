@@ -1,7 +1,7 @@
 {
   "name": "vite-ssr-relay",
   "description": "Vite SSR framework with support for React SSR streaming and Relay",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "exports": {
     "./plugin": "./dist/plugin.js"
