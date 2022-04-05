@@ -7,7 +7,8 @@ import swc from '@swc/core'
 const outDir = 'dist'
 const targets = ['cli.ts', 'plugin.ts', 'server/**/*']
 
-await rm(outDir, { recursive: true })
+if (existsSync(outDir)) await rm(outDir, { recursive: true })
+if (!existsSync(outDir)) await mkdir(outDir)
 
 const files = await Promise.all(
   targets.map(
