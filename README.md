@@ -16,4 +16,4 @@ English | [한국어](README.ko.md)
 - Image optimization
 - Improve usability
 
-Look at [example/](/example) to see how the framework work.
+Look at [the example](/packages/example) to see how the framework work.
