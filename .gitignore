@@ -1,12 +1,5 @@
 node_modules/
 dist/
-__generated__
-
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
+__generated__/
 
 *.local
