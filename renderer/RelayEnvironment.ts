@@ -6,13 +6,14 @@ import {
   type GraphQLResponse,
 } from 'relay-runtime'
 import { fetch } from 'ohmyfetch'
+import { InitRelayEnvironment } from '../types'
 
 let relayEnvironment: Environment | null = null
 
 // Init relay environment
-export const initEnvironment = (
-  isServer: boolean,
-  records = {}
+export const initRelayEnvironment: InitRelayEnvironment = (
+  isServer,
+  records
 ): Environment => {
   const network = Network.create(async ({ text: query }, variables) => {
     // Replace this with your own fetching logic

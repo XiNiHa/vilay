@@ -6,7 +6,6 @@ import {
 } from 'vite-plugin-ssr'
 import { renderToPipeableStream } from 'react-dom/server'
 import type { PageContext } from '../types'
-import { initEnvironment } from './RelayEnvironment'
 import preloadQuery from './preloadQuery'
 import { RouteManager } from './routeManager'
 import { PageShell } from './PageShell'
@@ -75,10 +74,13 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
 
 // Performs React Streaming SSR.
 const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
-  const { Page } = pageContext
+  const {
+    Page,
+    exports: { initRelayEnvironment },
+  } = pageContext
 
   // Initialize server-side Relay environment
-  const relayEnvironment = initEnvironment(true)
+  const relayEnvironment = initRelayEnvironment(true)
   // Preload query for the page to render.
   const relayQueryRef = preloadQuery(pageContext, relayEnvironment)
 

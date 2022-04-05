@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, usePreloadedQuery, type PreloadedQuery } from 'react-relay'
-import IssueListComponent from '../components/issues/IssueList'
 import type { GetQueryVariables } from 'vite-ssr-relay/types'
+import IssueListComponent from '../components/issues/IssueList'
 import type {
   issuesPageQuery,
   issuesPageQuery$variables,

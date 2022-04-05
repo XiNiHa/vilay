@@ -37,8 +37,10 @@ const IssueListComponent: React.FC<Props> = ({ repository }) => {
   const [onlyOpened, setOnlyOpened] = React.useState<boolean | null>(null)
 
   React.useEffect(() => {
-    onlyOpened != null &&
-      refetch({ filter: { states: onlyOpened ? 'OPEN' : null } })
+    if (onlyOpened != null)
+      React.startTransition(() => {
+        refetch({ filter: { states: onlyOpened ? 'OPEN' : null } })
+      })
   }, [onlyOpened])
 
   return (
@@ -63,7 +65,15 @@ const IssueListComponent: React.FC<Props> = ({ repository }) => {
       {isLoadingNext
         ? 'Loading more...'
         : data.issues.pageInfo.hasNextPage && (
-            <Button onClick={() => loadNext(10)}>Load more</Button>
+            <Button
+              onClick={() =>
+                React.startTransition(() => {
+                  loadNext(10)
+                })
+              }
+            >
+              Load more
+            </Button>
           )}
     </div>
   )

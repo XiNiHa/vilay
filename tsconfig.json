@@ -3,7 +3,6 @@
     "outDir": "dist",
     "strict": true,
     "module": "ESNext",
-    "declaration": true,
     "moduleResolution": "Node",
     "target": "ES2017",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -11,6 +10,5 @@
     "jsx": "react-jsx",
     "skipLibCheck": true,
     "esModuleInterop": true
-  },
-  "exclude": ["dist", "node_modules", "renderer", "example"]
+  }
 }
