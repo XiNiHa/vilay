@@ -5,5 +5,3 @@ export const customExports = [
   'documentProps',
   'initRelayEnvironment',
 ]
-
-export { initRelayEnvironment } from './RelayEnvironment'

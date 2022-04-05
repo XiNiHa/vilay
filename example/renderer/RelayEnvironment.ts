@@ -1,14 +1,12 @@
 import {
-  Network,
-  Store,
-  RecordSource,
   Environment,
-  type GraphQLResponse,
+  GraphQLResponse,
+  Network,
+  RecordSource,
+  Store,
 } from 'relay-runtime'
 import { fetch } from 'ohmyfetch'
-import { InitRelayEnvironment } from '../types'
-
-let relayEnvironment: Environment | null = null
+import type { InitRelayEnvironment } from 'vite-ssr-relay/types'
 
 // Init relay environment
 export const initRelayEnvironment: InitRelayEnvironment = (
@@ -38,22 +36,9 @@ export const initRelayEnvironment: InitRelayEnvironment = (
   const source = new RecordSource(records)
   const store = new Store(source, { gcReleaseBufferSize: 10 })
 
-  if (isServer) {
-    return new Environment({
-      configName: 'server',
-      network,
-      store,
-    })
-  }
-
-  // Reuse Relay environment on client-side
-  if (!relayEnvironment) {
-    relayEnvironment = new Environment({
-      configName: 'client',
-      network,
-      store,
-    })
-  }
-
-  return relayEnvironment
+  return new Environment({
+    configName: isServer ? 'server' : 'client',
+    network,
+    store,
+  })
 }

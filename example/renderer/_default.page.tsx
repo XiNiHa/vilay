@@ -55,4 +55,4 @@ const ErrorFallback: React.FC<FallbackProps> = ({ error }) => {
   return <>Error: {error.message}</>
 }
 
-export default ErrorFallback
+export { initRelayEnvironment } from './RelayEnvironment'

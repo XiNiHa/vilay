@@ -27,7 +27,6 @@ importers:
       glob: ^7.2.0
       h3: ^0.5.3
       listhen: ^0.2.6
-      ohmyfetch: ^0.4.15
       prettier: ^2.6.1
       react: '*'
       react-dom: '*'
@@ -49,7 +48,6 @@ importers:
       glob: 7.2.0
       h3: 0.5.4
       listhen: 0.2.6
-      ohmyfetch: 0.4.15
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
       react-relay: 13.2.0_react@18.0.0
@@ -79,6 +77,7 @@ importers:
     specifiers:
       '@unocss/reset': ^0.30.8
       babel-plugin-relay: ^13.2.0
+      ohmyfetch: ^0.4.15
       react: ^18.0.0
       react-dom: ^18.0.0
       react-error-boundary: ^3.1.4
@@ -89,6 +88,7 @@ importers:
       vite-ssr-relay: workspace:^*
     dependencies:
       babel-plugin-relay: 13.2.0
+      ohmyfetch: 0.4.15
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
       react-error-boundary: 3.1.4_react@18.0.0

@@ -25,7 +25,6 @@
     "glob": "^7.2.0",
     "h3": "^0.5.3",
     "listhen": "^0.2.6",
-    "ohmyfetch": "^0.4.15",
     "react": "*",
     "react-dom": "*",
     "react-relay": "*",
