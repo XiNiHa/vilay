@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql, usePreloadedQuery, type PreloadedQuery } from 'react-relay'
 import type { GetQueryVariables } from 'vite-ssr-relay/types'
+import { head as defaultHead } from '../renderer/_default.page'
 import IssueListComponent from '../components/issues/IssueList'
 import type {
   issuesPageQuery,
@@ -15,6 +16,8 @@ interface RouteParams {
   owner: string
   name: string
 }
+
+export const head = { ...defaultHead, title: 'Issues: Vite SSR app' }
 
 // If a page has `getQueryVariables` exported, it'll be called to get the variables used for preloading the query.
 // If it's not exported, route params will be directly used as variables.

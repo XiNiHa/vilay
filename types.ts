@@ -8,12 +8,10 @@ export type PageContext = {
   exports?: {
     PageLayout: React.FC<PageLayoutProps>
     initRelayEnvironment: InitRelayEnvironment
-    documentProps?: {
-      head?: {
-        title?: string
-        meta?: {
-          description?: string
-        }
+    head?: {
+      title?: string
+      meta?: {
+        description?: string
       }
     }
     query?: GraphQLTaggedNode

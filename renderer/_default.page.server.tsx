@@ -23,23 +23,17 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
   // Merge config's head data and page's head data
   const { exports } = pageContext
   const headTags: string[] = []
-  const merged = {
-    ...config.head,
-    ...exports?.documentProps?.head,
-    meta: {
-      ...config.head.meta,
-      ...exports?.documentProps?.head?.meta,
-    },
-  }
 
   // Add header tags from merged data
-  for (const [tag, value] of Object.entries(merged)) {
-    if (tag === 'meta') {
-      for (const [name, content] of Object.entries(value)) {
-        headTags.push(`<meta name="${name}" content="${content}">`)
+  if (exports.head) {
+    for (const [tag, value] of Object.entries(exports.head)) {
+      if (tag === 'meta') {
+        for (const [name, content] of Object.entries(value)) {
+          headTags.push(`<meta name="${name}" content="${content}">`)
+        }
+      } else {
+        headTags.push(`<${tag}>${value}</${tag}>`)
       }
-    } else {
-      headTags.push(`<${tag}>${value}</${tag}>`)
     }
   }
 
@@ -52,7 +46,9 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- vite-ssr-relay-head-start -->
         ${dangerouslySkipEscape(headTags.join('\n'))}
+        <!-- vite-ssr-relay-head-end -->
       </head>
       <body>
         <div id="page-view">${pipeNodeStream(pipe)}</div>

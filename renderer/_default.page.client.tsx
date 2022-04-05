@@ -19,7 +19,7 @@ export async function render(
   const {
     Page,
     relayInitialData,
-    exports: { initRelayEnvironment },
+    exports: { initRelayEnvironment, head },
   } = pageContext
 
   if (!relayEnvironment)
@@ -33,6 +33,24 @@ export async function render(
   routeManager ??= new RouteManager()
   // Update the route manager with the new route.
   routeManager.setPage(Page, relayQueryRef)
+
+  if (head) {
+    const headTags: string[] = []
+    for (const [tag, value] of Object.entries(head)) {
+      if (tag === 'meta') {
+        for (const [name, content] of Object.entries(value)) {
+          headTags.push(`<meta name="${name}" content="${content}">`)
+        }
+      } else {
+        headTags.push(`<${tag}>${value}</${tag}>`)
+      }
+    }
+
+    document.head.innerHTML = document.head.innerHTML.replace(
+      /<!--\s?vite-ssr-relay-head-start\s?-->([\S\s]+)<!--\s?vite-ssr-relay-head-end\s?-->/,
+      `<!-- vite-ssr-relay-head-start -->${headTags}<!-- vite-ssr-relay-head-end -->`
+    )
+  }
 
   if (!containerRoot) {
     const page = (
