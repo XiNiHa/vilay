@@ -34,7 +34,7 @@ importers:
       serve-static: ^1.15.0
       typescript: ^4.6.3
       vite: ^2.9.1
-      vite-plugin-ssr: ^0.4.0-beta.6
+      vite-plugin-ssr: ^0.4.0-beta.7
       yargs: ^17.4.0
     dependencies:
       '@babel/core': 7.17.8
@@ -50,7 +50,7 @@ importers:
       relay-runtime: 13.2.0
       serve-static: 1.15.0
       vite: 2.9.1
-      vite-plugin-ssr: 0.4.0-beta.6_vite@2.9.1
+      vite-plugin-ssr: 0.4.0-beta.7_vite@2.9.1
       yargs: 17.4.0
     devDependencies:
       '@swc/core': 1.2.163
@@ -2973,8 +2973,8 @@ packages:
     resolution: {integrity: sha512-N4oRY6Mv5l1qVODcAw1W6Xw1hiW9y8uVs6vqBy0dCTayCu5/7IRmUmjpc+wrBdSS2b/cZYkLX/xHgFyjXlaXtg==}
     dev: false
 
-  /vite-plugin-ssr/0.4.0-beta.6_vite@2.9.1:
-    resolution: {integrity: sha512-RcwrdWHFjyV1MbOZ2uMu0Es7Sf3R46qqj34zsrpAlPddU/RT4q5fCCTRUEGNTgnlAhw0Elk2+veA/RiE18Z96w==}
+  /vite-plugin-ssr/0.4.0-beta.7_vite@2.9.1:
+    resolution: {integrity: sha512-TmvxmyMdUI1DX3hpqhVu8Kg+0UvwprNCzYkJ1+T6Xerc4Y5TzBf/oHfSLAjb77I1W7HJJObsbAJRLKaXrmHR6Q==}
     engines: {node: '>=12.19.0'}
     hasBin: true
     peerDependencies:
