@@ -11,8 +11,8 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
 }) => {
   const links = {
     '/': 'Home',
-    '/repo/xiniha/vite-ssr-relay-template/issues': 'Issues',
-    '/repo/xiniha/vite-ssr-relay-template/issues/create': 'Create Issue',
+    '/repo/xiniha/vite-ssr-relay/issues': 'Issues',
+    '/repo/xiniha/vite-ssr-relay/issues/create': 'Create Issue',
   }
 
   return (
@@ -20,7 +20,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
       <LoadingIndicator transitioning={routeTransitioning} />
       <div className="flex max-w-900px m-auto">
         <div className="p-5 flex-shrink-0 flex flex-col items-end leading-7">
-          <h1 className="my-4 text-2xl">Vite Plugin SSR + React 18 + Relay</h1>
+          <h1 className="my-4 text-2xl">Vite SSR Relay</h1>
           {Object.entries(links).map(([href, text]) => (
             <a
               href={href}

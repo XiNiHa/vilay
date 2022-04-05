@@ -1,15 +1,15 @@
 import React from 'react'
 import { graphql, usePreloadedQuery, type PreloadedQuery } from 'react-relay'
-import { indexPageQuery } from './__generated__/indexPageQuery.graphql'
+import { pagesPageQuery } from './__generated__/pagesPageQuery.graphql'
 
 interface Props {
-  queryRef: PreloadedQuery<indexPageQuery>
+  queryRef: PreloadedQuery<pagesPageQuery>
 }
 
 // If a page has `query` exported, it will be prefetched and SSR'd.
 export const query = graphql`
   query pagesPageQuery {
-    repository(owner: "XiNiHa", name: "vite-ssr-relay-template") {
+    repository(owner: "XiNiHa", name: "vite-ssr-relay") {
       name
       stargazerCount
       issues(first: 0) {
@@ -25,7 +25,7 @@ export const query = graphql`
 // Basic data fetching example using Relay.
 export const Page: React.FC<Props> = ({ queryRef }) => {
   // This will either pull the preloaded data or suspend.
-  const data = usePreloadedQuery<indexPageQuery>(query, queryRef)
+  const data = usePreloadedQuery<pagesPageQuery>(query, queryRef)
 
   const listItems = [
     <>Name: {data.repository?.name}</>,

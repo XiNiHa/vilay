@@ -10,9 +10,10 @@
     "preview": "vite-ssr-relay preview"
   },
   "dependencies": {
+    "@babel/runtime": "^7.17.8",
     "babel-plugin-relay": "^13.2.0",
-    "react": "^18.0.0",
     "ohmyfetch": "^0.4.15",
+    "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-error-boundary": "^3.1.4",
     "react-relay": "^13.2.0",
