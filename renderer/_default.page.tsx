@@ -1,7 +1,7 @@
 export const customExports = [
+  'PageLayout',
+  'initRelayEnvironment',
+  'head',
   'query',
   'getQueryVariables',
-  'PageLayout',
-  'documentProps',
-  'initRelayEnvironment',
 ]
