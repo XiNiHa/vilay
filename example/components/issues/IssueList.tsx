@@ -38,6 +38,7 @@ const IssueListComponent: React.FC<Props> = ({ repository }) => {
 
   React.useEffect(() => {
     if (onlyOpened != null)
+      // `startTransition()` keeps the previous content temporarily while the new content is loading.
       React.startTransition(() => {
         refetch({ filter: { states: onlyOpened ? 'OPEN' : null } })
       })
@@ -65,15 +66,7 @@ const IssueListComponent: React.FC<Props> = ({ repository }) => {
       {isLoadingNext
         ? 'Loading more...'
         : data.issues.pageInfo.hasNextPage && (
-            <Button
-              onClick={() =>
-                React.startTransition(() => {
-                  loadNext(10)
-                })
-              }
-            >
-              Load more
-            </Button>
+            <Button onClick={() => loadNext(10)}>Load more</Button>
           )}
     </div>
   )

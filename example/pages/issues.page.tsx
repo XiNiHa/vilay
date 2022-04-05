@@ -17,6 +17,7 @@ interface RouteParams {
   name: string
 }
 
+// This overrides the application-wide <head> tag definition in `_default.page.tsx`
 export const head = { ...defaultHead, title: 'Issues: Vite SSR app' }
 
 // If a page has `getQueryVariables` exported, it'll be called to get the variables used for preloading the query.

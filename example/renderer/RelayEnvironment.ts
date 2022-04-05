@@ -14,7 +14,7 @@ export const initRelayEnvironment: InitRelayEnvironment = (
   records
 ): Environment => {
   const network = Network.create(async ({ text: query }, variables) => {
-    // Replace this with your own fetching logic
+    // Using GitHub API for example
     const response = await fetch('https://api.github.com/graphql', {
       method: 'POST',
       headers: {
@@ -36,6 +36,7 @@ export const initRelayEnvironment: InitRelayEnvironment = (
   const source = new RecordSource(records)
   const store = new Store(source, { gcReleaseBufferSize: 10 })
 
+  // Client environment gets cached by the framework
   return new Environment({
     configName: isServer ? 'server' : 'client',
     network,

@@ -6,6 +6,7 @@ import 'uno.css'
 
 export const PageLayout: React.FC<PageLayoutProps> = ({
   children,
+  // true while the route is transitioning with `startTransition()`
   routeTransitioning,
 }) => {
   const links = {

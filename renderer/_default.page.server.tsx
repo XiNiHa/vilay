@@ -5,26 +5,21 @@ import {
   type PageContextBuiltIn,
 } from 'vite-plugin-ssr'
 import { renderToPipeableStream } from 'react-dom/server'
-import type { PageContext } from '../types'
-import preloadQuery from './preloadQuery'
-import { RouteManager } from './routeManager'
-import { PageShell } from './PageShell'
 import config from '../config'
+import preloadQuery from './preloadQuery'
+import { PageShell } from './PageShell'
+import { RouteManager } from './routeManager'
+import type { PageContext } from '../types'
 
-// Only props listed here are passed to client's PageContext, see https://vite-plugin-ssr.com/passToClient for more info.
 export const passToClient = ['routeParams', 'relayInitialData']
 
-// This is the main render function that is called by vite-plugin-ssr.
 export async function render(pageContext: PageContextBuiltIn & PageContext) {
-  // Performs React Streaming SSR
   const { initialCompletion, totalCompletion, pipe, getStoreSource } =
     renderReact(pageContext)
 
-  // Merge config's head data and page's head data
   const { exports } = pageContext
   const headTags: string[] = []
 
-  // Add header tags from merged data
   if (exports.head) {
     for (const [tag, value] of Object.entries(exports.head)) {
       if (tag === 'meta') {
@@ -37,8 +32,6 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
     }
   }
 
-  // This awaits for initial completion of streaming rendering.
-  // Max wait time is `config.ssr.initialSendTimeout`, it will end early if there's no part suspended.
   await initialCompletion
 
   const documentHtml = escapeInject`<!DOCTYPE html>
@@ -58,8 +51,6 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
 
   return {
     documentHtml,
-    // Sends Relay store data to client, after the streaming ends.
-    // This ensures that the store data is extracted after getting filled with fetched data.
     pageContext: totalCompletion
       .then(() => ({
         relayInitialData: getStoreSource().toJSON(),
@@ -75,12 +66,9 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
     exports: { initRelayEnvironment },
   } = pageContext
 
-  // Initialize server-side Relay environment
   const relayEnvironment = initRelayEnvironment(true)
-  // Preload query for the page to render.
   const relayQueryRef = preloadQuery(pageContext, relayEnvironment)
 
-  // Variables for storing promise resolve/reject functions and states.
   let resolveInitial: () => void
   let rejectInitial: (reason: Error) => void
   let resolveTotal: () => void
@@ -88,7 +76,6 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
   let initialResolved = false
   let totalResolved = false
 
-  // Initial completion promise. Stream isn't passed to the client until this resolves.
   const initialCompletion = new Promise<true>((res, rej) => {
     resolveInitial = () => {
       initialResolved = true
@@ -97,7 +84,6 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
     rejectInitial = rej
   })
 
-  // Total completion promise. Relay store data is passed when this promise is resolved.
   const totalCompletion = new Promise<true>((res, rej) => {
     resolveTotal = () => {
       totalResolved = true
@@ -106,7 +92,6 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
     rejectTotal = rej
   })
 
-  // Render the page to a stream.
   const { pipe, abort: _abort } = renderToPipeableStream(
     <PageShell
       pageContext={pageContext}
@@ -120,7 +105,6 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
     />,
     {
       onAllReady: () => {
-        // If the initial promise isn't resolved until total completion, resolve it.
         if (!initialResolved) resolveInitial()
         if (!totalResolved) resolveTotal()
       },
@@ -138,15 +122,12 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
     if (!totalResolved) rejectTotal(new Error('React SSR Error: Aborted'))
   }
 
-  // Resolve initial completion promise after initial send timeout.
   setTimeout(
     () => initialResolved || resolveInitial(),
     config.ssr.initialSendTimeout
   )
-  // Abort rendering after about timeout.
   setTimeout(() => totalResolved || abortRender(), config.ssr.abortTimeout)
 
-  // Expose store source.
   const getStoreSource = () => relayEnvironment.getStore().getSource()
 
   return { initialCompletion, totalCompletion, pipe, getStoreSource }

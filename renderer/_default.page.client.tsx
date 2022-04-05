@@ -12,7 +12,6 @@ let routeManager: RouteManager | null = null
 
 export const clientRouting = true
 
-// `render()` is called on every navigation.
 export async function render(
   pageContext: PageContextBuiltInClient & PageContext
 ) {
@@ -25,13 +24,9 @@ export async function render(
   if (!relayEnvironment)
     relayEnvironment = initRelayEnvironment(false, relayInitialData)
 
-  // Load the query needed for the page.
-  // Preloading through links is not supported yet, see https://github.com/brillout/vite-plugin-ssr/issues/246 for details.
   const relayQueryRef = preloadQuery(pageContext, relayEnvironment)
 
-  // Create a new route manager if haven't.
   routeManager ??= new RouteManager()
-  // Update the route manager with the new route.
   routeManager.setPage(Page, relayQueryRef)
 
   if (head) {
@@ -61,7 +56,6 @@ export async function render(
       />
     )
 
-    // Hydrate the page.
     const container = document.getElementById('page-view')
     if (!container)
       throw new Error(

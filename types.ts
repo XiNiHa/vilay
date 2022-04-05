@@ -2,7 +2,6 @@ import type React from 'react'
 import type { Environment, GraphQLTaggedNode, Variables } from 'relay-runtime'
 import type { RecordMap } from 'relay-runtime/lib/store/RelayStoreTypes'
 
-// The `pageContext` that are available in both on the server-side and browser-side
 export type PageContext = {
   Page: () => React.ReactElement
   exports?: {
@@ -21,7 +20,6 @@ export type PageContext = {
   relayInitialData: RecordMap
 }
 
-// Type definition for `getQueryVariables` function.
 export type GetQueryVariables<RouteParams, Variables> = (
   routeParams: RouteParams
 ) => Variables
