@@ -18,6 +18,7 @@ export async function render(
   const {
     Page,
     relayInitialData,
+    isHydration,
     exports: { initRelayEnvironment, head },
   } = pageContext
 
@@ -29,22 +30,43 @@ export async function render(
   routeManager ??= new RouteManager()
   routeManager.setPage(Page, relayQueryRef)
 
-  if (head) {
-    const headTags: string[] = []
+  if (head && !isHydration) {
+    const headTags: HTMLElement[] = []
     for (const [tag, value] of Object.entries(head)) {
       if (tag === 'meta') {
         for (const [name, content] of Object.entries(value)) {
-          headTags.push(`<meta name="${name}" content="${content}">`)
+          const node = document.createElement('meta')
+          node.setAttribute('name', name)
+          node.setAttribute('content', content)
+          headTags.push(node)
         }
       } else {
-        headTags.push(`<${tag}>${value}</${tag}>`)
+        const node = document.createElement(tag)
+        node.innerHTML = value.toString()
+        headTags.push(node)
       }
     }
 
-    document.head.innerHTML = document.head.innerHTML.replace(
-      /<!--\s?vite-ssr-relay-head-start\s?-->([\S\s]+)<!--\s?vite-ssr-relay-head-end\s?-->/,
-      `<!-- vite-ssr-relay-head-start -->${headTags}<!-- vite-ssr-relay-head-end -->`
-    )
+    let inCommentArea = false
+    for (let i = 0; i < document.head.childNodes.length; i++) {
+      const node = document.head.childNodes[i]
+      if (node.nodeType === document.COMMENT_NODE) {
+        const trimmed = node.textContent?.trim()
+        if (trimmed === 'vite-ssr-relay-head-start') {
+          inCommentArea = true
+          continue
+        }
+        else if (trimmed === 'vite-ssr-relay-head-end') {
+          node.before(...headTags)
+          inCommentArea = false
+          break
+        }
+      }
+      if (inCommentArea) {
+        node.remove()
+        --i
+      }
+    }
   }
 
   if (!containerRoot) {
