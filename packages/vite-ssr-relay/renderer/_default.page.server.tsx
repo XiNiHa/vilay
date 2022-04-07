@@ -4,6 +4,7 @@ import {
   pipeNodeStream,
   type PageContextBuiltIn,
 } from 'vite-plugin-ssr'
+import React from 'react'
 import { renderToPipeableStream } from 'react-dom/server'
 import config from '../config'
 import preloadQuery from './preloadQuery'
@@ -13,7 +14,12 @@ import type { PageContext } from '../types'
 
 export const passToClient = ['routeParams', 'relayInitialData']
 
-export async function render(pageContext: PageContextBuiltIn & PageContext) {
+export async function render(
+  pageContext: PageContextBuiltIn & PageContext
+): Promise<{
+  documentHtml: ReturnType<typeof escapeInject>
+  pageContext: Promise<unknown>
+}> {
   const { initialCompletion, totalCompletion, pipe, getStoreSource } =
     renderReact(pageContext)
 

@@ -2,11 +2,7 @@
 
 import { cwd, argv } from 'node:process'
 import { existsSync } from 'node:fs'
-import {
-  createServer as createDevServer,
-  build,
-  type PluginOption,
-} from 'vite'
+import { createServer as createDevServer, build, type PluginOption } from 'vite'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import { renderPage } from 'vite-plugin-ssr'

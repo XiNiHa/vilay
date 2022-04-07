@@ -1,3 +1,4 @@
+import React from 'react'
 import ReactDOMClient from 'react-dom/client'
 import type { Environment } from 'react-relay'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
