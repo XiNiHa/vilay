@@ -1,3 +1,4 @@
+import React from 'react'
 import ReactDOMClient from 'react-dom/client'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
 import type { PageContext } from '../types'

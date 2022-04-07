@@ -6,7 +6,7 @@ import {
   Store,
 } from 'relay-runtime'
 import { fetch } from 'ohmyfetch'
-import type { InitRelayEnvironment } from 'vite-ssr-relay/types'
+import type { InitRelayEnvironment } from 'vite-ssr-relay'
 
 // Init relay environment
 export const initRelayEnvironment: InitRelayEnvironment = (

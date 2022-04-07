@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql } from 'react-relay'
-import { useLazyLoadQuery } from 'vite-ssr-relay/renderer/relayWrapper'
-import type { GetQueryVariables } from 'vite-ssr-relay/types'
+import { useLazyLoadQuery, type GetQueryVariables } from 'vite-ssr-relay'
 import { head as defaultHead } from '../renderer/_default.page'
 import IssueListComponent from '../components/issues/IssueList'
 import type {

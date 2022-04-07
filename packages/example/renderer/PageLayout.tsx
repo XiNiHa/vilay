@@ -1,6 +1,6 @@
 import React from 'react'
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
-import type { PageLayoutProps } from 'vite-ssr-relay/types'
+import type { PageLayoutProps } from 'vite-ssr-relay'
 import '@unocss/reset/tailwind.css'
 import 'uno.css'
 

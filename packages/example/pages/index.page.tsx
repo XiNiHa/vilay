@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, type PreloadedQuery } from 'react-relay'
+import { useLazyLoadQuery } from 'vite-ssr-relay'
 import { pagesPageQuery } from './__generated__/pagesPageQuery.graphql'
-import { useLazyLoadQuery } from 'vite-ssr-relay/renderer/relayWrapper'
 
 interface Props {
   queryRef: PreloadedQuery<pagesPageQuery>

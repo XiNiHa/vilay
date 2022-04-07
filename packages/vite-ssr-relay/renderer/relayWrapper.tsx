@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  useRelayEnvironment,
-  usePreloadedQuery,
-  useLazyLoadQuery,
-  type PreloadedQuery,
-} from 'react-relay'
+import ReactRelay from 'react-relay'
 import type {
   GraphQLTaggedNode,
   CacheConfig,
@@ -60,7 +55,7 @@ const InjectionScript: React.FC<{
     }
     if (state !== true) throw state
   }
-  const relayEnvironment = useRelayEnvironment()
+  const relayEnvironment = ReactRelay.useRelayEnvironment()
   const isServer = typeof window === 'undefined'
 
   if (isServer) InjectionStateMap.delete(id)
@@ -83,14 +78,14 @@ const InjectionScript: React.FC<{
 
 const useWrappedPreloadedQuery = <TQuery extends OperationType>(
   gqlQuery: GraphQLTaggedNode,
-  preloadedQuery: PreloadedQuery<TQuery>,
+  preloadedQuery: ReactRelay.PreloadedQuery<TQuery>,
   options?: {
     UNSTABLE_renderPolicy?: RenderPolicy | undefined
   }
 ) => {
   const context = React.useContext(Context)
   try {
-    return usePreloadedQuery(gqlQuery, preloadedQuery, options)
+    return ReactRelay.usePreloadedQuery(gqlQuery, preloadedQuery, options)
   } catch (e) {
     if (e instanceof Promise) context.handler?.(e)
     throw e
@@ -109,7 +104,7 @@ const useWrappedLazyLoadQuery = <TQuery extends OperationType>(
 ) => {
   const context = React.useContext(Context)
   try {
-    return useLazyLoadQuery(gqlQuery, variables, options)
+    return ReactRelay.useLazyLoadQuery(gqlQuery, variables, options)
   } catch (e) {
     if (e instanceof Promise) context.handler?.(e)
     throw e
