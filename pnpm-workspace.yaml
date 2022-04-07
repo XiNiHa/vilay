@@ -1,0 +1,3 @@
+packages:
+  - packages/vite-ssr-relay/
+  - packages/example/

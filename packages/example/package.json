@@ -1,0 +1,33 @@
+{
+  "name": "vite-ssr-relay-example",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "relay": "relay-compiler",
+    "dev": "vite-ssr-relay dev",
+    "build": "vite-ssr-relay build",
+    "start": "vite-ssr-relay start",
+    "preview": "vite-ssr-relay preview"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.17.8",
+    "babel-plugin-relay": "^13.2.0",
+    "ohmyfetch": "^0.4.15",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-error-boundary": "^3.1.4",
+    "react-relay": "^13.2.0",
+    "relay-runtime": "^13.2.0",
+    "vite-ssr-relay": "workspace:^*"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.14",
+    "@types/react-relay": "^13.0.2",
+    "@types/relay-runtime": "^13.0.3",
+    "@unocss/reset": "^0.30.8",
+    "relay-compiler": "^13.2.0",
+    "unocss": "^0.30.8",
+    "vite": "^2.9.1"
+  }
+}
