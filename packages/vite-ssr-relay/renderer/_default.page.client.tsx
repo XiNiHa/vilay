@@ -56,8 +56,7 @@ export async function render(
         if (trimmed === 'vite-ssr-relay-head-start') {
           inCommentArea = true
           continue
-        }
-        else if (trimmed === 'vite-ssr-relay-head-end') {
+        } else if (trimmed === 'vite-ssr-relay-head-end') {
           node.before(...headTags)
           inCommentArea = false
           break
