@@ -2,6 +2,7 @@
   "name": "vite-ssr-relay",
   "description": "Vite SSR framework with support for React SSR streaming and Relay",
   "version": "0.0.4",
+  "author": "XiNiHa <me@xiniha.dev>",
   "license": "MIT",
   "type": "module",
   "exports": {
