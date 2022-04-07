@@ -6,7 +6,7 @@ import {
 } from 'vite-plugin-ssr'
 import React from 'react'
 import { renderToPipeableStream } from 'react-dom/server'
-import config from '../config'
+import config from 'virtual:vite-ssr-relay:config'
 import preloadQuery from './preloadQuery'
 import { PageShell } from './PageShell'
 import { RouteManager } from './routeManager'

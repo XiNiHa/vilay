@@ -4,7 +4,7 @@ import { presetUno } from 'unocss'
 import unocss from 'unocss/vite'
 
 const config: UserConfig = {
-  plugins: [viteSsrRelay, unocss({ presets: [presetUno()] })],
+  plugins: [viteSsrRelay(), unocss({ presets: [presetUno()] })],
 }
 
 export default config
