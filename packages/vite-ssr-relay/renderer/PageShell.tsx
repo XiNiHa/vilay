@@ -17,7 +17,7 @@ export const PageShell: React.FC<Props> = ({
   routeManager,
 }) => {
   const PageLayout = pageContext.exports?.PageLayout ?? Passthrough
-  const [CurrentPage, queryRef, routeTransitioning] =
+  const [CurrentPage, variables, routeTransitioning] =
     useRouteManager(routeManager)
 
   return (
@@ -25,7 +25,7 @@ export const PageShell: React.FC<Props> = ({
       <RelayEnvironmentProvider environment={relayEnvironment}>
         <PageContextProvider pageContext={pageContext}>
           <PageLayout routeTransitioning={routeTransitioning}>
-            {CurrentPage && <CurrentPage queryRef={queryRef} />}
+            {CurrentPage && <CurrentPage variables={variables} />}
           </PageLayout>
         </PageContextProvider>
       </RelayEnvironmentProvider>
