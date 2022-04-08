@@ -4,7 +4,7 @@ import ssr from 'vite-plugin-ssr/plugin'
 import relay from 'babel-plugin-relay'
 import { transformSync } from '@babel/core'
 import deepmerge from 'deepmerge'
-import type { Config } from 'virtual:vite-ssr-relay:config'
+import type { Config } from 'virtual:vilay:config'
 
 type RecursivePartial<T> = {
   [P in keyof T]?: T[P] extends (infer U)[]
@@ -15,7 +15,7 @@ type RecursivePartial<T> = {
 }
 
 const relayPlugin: PluginOption = {
-  name: 'vite-ssr-relay:relay',
+  name: 'vilay:relay',
   transform(src, id) {
     let code = src
     if (/.(t|j)sx?/.test(id) && src.includes('graphql`')) {
@@ -31,7 +31,7 @@ const relayPlugin: PluginOption = {
 }
 
 const configPlugin = (config: RecursivePartial<Config>): PluginOption => {
-  const virtualModuleId = 'virtual:vite-ssr-relay:config'
+  const virtualModuleId = 'virtual:vilay:config'
   const resolvedVirtualModuleId = '\0' + virtualModuleId
   const defaultConfig: Config = {
     ssr: {
@@ -42,7 +42,7 @@ const configPlugin = (config: RecursivePartial<Config>): PluginOption => {
   const merged = deepmerge(defaultConfig, config)
 
   return {
-    name: 'vite-ssr-relay:config',
+    name: 'vilay:config',
     resolveId(id) {
       if (id === virtualModuleId) {
         return resolvedVirtualModuleId
@@ -56,11 +56,23 @@ const configPlugin = (config: RecursivePartial<Config>): PluginOption => {
   }
 }
 
+const viteConfigPlugin: PluginOption = {
+  name: 'vilay:overrideConfig',
+  config: (config) => ({
+    ...config,
+    optimizeDeps: {
+      ...config.optimizeDeps,
+      include: [...(config.optimizeDeps?.include ?? []), 'react-dom/client'],
+    },
+  }),
+}
+
 const plugin = (config: RecursivePartial<Config> = {}): PluginOption[] => [
   react(),
-  ssr({ pageFiles: { include: ['vite-ssr-relay'] } }),
+  ssr({ pageFiles: { include: ['vilay'] } }),
   relayPlugin,
   configPlugin(config),
+  viteConfigPlugin,
 ]
 
 export default plugin

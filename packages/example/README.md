@@ -1,4 +1,4 @@
-# vite-ssr-relay Demo App
+# Vilay Demo App
 
 ## Trying the demo app
 

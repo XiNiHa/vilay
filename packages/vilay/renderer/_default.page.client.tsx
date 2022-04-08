@@ -53,10 +53,10 @@ export async function render(
       const node = document.head.childNodes[i]
       if (node.nodeType === document.COMMENT_NODE) {
         const trimmed = node.textContent?.trim()
-        if (trimmed === 'vite-ssr-relay-head-start') {
+        if (trimmed === 'vilay-head-start') {
           inCommentArea = true
           continue
-        } else if (trimmed === 'vite-ssr-relay-head-end') {
+        } else if (trimmed === 'vilay-head-end') {
           node.before(...headTags)
           inCommentArea = false
           break

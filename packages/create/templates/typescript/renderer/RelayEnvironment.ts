@@ -1,26 +1,24 @@
 import {
   Environment,
-  GraphQLResponse,
   Network,
   RecordSource,
   Store,
+  type GraphQLResponse,
 } from 'relay-runtime'
 import { fetch } from 'ohmyfetch'
 import type { InitRelayEnvironment } from 'vilay'
 
-// Init relay environment
 export const initRelayEnvironment: InitRelayEnvironment = (
   isServer,
   records
-): Environment => {
+) => {
   const network = Network.create(async ({ text: query }, variables) => {
-    // Using GitHub API for example
-    const response = await fetch('https://api.github.com/graphql', {
+    // Replace this with your backend API URL
+    const response = await fetch(`https://beta.pokeapi.co/graphql/v1beta`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
       },
       body: JSON.stringify({ query, variables }),
     })
@@ -36,7 +34,6 @@ export const initRelayEnvironment: InitRelayEnvironment = (
   const source = new RecordSource(records)
   const store = new Store(source, { gcReleaseBufferSize: 10 })
 
-  // Client environment gets cached by the framework
   return new Environment({
     configName: isServer ? 'server' : 'client',
     network,
