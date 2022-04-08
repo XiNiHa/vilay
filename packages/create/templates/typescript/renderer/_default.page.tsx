@@ -7,6 +7,6 @@ export { initRelayEnvironment } from './RelayEnvironment'
 export const head = {
   title: 'New Vilay App',
   meta: {
-    description: 'Just created with @vilay/create',
+    description: 'Just created with create-vilay',
   },
 }

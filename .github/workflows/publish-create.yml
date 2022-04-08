@@ -1,9 +1,9 @@
-name: Publish @vilay/create
+name: Publish create-vilay
 
 on:
   push:
     tags:
-      - '@vilay/create-v*'
+      - 'create-vilay_v*'
 
 jobs:
   publish:

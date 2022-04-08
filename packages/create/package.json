@@ -1,5 +1,5 @@
 {
-  "name": "@vilay/create",
+  "name": "create-vilay",
   "version": "0.1.0",
   "description": "CLI tool for creating a new Vilay project",
   "author": "XiNiHa <me@xiniha.dev>",

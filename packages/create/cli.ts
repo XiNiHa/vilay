@@ -34,7 +34,7 @@ yargs(hideBin(argv))
           type: 'string',
         }),
     async ({ projectPath, template }) => {
-      console.log(magenta('*** @vilay/create ***'))
+      console.log(magenta('*** create-vilay ***'))
       const projectDir = projectPath
         ? resolve(projectPath)
         : await inquirer
