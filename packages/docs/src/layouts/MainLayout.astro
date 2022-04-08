@@ -2,7 +2,6 @@
 import HeadCommon from '../components/HeadCommon.astro'
 import HeadSEO from '../components/HeadSEO.astro'
 import Header from '../components/Header/Header.astro'
-import Footer from '../components/Footer/Footer.astro'
 import PageContent from '../components/PageContent/PageContent.astro'
 import LeftSidebar from '../components/LeftSidebar/LeftSidebar.astro'
 import RightSidebar from '../components/RightSidebar/RightSidebar.astro'
@@ -10,9 +9,8 @@ import * as CONFIG from '../config'
 
 const { content = {} } = Astro.props
 const currentPage = new URL(Astro.request.url).pathname
-const currentFile = `src/pages${currentPage.replace(/\/$/, '')}.md`
-const githubEditUrl =
-  CONFIG.GITHUB_EDIT_URL && CONFIG.GITHUB_EDIT_URL + currentFile
+const currentFile = `${CONFIG.GITHUB_PAGES_PATH}${currentPage.replace(/\/$/, '')}.md`
+const githubEditUrl = `https://github.com/${CONFIG.GITHUB_REPO_NAME}/blob/${CONFIG.GITHUB_REPO_BRANCH}/${currentFile}`
 ---
 
 <html dir={content.dir ?? 'ltr'} lang={content.lang ?? 'en-us'} class="initial">
@@ -115,7 +113,7 @@ const githubEditUrl =
         <LeftSidebar {currentPage} />
       </aside>
       <div id="grid-main">
-        <PageContent {content} {githubEditUrl}>
+        <PageContent {content} {githubEditUrl} {currentFile}>
           <slot />
         </PageContent>
       </div>

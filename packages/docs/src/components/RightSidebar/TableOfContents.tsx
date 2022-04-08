@@ -1,7 +1,9 @@
 import { Component } from 'solid-js'
 import 'solid-js/web'
 
-const TableOfContents: Component<{ headers: any[] }> = ({ headers = [] }) => {
+const TableOfContents: Component<{
+  headers: { depth: number; text: string; slug: string }[]
+}> = ({ headers = [] }) => {
   return (
     <>
       <h2 class="heading">On this page</h2>

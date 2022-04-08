@@ -1,8 +1,9 @@
 ---
+import AvatarList from './AvatarList.astro'
 import MoreMenu from '../RightSidebar/MoreMenu.astro'
-import TableOfContents from '../RightSidebar/TableOfContents.tsx'
+import TableOfContents from '../RightSidebar/TableOfContents'
 
-const { content, githubEditUrl } = Astro.props
+const { content, githubEditUrl, currentFile } = Astro.props
 const title = content.title
 const headers = content.astro.headers
 ---
@@ -15,6 +16,7 @@ const headers = content.astro.headers
     </nav>
     <slot></slot>
   </section>
+  <AvatarList {currentFile} />
   <nav class='block sm:hidden'>
     <MoreMenu editHref={githubEditUrl} />
   </nav>

@@ -1,25 +1,29 @@
 ---
+import * as CONFIG from '../../config'
+
 // fetch all commits for just this page's path
-const path = 'docs/' + Astro.props.path
-const url = `https://api.github.com/repos/withastro/astro/commits?path=${path}`
-const commitsURL = `https://github.com/withastro/astro/commits/main/${path}`
+const path = Astro.props.currentFile
+const url = `https://api.github.com/repos/XiNiHa/vilay/commits?path=${path}`
+const commitsURL = `https://github.com/${CONFIG.GITHUB_REPO_NAME}/commits/${CONFIG.GITHUB_REPO_BRANCH}/${path}`
 
 async function getCommits(url) {
   try {
-    const token = import.meta.env.SNOWPACK_PUBLIC_GITHUB_TOKEN
+    const token = import.meta.env.VITE_GITHUB_TOKEN
     if (!token) {
       throw new Error(
-        'Cannot find "SNOWPACK_PUBLIC_GITHUB_TOKEN" used for escaping rate-limiting.'
+        'Cannot find "VITE_GITHUB_TOKEN" used for escaping rate-limiting.'
       )
     }
 
-    const auth = `Basic ${Buffer.from(token, 'binary').toString('base64')}`
+    const auth = `Basic ${Buffer.from(token as string, 'binary').toString(
+      'base64'
+    )}`
 
     const res = await fetch(url, {
       method: 'GET',
       headers: {
         Authorization: auth,
-        'User-Agent': 'astro-docs/1.0',
+        'User-Agent': 'vilay-docs/1.0',
       },
     })
 
@@ -112,6 +116,7 @@ const additionalContributors = unique.length - recentContributors.length // list
   the `box-shadow` to help create a more accurate
   computed component size */
     padding: 0.08em;
+    margin: 16px 0;
     font-size: var(--avatar-size);
   }
 
@@ -162,6 +167,7 @@ const additionalContributors = unique.length - recentContributors.length // list
 
   .contributors {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
   }
 

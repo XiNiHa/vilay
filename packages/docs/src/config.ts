@@ -1,17 +1,20 @@
 export const SITE = {
-  title: 'Your Documentation Website',
-  description: 'Your website description.',
+  title: 'Vilay',
+  description:
+    'Vite SSR framework with support for React SSR streaming and Relay.',
   defaultLanguage: 'en_US',
 }
 
 export const OPEN_GRAPH = {
+  image: undefined
+  /*
   image: {
     src: 'https://github.com/withastro/astro/blob/main/assets/social/banner.jpg?raw=true',
     alt:
       'astro logo on a starry expanse of space,' +
       ' with a purple saturn-like planet floating in the right foreground',
   },
-  twitter: 'astrodotbuild',
+  */
 }
 
 export const KNOWN_LANGUAGES = {
@@ -19,13 +22,17 @@ export const KNOWN_LANGUAGES = {
 }
 
 // Uncomment this to add an "Edit this page" button to every page of documentation.
-// export const GITHUB_EDIT_URL = `https://github.com/withastro/astro/blob/main/docs/`;
+export const GITHUB_REPO_NAME = `XiNiHa/vilay`
+export const GITHUB_REPO_BRANCH = 'main'
+export const GITHUB_PAGES_PATH = 'packages/docs/src/pages'
 
 // Uncomment this to add an "Join our Community" button to every page of documentation.
+export const COMMUNITY_INVITE_URL = undefined
 // export const COMMUNITY_INVITE_URL = `https://astro.build/chat`;
 
 // Uncomment this to enable site search.
 // See "Algolia" section of the README for more information.
+export const ALGOLIA = undefined
 // export const ALGOLIA = {
 //   indexName: 'XXXXXXXXXX',
 //   appId: 'XXXXXXXXXX',
