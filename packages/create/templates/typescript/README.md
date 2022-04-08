@@ -7,7 +7,8 @@
 ## Scripts
 
 ```sh
-npm run dev   # Run development server
-npm run build # Build for production
-npm run start # Launch production SSR server
+npm run relay   # Run Relay compiler (add -w for watch mode)
+npm run dev     # Run development server
+npm run build   # Build for production
+npm run start   # Launch production SSR server
 ```
