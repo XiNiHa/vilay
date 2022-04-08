@@ -1,3 +1,2 @@
 packages:
-  - packages/vilay/
-  - packages/example/
+  - packages/*

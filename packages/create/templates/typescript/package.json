@@ -1,0 +1,29 @@
+{
+  "name": "test",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "relay": "relay-compiler",
+    "dev": "vilay dev",
+    "build": "vilay build",
+    "start": "vilay start"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.17.8",
+    "babel-plugin-relay": "^13.2.0",
+    "ohmyfetch": "^0.4.15",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-relay": "^13.2.0",
+    "relay-runtime": "^13.2.0",
+    "vilay": "^0.0.8"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@types/react-relay": "^13.0.2",
+    "@types/relay-runtime": "^13.0.2",
+    "relay-compiler": "^13.2.0",
+    "vite": "^2.9.1"
+  }
+}
