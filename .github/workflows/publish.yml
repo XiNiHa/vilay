@@ -19,6 +19,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
       - run: pnpm install
-      - run: cd packages/vite-ssr-relay && pnpm build && pnpm publish --no-git-checks
+      - run: cd packages/vilay && pnpm build && pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

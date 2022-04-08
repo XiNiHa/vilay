@@ -1,5 +1,5 @@
 {
-  "name": "vite-ssr-relay",
+  "name": "vilay",
   "description": "Vite SSR framework with support for React SSR streaming and Relay",
   "version": "0.0.7",
   "author": "XiNiHa <me@xiniha.dev>",

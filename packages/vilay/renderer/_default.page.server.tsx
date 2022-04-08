@@ -6,7 +6,7 @@ import {
 } from 'vite-plugin-ssr'
 import React from 'react'
 import { renderToPipeableStream } from 'react-dom/server'
-import config from 'virtual:vite-ssr-relay:config'
+import config from 'virtual:vilay:config'
 import preloadQuery from './preloadQuery'
 import { PageShell } from './PageShell'
 import { RouteManager } from './routeManager'
@@ -45,9 +45,9 @@ export async function render(
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- vite-ssr-relay-head-start -->
+        <!-- vilay-head-start -->
         ${dangerouslySkipEscape(headTags.join('\n'))}
-        <!-- vite-ssr-relay-head-end -->
+        <!-- vilay-head-end -->
       </head>
       <body>
         <div id="page-view">${pipeNodeStream(pipe)}</div>

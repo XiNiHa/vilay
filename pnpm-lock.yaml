@@ -37,8 +37,8 @@ importers:
       relay-compiler: ^13.2.0
       relay-runtime: ^13.2.0
       unocss: ^0.30.8
+      vilay: workspace:^*
       vite: ^2.9.1
-      vite-ssr-relay: workspace:^*
     dependencies:
       '@babel/runtime': 7.17.8
       babel-plugin-relay: 13.2.0
@@ -48,7 +48,7 @@ importers:
       react-error-boundary: 3.1.4_react@18.0.0
       react-relay: 13.2.0_react@18.0.0
       relay-runtime: 13.2.0
-      vite-ssr-relay: link:../vite-ssr-relay
+      vilay: link:../vilay
     devDependencies:
       '@types/react': 17.0.43
       '@types/react-dom': 17.0.14
@@ -59,7 +59,7 @@ importers:
       unocss: 0.30.11
       vite: 2.9.1
 
-  packages/vite-ssr-relay:
+  packages/vilay:
     specifiers:
       '@babel/core': ^7.17.8
       '@babel/runtime': ^7.17.8
