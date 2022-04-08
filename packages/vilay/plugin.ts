@@ -56,11 +56,23 @@ const configPlugin = (config: RecursivePartial<Config>): PluginOption => {
   }
 }
 
+const viteConfigPlugin: PluginOption = {
+  name: 'vilay:overrideConfig',
+  config: (config) => ({
+    ...config,
+    optimizeDeps: {
+      ...config.optimizeDeps,
+      include: [...(config.optimizeDeps?.include ?? []), 'react-dom/client'],
+    },
+  }),
+}
+
 const plugin = (config: RecursivePartial<Config> = {}): PluginOption[] => [
   react(),
   ssr({ pageFiles: { include: ['vilay'] } }),
   relayPlugin,
   configPlugin(config),
+  viteConfigPlugin,
 ]
 
 export default plugin
