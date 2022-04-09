@@ -1,26 +1,15 @@
 ---
 title: Introduction
-description: Docs intro
+description: Introduction about the Vilay framework
 layout: ../../layouts/MainLayout.astro
 ---
 
-**Welcome to Astro!**
+**Vilay** is a web app framework that:
 
-This is the `docs` starter template. It contains all of the features that you need to build a Markdown-powered documentation site, including:
+- ✅ **is built on Vite and vite-plugin-ssr**
+- ✅ **supports React 18 SSR streaming by default**
+- ✅ **is deeply integrated with Relay (Render-as-you-fetch support)**
+- ✅ **is easy and convenient to use**
 
-- ✅ **Full Markdown support**
-- ✅ **Responsive mobile-friendly design**
-- ✅ **Sidebar navigation**
-- ✅ **Search (powered by Algolia)**
-- ✅ **Multi-language i18n**
-- ✅ **Automatic table of contents**
-- ✅ **Automatic list of contributors**
-- ✅ (and, best of all) **dark mode**
-
-## Getting Started
-
-To get started with this theme, check out the `README.md` in your new project directory. It provides documentation on how to use and customize this template for your own project. Keep the README around so that you can always refer back to it as you build.
-
-Found a missing feature that you can't live without? Please suggest it on Discord [(#ideas-and-suggestions channel)](https://astro.build/chat) and even consider adding it yourself on GitHub! Astro is an open source project and contributions from developers like you are how we grow!
-
-Good luck out there, Astronaut. 🧑‍🚀
+It is currently being actively developed to be used in production applications, which means that the framework is keep evolving.
+While a lot of exciting features will be added over time, expect breaking changes between versions!

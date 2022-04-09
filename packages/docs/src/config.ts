@@ -42,12 +42,11 @@ export const ALGOLIA = undefined
 export const SIDEBAR = {
   en: [
     { text: '', header: true },
-    { text: 'Section Header', header: true },
+    { text: 'Getting Started', header: true },
     { text: 'Introduction', link: 'en/introduction' },
-    { text: 'Page 2', link: 'en/page-2' },
-    { text: 'Page 3', link: 'en/page-3' },
+    { text: 'Try It Out', link: 'en/try-it-out' },
 
-    { text: 'Another Section', header: true },
-    { text: 'Page 4', link: 'en/page-4' },
+    { text: 'Reference', header: true },
+    { text: 'Page Exports', link: 'en/page-exports' },
   ],
 }
