@@ -1,13 +1,12 @@
 {
-  "name": "vilay-example",
+  "name": "test",
   "type": "module",
   "private": true,
   "scripts": {
     "relay": "relay-compiler",
     "dev": "vilay dev",
     "build": "vilay build",
-    "start": "vilay start",
-    "preview": "vilay preview"
+    "start": "vilay start"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.8",
@@ -15,19 +14,16 @@
     "ohmyfetch": "^0.4.15",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-error-boundary": "^3.1.4",
     "react-relay": "^13.2.0",
     "relay-runtime": "^13.2.0",
-    "vilay": "workspace:^*"
+    "vilay": "^0.0.8"
   },
   "devDependencies": {
-    "@types/react": "^17.0.43",
-    "@types/react-dom": "^17.0.14",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "@types/react-relay": "^13.0.2",
-    "@types/relay-runtime": "^13.0.3",
-    "@unocss/reset": "^0.30.8",
+    "@types/relay-runtime": "^13.0.2",
     "relay-compiler": "^13.2.0",
-    "unocss": "^0.30.8",
     "vite": "^2.9.1"
   }
 }

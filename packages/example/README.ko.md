@@ -1,4 +1,4 @@
-# vite-ssr-relay 데모 앱
+# Vilay 데모 앱
 
 ## 데모 앱 실행해 보기
 

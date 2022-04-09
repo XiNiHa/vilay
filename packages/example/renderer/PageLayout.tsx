@@ -1,6 +1,6 @@
 import React from 'react'
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
-import type { PageLayoutProps } from 'vite-ssr-relay'
+import type { PageLayoutProps } from 'vilay'
 import '@unocss/reset/tailwind.css'
 import 'uno.css'
 
@@ -11,8 +11,8 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
 }) => {
   const links = {
     '/': 'Home',
-    '/repo/xiniha/vite-ssr-relay/issues': 'Issues',
-    '/repo/xiniha/vite-ssr-relay/issues/create': 'Create Issue',
+    '/repo/xiniha/vilay/issues': 'Issues',
+    '/repo/xiniha/vilay/issues/create': 'Create Issue',
   }
 
   return (

@@ -47,7 +47,7 @@ yargs(hideBin(argv))
 
 function rendererPlugin(): PluginOption {
   return {
-    name: 'vite-ssr-relay:rendererPlugin',
+    name: 'vilay:rendererPlugin',
     configureServer(server) {
       return () => {
         server.middlewares.use(async (req, res, next) => {

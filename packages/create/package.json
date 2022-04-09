@@ -1,0 +1,28 @@
+{
+  "name": "create-vilay",
+  "version": "0.1.0",
+  "description": "CLI tool for creating a new Vilay project",
+  "author": "XiNiHa <me@xiniha.dev>",
+  "license": "MIT",
+  "type": "module",
+  "bin": "./dist/cli.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "gunzip-maybe": "^1.4.2",
+    "inquirer": "^8.2.2",
+    "node-fetch": "^3.2.3",
+    "tar-fs": "^2.1.1",
+    "yargs": "^17.4.0"
+  },
+  "devDependencies": {
+    "@types/gunzip-maybe": "^1.4.0",
+    "@types/inquirer": "^8.2.1",
+    "@types/tar-fs": "^2.0.1",
+    "@types/yargs": "^17.0.10",
+    "typescript": "^4.6.3"
+  },
+  "files": ["dist"]
+}

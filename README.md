@@ -1,3 +1,3 @@
-# vite-ssr-relay
+# Vilay
 
-[English](packages/vite-ssr-relay/README.md) | [한국어](packages/vite-ssr-relay/README.ko.md)
+[English](packages/vilay/README.md) | [한국어](packages/vilay/README.ko.md)

@@ -5,5 +5,5 @@ export type {
   PageContext,
   PageLayoutProps,
   GetQueryVariables,
-  InitRelayEnvironment
+  InitRelayEnvironment,
 } from './types.js'

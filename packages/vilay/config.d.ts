@@ -1,4 +1,4 @@
-declare module 'virtual:vite-ssr-relay:config' {
+declare module 'virtual:vilay:config' {
   export interface Config {
     ssr: {
       initialSendTimeout: number
