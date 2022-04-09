@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, useMutation } from 'react-relay'
-import { useLazyLoadQuery } from 'vite-ssr-relay'
+import { useLazyLoadQuery } from 'vilay'
 import Button from '../components/Button'
 import type {
   createIssueQuery,

@@ -21,7 +21,7 @@ const Context = React.createContext<{
   handler: ((p: Promise<unknown>) => unknown) | null
 }>({ handler: null })
 
-const WrappedSuspense: React.FC<{ fallback: React.ReactNode }> = ({
+const WrappedSuspense: React.FC<{ fallback: React.ReactNode, children: React.ReactNode }> = ({
   fallback,
   children,
 }) => {

@@ -33,4 +33,6 @@ export const PageShell: React.FC<Props> = ({
   )
 }
 
-const Passthrough: React.FC = ({ children }) => <>{children}</>
+const Passthrough: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => <>{children}</>
