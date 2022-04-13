@@ -12,7 +12,7 @@ import { PageShell } from './PageShell'
 import { RouteManager } from './routeManager'
 import type { PageContext } from '../types'
 
-export const passToClient = ['routeParams', 'relayInitialData']
+export const passToClient = ['routeParams']
 
 export async function render(
   pageContext: PageContextBuiltIn & PageContext
@@ -20,8 +20,7 @@ export async function render(
   documentHtml: ReturnType<typeof escapeInject>
   pageContext: Promise<unknown>
 }> {
-  const { initialCompletion, totalCompletion, pipe, getStoreSource } =
-    renderReact(pageContext)
+  const { /* initialCompletion , */ totalCompletion, pipe } = renderReact(pageContext)
 
   const { exports } = pageContext
   const headTags: string[] = []
@@ -38,7 +37,7 @@ export async function render(
     }
   }
 
-  await initialCompletion
+  // await initialCompletion
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">
@@ -57,11 +56,7 @@ export async function render(
 
   return {
     documentHtml,
-    pageContext: totalCompletion
-      .then(() => ({
-        relayInitialData: getStoreSource().toJSON(),
-      }))
-      .catch(() => ({})),
+    pageContext: totalCompletion.then(() => ({})).catch(() => ({})),
   }
 }
 
@@ -73,7 +68,7 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
   } = pageContext
 
   const relayEnvironment = initRelayEnvironment(true)
-  const relayQueryRef = preloadQuery(pageContext, relayEnvironment)
+  const { variables } = preloadQuery(pageContext, relayEnvironment) ?? {}
 
   let resolveInitial: () => void
   let rejectInitial: (reason: Error) => void
@@ -105,7 +100,7 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
       routeManager={
         new RouteManager({
           initialPage: Page,
-          queryRef: relayQueryRef,
+          variables,
         })
       }
     />,

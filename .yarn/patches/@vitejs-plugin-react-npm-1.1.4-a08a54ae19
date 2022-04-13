@@ -1,0 +1,13 @@
+diff --git a/dist/index.js b/dist/index.js
+index 95d5f47fbe58d90c4e1c337359c7d14bd7de8157..210a4e5be01f32369ac8360f67a7271c189540ed 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -491,7 +491,7 @@ function viteReact(opts = {}) {
+         return [
+           {
+             tag: "script",
+-            attrs: { type: "module" },
++            attrs: { type: "module", async: true },
+             children: preambleCode.replace(`__BASE__`, base)
+           }
+         ];

@@ -26,5 +26,5 @@ function onError(error: Error, event: CompatibilityEvent) {
     event.res.end()
     return
   }
-  sendError(event.res, error, false)
+  sendError(event, error, false)
 }

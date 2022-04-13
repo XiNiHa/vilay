@@ -1,4 +1,5 @@
 export { usePageContext } from './renderer/usePageContext.js'
+export { Suspense, useLazyLoadQuery } from './renderer/relayWrapper.js'
 
 export type {
   PageContext,

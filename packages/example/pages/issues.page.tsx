@@ -1,6 +1,6 @@
 import React from 'react'
-import { graphql, usePreloadedQuery, type PreloadedQuery } from 'react-relay'
-import type { GetQueryVariables } from 'vilay'
+import { graphql } from 'react-relay'
+import { useLazyLoadQuery, type GetQueryVariables } from 'vilay'
 import { head as defaultHead } from '../renderer/_default.page'
 import IssueListComponent from '../components/issues/IssueList'
 import type {
@@ -9,7 +9,7 @@ import type {
 } from './__generated__/issuesPageQuery.graphql'
 
 interface Props {
-  queryRef: PreloadedQuery<issuesPageQuery>
+  variables: issuesPageQuery$variables
 }
 
 interface RouteParams {
@@ -47,8 +47,8 @@ export const query = graphql`
 `
 
 // Relay pagination example.
-export const Page: React.FC<Props> = ({ queryRef }) => {
-  const data = usePreloadedQuery<issuesPageQuery>(query, queryRef)
+export const Page: React.FC<Props> = ({ variables }) => {
+  const data = useLazyLoadQuery<issuesPageQuery>(query, variables)
 
   return (
     <>

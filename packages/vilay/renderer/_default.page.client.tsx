@@ -1,14 +1,13 @@
 import React from 'react'
 import ReactDOMClient from 'react-dom/client'
-import type { Environment } from 'react-relay'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
 import type { PageContext } from '../types'
-import preloadQuery from './preloadQuery'
+import { getQueryVariables } from './preloadQuery'
 import { PageShell } from './PageShell'
 import { RouteManager } from './routeManager'
+import './bootstrap'
 
 let containerRoot: ReactDOMClient.Root | null = null
-let relayEnvironment: Environment | null = null
 let routeManager: RouteManager | null = null
 
 export const clientRouting = true
@@ -18,18 +17,21 @@ export async function render(
 ) {
   const {
     Page,
-    relayInitialData,
     isHydration,
     exports: { initRelayEnvironment, head },
   } = pageContext
 
-  if (!relayEnvironment)
-    relayEnvironment = initRelayEnvironment(false, relayInitialData)
+  window.relayEnv ??= initRelayEnvironment(false)
 
-  const relayQueryRef = preloadQuery(pageContext, relayEnvironment)
+  if (window.$caches?.length && window.$updateRelay) {
+    window.$caches?.forEach(window.$updateRelay)
+    delete window.$caches
+  }
+
+  const variables = getQueryVariables(pageContext)
 
   routeManager ??= new RouteManager()
-  routeManager.setPage(Page, relayQueryRef)
+  routeManager.setPage(Page, variables)
 
   if (head && !isHydration) {
     const headTags: HTMLElement[] = []
@@ -73,7 +75,7 @@ export async function render(
     const page = (
       <PageShell
         pageContext={pageContext}
-        relayEnvironment={relayEnvironment}
+        relayEnvironment={window.relayEnv}
         routeManager={routeManager}
       />
     )
