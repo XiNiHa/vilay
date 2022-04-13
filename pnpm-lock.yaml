@@ -89,7 +89,6 @@ importers:
   packages/vilay:
     specifiers:
       '@babel/core': ^7.17.8
-      '@babel/runtime': '*'
       '@types/babel__core': ^7.1.19
       '@types/glob': ^7.2.0
       '@types/node': ^16.11.13
@@ -100,15 +99,10 @@ importers:
       '@types/serve-static': ^1.13.10
       '@types/yargs': ^17.0.10
       '@vitejs/plugin-react': ^1.3.0
-      babel-plugin-relay: '*'
       deepmerge: ^4.2.2
       glob: ^7.2.0
       h3: ^0.5.3
       listhen: ^0.2.6
-      react: '*'
-      react-dom: '*'
-      react-relay: '*'
-      relay-runtime: '*'
       serve-static: ^1.15.0
       typescript: ^4.6.3
       vite: ^2.9.1
@@ -116,17 +110,11 @@ importers:
       yargs: ^17.4.0
     dependencies:
       '@babel/core': 7.17.9
-      '@babel/runtime': 7.17.9
       '@vitejs/plugin-react': 1.3.0
-      babel-plugin-relay: 13.2.0
       deepmerge: 4.2.2
       glob: 7.2.0
       h3: 0.5.7
       listhen: 0.2.8
-      react: 18.0.0
-      react-dom: 18.0.0_react@18.0.0
-      react-relay: 13.2.0_react@18.0.0
-      relay-runtime: 13.2.0
       serve-static: 1.15.0
       vite: 2.9.1
       vite-plugin-ssr: 0.4.0-beta.8_vite@2.9.1
