@@ -1,15 +1,20 @@
 #!/usr/bin/env node
 
+import { fileURLToPath } from 'node:url'
+import { dirname, join } from 'node:path'
 import { cwd, argv } from 'node:process'
 import { existsSync } from 'node:fs'
 import { createServer as createDevServer, build, type PluginOption } from 'vite'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import { renderPage } from 'vite-plugin-ssr'
+import esbuild from 'esbuild'
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import { listen } from 'listhen'
-import { createServer as createProdServer } from './server/index.js'
+import { createServer as createProdServer } from './server/node/index.js'
 
 const workDir = cwd()
+const srcDir = dirname(fileURLToPath(import.meta.url))
 
 if (!existsSync(`${workDir}/package.json`)) {
   throw new Error(
@@ -32,10 +37,48 @@ yargs(hideBin(argv))
       server.printUrls()
     }
   )
-  .command('build', 'build for production', async () => {
-    await build({ root: workDir })
-    await build({ root: workDir, build: { ssr: true } })
-  })
+  .command(
+    'build',
+    'build for production',
+    (yargs) =>
+      yargs.option('env', { choices: ['node', 'cloudflare'], default: 'node' }),
+    async ({ env }) => {
+      switch (env) {
+        case 'node': {
+          return void (await build({ root: workDir }))
+        }
+        case 'cloudflare': {
+          await build({ root: workDir })
+          await esbuild
+            .build({
+              plugins: [NodeModulesPolyfillPlugin()],
+              platform: 'browser',
+              conditions: ['node'],
+              entryPoints: [join(srcDir, '../server/workers/index.ts')],
+              sourcemap: true,
+              bundle: true,
+              minify: false,
+              outfile: './dist/client/_worker.js',
+              logLevel: 'warning',
+              format: 'esm',
+              target: 'es2020',
+            })
+            .then(() =>
+              console.log(
+                'Application built successfully for Cloudflare Workers!'
+              )
+            )
+            .catch((e) =>
+              console.log('Application build failed for Cloudflare Workers.', e)
+            )
+          break
+        }
+        default: {
+          throw new Error(`Unknown environment: ${env}`)
+        }
+      }
+    }
+  )
   .command('start', 'launch production SSR server', async () => {
     if (!existsSync(`${workDir}/dist`)) {
       throw new Error('Call `build` before calling `start`.')
