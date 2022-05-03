@@ -346,16 +346,16 @@ __metadata:
   linkType: hard
 
 "@brillout/json-s@npm:^0.4.3":
-  version: 0.4.5
-  resolution: "@brillout/json-s@npm:0.4.5"
-  checksum: a7dcdcf185ced5a9d17adb66a072c2e63c85f4ebef00b0b8f31d6c34f54c63c12f37d9e73a10d2a8be5024c3901b65169f2e01ac8a1dd55fb32e9dba1d4ed13c
+  version: 0.4.6
+  resolution: "@brillout/json-s@npm:0.4.6"
+  checksum: 72fff416de6676fcc421d554d1351b2b1ffde1419392e4d533ceb8fd4bcede3ce0da2fdb1df90402dbfa9bea889dc10e918cab4a12e6c51fa217defc0e6b0814
   languageName: node
   linkType: hard
 
 "@brillout/libassert@npm:^0.5.4":
-  version: 0.5.4
-  resolution: "@brillout/libassert@npm:0.5.4"
-  checksum: d20d9fbacc5df2927b738b060231119ba1b5b0d4fc1936bd5d2492f7d8dd57ac5e59e79e41c7aeb4277b7b55a46ce37da9cc080b50783123903a6b3574997ee0
+  version: 0.5.5
+  resolution: "@brillout/libassert@npm:0.5.5"
+  checksum: 2f2010636400eda93b6ee7b4c4829498aded2e3f445e7717a5cb3a274841d5f8e3af99e0dce37c1d2a896576ea62ef1a6680238dfe70a02495df7156faf7fd2f
   languageName: node
   linkType: hard
 
