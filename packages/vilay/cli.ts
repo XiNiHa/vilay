@@ -8,6 +8,7 @@ import { createServer as createDevServer, build, type PluginOption } from 'vite'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import { renderPage } from 'vite-plugin-ssr'
+import { buildWorker } from 'build-worker'
 import esbuild from 'esbuild'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import { listen } from 'listhen'
@@ -41,7 +42,10 @@ yargs(hideBin(argv))
     'build [env]',
     'build for production',
     (yargs) =>
-      yargs.positional('env', { choices: ['node', 'cloudflare'], default: 'node' }),
+      yargs.positional('env', {
+        choices: ['node', 'cloudflare'],
+        default: 'node',
+      }),
     async ({ env }) => {
       switch (env) {
         case 'node': {
@@ -49,20 +53,10 @@ yargs(hideBin(argv))
         }
         case 'cloudflare': {
           await build({ root: workDir })
-          await esbuild
-            .build({
-              plugins: [NodeModulesPolyfillPlugin()],
-              platform: 'browser',
-              conditions: ['worker'],
-              entryPoints: [join(srcDir, '../server/workers/index.ts')],
-              sourcemap: true,
-              bundle: true,
-              minify: true,
-              outfile: './dist/client/_worker.js',
-              logLevel: 'warning',
-              format: 'esm',
-              target: 'es2020',
-            })
+          await buildWorker({
+            entry: join(srcDir, '../server/workers/index.ts'),
+            out: './dist/client/_worker.js',
+          })
             .then(() =>
               console.log(
                 'Application built successfully for Cloudflare Workers!'
