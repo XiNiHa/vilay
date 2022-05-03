@@ -57,7 +57,7 @@ yargs(hideBin(argv))
               entryPoints: [join(srcDir, '../server/workers/index.ts')],
               sourcemap: true,
               bundle: true,
-              minify: false,
+              minify: true,
               outfile: './dist/client/_worker.js',
               logLevel: 'warning',
               format: 'esm',
