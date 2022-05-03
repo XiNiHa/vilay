@@ -4,8 +4,10 @@ import {
   pipeNodeStream,
   type PageContextBuiltIn,
 } from 'vite-plugin-ssr'
-import React from 'react'
-import { renderToPipeableStream } from 'react-dom/server'
+import React, { ReactNode } from 'react'
+import * as ReactDOMServer from 'react-dom/server'
+import type { Writable } from 'node:stream'
+import type { Store } from 'relay-runtime'
 import config from 'virtual:vilay:config'
 import preloadQuery from './preloadQuery'
 import { PageShell } from './PageShell'
@@ -20,7 +22,7 @@ export async function render(
   documentHtml: ReturnType<typeof escapeInject>
   pageContext: Promise<unknown>
 }> {
-  const { initialCompletion, totalCompletion, pipe, getStoreSource } =
+  const { initialCompletion, totalCompletion, getStoreSource } =
     renderReact(pageContext)
 
   const { exports } = pageContext
@@ -38,7 +40,7 @@ export async function render(
     }
   }
 
-  await initialCompletion
+  const { pipe, stream } = await initialCompletion
 
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">
@@ -50,7 +52,7 @@ export async function render(
         <!-- vilay-head-end -->
       </head>
       <body>
-        <div id="page-view">${pipeNodeStream(pipe)}</div>
+        <div id="page-view">${pipe ? pipeNodeStream(pipe) : stream ?? ''}</div>
         <script>let global = globalThis;</script>
       </body>
     </html>`
@@ -75,17 +77,54 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
   const relayEnvironment = initRelayEnvironment(true)
   const relayQueryRef = preloadQuery(pageContext, relayEnvironment)
 
-  let resolveInitial: () => void
-  let rejectInitial: (reason: Error) => void
+  const children = (
+    <PageShell
+      pageContext={pageContext}
+      relayEnvironment={relayEnvironment}
+      routeManager={
+        new RouteManager({
+          initialPage: Page,
+          queryRef: relayQueryRef,
+        })
+      }
+    />
+  )
+
+  if ('renderToPipeableStream' in ReactDOMServer) {
+    return renderReactToPipeableStream(children, () =>
+      relayEnvironment.getStore().getSource()
+    )
+  } else if ('renderToReadableStream' in ReactDOMServer) {
+    return renderReactToReadableStream(children, () =>
+      relayEnvironment.getStore().getSource()
+    )
+  } else {
+    throw new Error(
+      `Both 'renderToPipeableStream' and 'rendertoReadableStream' are unavailable in ReactDOMServer! Looks like the bundle is broken...`
+    )
+  }
+}
+
+type RenderSource = {
+  pipe?: (dest: Writable) => Writable
+  stream?: ReactDOMServer.ReactDOMServerReadableStream
+}
+
+const renderReactToPipeableStream = (
+  children: ReactNode,
+  getStoreSource: () => ReturnType<Store['getSource']>
+) => {
+  let resolveInitial: (source: RenderSource) => void
+  let rejectInitial: (reason: unknown) => void
   let resolveTotal: () => void
-  let rejectTotal: (reason: Error) => void
+  let rejectTotal: (reason: unknown) => void
   let initialResolved = false
   let totalResolved = false
 
-  const initialCompletion = new Promise<true>((res, rej) => {
-    resolveInitial = () => {
+  const initialCompletion = new Promise<RenderSource>((res, rej) => {
+    resolveInitial = (source: RenderSource) => {
       initialResolved = true
-      res(true)
+      res(source)
     }
     rejectInitial = rej
   })
@@ -98,20 +137,11 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
     rejectTotal = rej
   })
 
-  const { pipe, abort: _abort } = renderToPipeableStream(
-    <PageShell
-      pageContext={pageContext}
-      relayEnvironment={relayEnvironment}
-      routeManager={
-        new RouteManager({
-          initialPage: Page,
-          queryRef: relayQueryRef,
-        })
-      }
-    />,
+  const { pipe, abort: _abort } = ReactDOMServer.renderToPipeableStream(
+    children,
     {
       onAllReady: () => {
-        if (!initialResolved) resolveInitial()
+        if (!initialResolved) resolveInitial({ pipe })
         if (!totalResolved) resolveTotal()
       },
       onError: (err) => {
@@ -129,12 +159,54 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
   }
 
   setTimeout(
-    () => initialResolved || resolveInitial(),
+    () => initialResolved || resolveInitial({ pipe }),
     config.ssr.initialSendTimeout
   )
   setTimeout(() => totalResolved || abortRender(), config.ssr.abortTimeout)
 
-  const getStoreSource = () => relayEnvironment.getStore().getSource()
-
   return { initialCompletion, totalCompletion, pipe, getStoreSource }
+}
+
+const renderReactToReadableStream = (
+  children: ReactNode,
+  getStoreSource: () => ReturnType<Store['getSource']>
+) => {
+  let resolveTotal: () => void
+  let rejectTotal: (reason: unknown) => void
+  let abort: (() => void) | undefined = undefined
+  let totalResolved = false
+
+  const totalCompletion = new Promise<true>((res, rej) => {
+    resolveTotal = () => {
+      totalResolved = true
+      res(true)
+    }
+    rejectTotal = rej
+  })
+
+  const streamPromise = ReactDOMServer.renderToReadableStream(children, {
+    onError: (err) => {
+      console.error('React SSR Error', err)
+      rejectTotal(err)
+    },
+  })
+
+  const initialCompletion: Promise<RenderSource> = Promise.all([
+    streamPromise,
+    new Promise((res) => setTimeout(res, config.ssr.initialSendTimeout)),
+  ]).then(([stream]) => ({ stream }))
+
+  streamPromise.then((stream) => {
+    stream.allReady.then(() => resolveTotal())
+    abort = () => stream.cancel()
+  })
+
+  const abortRender = () => {
+    if (abort) abort()
+    if (!totalResolved) rejectTotal(new Error('React SSR Error: Aborted'))
+  }
+
+  setTimeout(() => totalResolved || abortRender(), config.ssr.abortTimeout)
+
+  return { initialCompletion, totalCompletion, getStoreSource }
 }

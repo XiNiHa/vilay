@@ -38,10 +38,10 @@ yargs(hideBin(argv))
     }
   )
   .command(
-    'build',
+    'build [env]',
     'build for production',
     (yargs) =>
-      yargs.option('env', { choices: ['node', 'cloudflare'], default: 'node' }),
+      yargs.positional('env', { choices: ['node', 'cloudflare'], default: 'node' }),
     async ({ env }) => {
       switch (env) {
         case 'node': {
@@ -53,7 +53,7 @@ yargs(hideBin(argv))
             .build({
               plugins: [NodeModulesPolyfillPlugin()],
               platform: 'browser',
-              conditions: ['node'],
+              conditions: ['worker'],
               entryPoints: [join(srcDir, '../server/workers/index.ts')],
               sourcemap: true,
               bundle: true,

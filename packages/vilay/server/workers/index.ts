@@ -36,9 +36,7 @@ async function handleSsr(url: string) {
   const { httpResponse } = pageContext
   if (!httpResponse) {
     return null
-  } else {
-    const { readable, writable } = new TransformStream()
-    httpResponse.pipeToWebWritable(writable)
-    return new Response(readable)
+  } else {    
+    return new Response(httpResponse.getWebStream())
   }
 }
