@@ -4366,7 +4366,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:*, react-dom@npm:^18.0.0":
+"react-dom@npm:*, react-dom@npm:^18.1.0":
   version: 18.1.0
   resolution: "react-dom@npm:18.1.0"
   dependencies:
@@ -4411,7 +4411,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:*, react@npm:^18.0.0":
+"react@npm:*, react@npm:^18.1.0":
   version: 18.1.0
   resolution: "react@npm:18.1.0"
   dependencies:
@@ -5468,8 +5468,8 @@ __metadata:
     "@unocss/reset": ^0.30.8
     babel-plugin-relay: ^13.2.0
     ohmyfetch: ^0.4.15
-    react: ^18.0.0
-    react-dom: ^18.0.0
+    react: ^18.1.0
+    react-dom: ^18.1.0
     react-error-boundary: ^3.1.4
     react-relay: ^13.2.0
     relay-compiler: ^13.2.0
@@ -5517,8 +5517,8 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.17.8
     babel-plugin-relay: ^13.2.0
-    react: ^18.0.0
-    react-dom: ^18.0.0
+    react: ^18.1.0
+    react-dom: ^18.1.0
     react-relay: ^13.2.0
     relay-runtime: ^13.2.0
   bin:
