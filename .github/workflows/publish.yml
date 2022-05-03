@@ -16,6 +16,5 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'yarn'
       - run: yarn
+      - run: echo ${{ secrets.YARNRC }} | base64 --decode > ~/.yarnrc.yml
       - run: cd packages/vilay && yarn build && yarn npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
