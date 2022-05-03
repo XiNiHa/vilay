@@ -10,15 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: 7.0.0-rc.2
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: cd packages/create && pnpm build && pnpm publish --access public --no-git-checks
+          cache: 'yarn'
+      - run: yarn
+      - run: cd packages/create && yarn build && yarn npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
