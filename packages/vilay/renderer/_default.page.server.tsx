@@ -74,7 +74,7 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
     exports: { initRelayEnvironment },
   } = pageContext
 
-  const relayEnvironment = initRelayEnvironment(true)
+  const relayEnvironment = initRelayEnvironment(true, pageContext.fetch)
   const relayQueryRef = preloadQuery(pageContext, relayEnvironment)
 
   const children = (

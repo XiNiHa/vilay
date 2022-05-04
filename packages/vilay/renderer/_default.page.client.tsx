@@ -26,7 +26,7 @@ export async function render(
   pageContext.fetch = fetch
 
   if (!relayEnvironment)
-    relayEnvironment = initRelayEnvironment(false, relayInitialData)
+    relayEnvironment = initRelayEnvironment(false, pageContext.fetch, relayInitialData)
 
   const relayQueryRef = preloadQuery(pageContext, relayEnvironment)
 

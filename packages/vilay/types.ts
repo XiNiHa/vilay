@@ -30,7 +30,10 @@ export type PageLayoutProps = {
   routeTransitioning: boolean
 }
 
+type FetchFn = typeof fetch
+
 export type InitRelayEnvironment = (
   isServer: boolean,
+  fetch: FetchFn,
   records?: RecordMap
 ) => Environment
