@@ -4,14 +4,14 @@ description: Documentation about Vilay's unique page exports
 layout: ../../layouts/MainLayout.astro
 ---
 
-For providing an easy-to-use API to users, Vilay uses a page exports to customize the behavior of the framework.
+For providing an easy-to-use API to users, Vilay uses page exports to customize the behavior of the framework.
 Users can easily utilize these exports to use various features of Vilay.
 
 Since Vilay is built on [vite-plugin-ssr](https://vite-plugin-ssr.com), users can also use every page exports provided by `vite-plugin-ssr` by default.
 
 ## How to Use
 
-Users can export any kind of page exports in every page files (`.page.js/jsx/ts/tsx`).
+Users can export any kind of page exports in every page file (`.page.js/jsx/ts/tsx`).
 
 ```tsx
 // _default.page.js
@@ -40,7 +40,7 @@ export const Page = () => {
 
 ### `query`
 
-Vilay provides various page exports that makes integrating with Relay very easy and convenient.
+Vilay provides various page exports that make integrating with Relay very easy and convenient.
 `query` is the most basic export that tells Vilay to fetch the query before rendering the page.
 
 ```tsx

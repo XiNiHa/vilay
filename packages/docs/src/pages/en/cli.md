@@ -21,8 +21,8 @@ Build for production.
 **Options**
 
 - `env`: Target environment to run the app. Choices: `node`, `cloudflare`. Default: `node`
-- `--no-minify`: Skip minifying. Useful for debugging purpose. Default: `false`
+- `--no-minify`: Skip minifying. Useful for debugging purposes. Default: `false`
 
 ## `start`
 
-Launch production SSR server. Only works when user already built the app with the `build` command.
+Launch production SSR server. Only works when the user already built the app with the `build` command.

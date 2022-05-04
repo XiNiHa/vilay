@@ -11,5 +11,5 @@ layout: ../../layouts/MainLayout.astro
 - ✅ **is deeply integrated with Relay (Render-as-you-fetch support)**
 - ✅ **is easy and convenient to use**
 
-It is currently being actively developed to be used in production applications, which means that the framework is keep evolving.
+It is currently being actively developed to be used in production applications, which means that the framework keeps evolving.
 While a lot of exciting features will be added over time, expect breaking changes between versions!
