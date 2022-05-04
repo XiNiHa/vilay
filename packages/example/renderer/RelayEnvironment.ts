@@ -5,12 +5,12 @@ import {
   RecordSource,
   Store,
 } from 'relay-runtime'
-import { fetch } from 'ohmyfetch'
 import type { InitRelayEnvironment } from 'vilay'
 
 // Init relay environment
 export const initRelayEnvironment: InitRelayEnvironment = (
   isServer,
+  fetch,
   records
 ): Environment => {
   const network = Network.create(async ({ text: query }, variables) => {
