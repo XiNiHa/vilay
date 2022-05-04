@@ -5,11 +5,11 @@ import {
   Store,
   type GraphQLResponse,
 } from 'relay-runtime'
-import { fetch } from 'ohmyfetch'
 import type { InitRelayEnvironment } from 'vilay'
 
 export const initRelayEnvironment: InitRelayEnvironment = (
   isServer,
+  fetch,
   records
 ) => {
   const network = Network.create(async ({ text: query }, variables) => {
