@@ -7,7 +7,7 @@
     "moduleResolution": "Node",
     "target": "ES2020",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vite/client", "react-dom/next", "react/next"],
+    "types": ["vite/client"],
     "jsx": "react",
     "skipLibCheck": true,
     "esModuleInterop": true

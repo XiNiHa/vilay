@@ -13,21 +13,22 @@
     "@babel/runtime": "^7.17.8",
     "babel-plugin-relay": "^13.2.0",
     "ohmyfetch": "^0.4.15",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "react-error-boundary": "^3.1.4",
     "react-relay": "^13.2.0",
     "relay-runtime": "^13.2.0",
-    "vilay": "workspace:^*"
+    "vilay": "workspace:^*",
+    "vite-plugin-ssr": "^0.4.0-beta.15"
   },
   "devDependencies": {
-    "@types/react": "^17.0.43",
-    "@types/react-dom": "^17.0.14",
+    "@types/react": "^18.0.8",
+    "@types/react-dom": "^18.0.3",
     "@types/react-relay": "^13.0.2",
     "@types/relay-runtime": "^13.0.3",
     "@unocss/reset": "^0.30.8",
     "relay-compiler": "^13.2.0",
     "unocss": "^0.30.8",
-    "vite": "^2.9.1"
+    "vite": "^2.9.6"
   }
 }

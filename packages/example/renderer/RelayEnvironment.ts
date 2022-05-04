@@ -18,6 +18,8 @@ export const initRelayEnvironment: InitRelayEnvironment = (
     const response = await fetch('https://api.github.com/graphql', {
       method: 'POST',
       headers: {
+        // CF Workers don't append any User Agent, and GitHub API requires it
+        ...(typeof window === 'undefined' ? { 'User-Agent': 'Vilay' } : undefined),
         'Content-Type': 'application/json',
         Accept: 'application/json',
         Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,

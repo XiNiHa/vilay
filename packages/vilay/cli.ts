@@ -1,15 +1,19 @@
 #!/usr/bin/env node
 
+import { fileURLToPath } from 'node:url'
+import { dirname, join } from 'node:path'
 import { cwd, argv } from 'node:process'
 import { existsSync } from 'node:fs'
 import { createServer as createDevServer, build, type PluginOption } from 'vite'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import { renderPage } from 'vite-plugin-ssr'
+import { buildWorker } from 'build-worker'
 import { listen } from 'listhen'
-import { createServer as createProdServer } from './server/index.js'
+import { createServer as createProdServer } from './server/node/index.js'
 
 const workDir = cwd()
+const srcDir = dirname(fileURLToPath(import.meta.url))
 
 if (!existsSync(`${workDir}/package.json`)) {
   throw new Error(
@@ -32,10 +36,43 @@ yargs(hideBin(argv))
       server.printUrls()
     }
   )
-  .command('build', 'build for production', async () => {
-    await build({ root: workDir })
-    await build({ root: workDir, build: { ssr: true } })
-  })
+  .command(
+    'build [env]',
+    'build for production',
+    (yargs) =>
+      yargs.positional('env', {
+        choices: ['node', 'cloudflare'],
+        default: 'node',
+      }).option('no-minify', { default: false }),
+    async ({ env, noMinify }) => {
+      const minify = !noMinify
+      switch (env) {
+        case 'node': {
+          return void (await build({ root: workDir, build: { minify } }))
+        }
+        case 'cloudflare': {
+          await build({ root: workDir, build: { minify } })
+          await buildWorker({
+            entry: join(srcDir, '../server/workers/index.ts'),
+            out: './dist/client/_worker.js',
+            debug: minify,
+          })
+            .then(() =>
+              console.log(
+                'Application built successfully for Cloudflare Workers!'
+              )
+            )
+            .catch((e) =>
+              console.log('Application build failed for Cloudflare Workers.', e)
+            )
+          break
+        }
+        default: {
+          throw new Error(`Unknown environment: ${env}`)
+        }
+      }
+    }
+  )
   .command('start', 'launch production SSR server', async () => {
     if (!existsSync(`${workDir}/dist`)) {
       throw new Error('Call `build` before calling `start`.')
