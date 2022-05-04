@@ -93,10 +93,6 @@ p {
 	line-height: 1.65em;
 }
 
-.content ul {
-	line-height: 1.1em;
-}
-
 p,
 .content ul {
 	color: var(--theme-text-light);
