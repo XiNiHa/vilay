@@ -10,6 +10,7 @@ import { hideBin } from 'yargs/helpers'
 import { renderPage } from 'vite-plugin-ssr'
 import { buildWorker } from 'build-worker'
 import { listen } from 'listhen'
+import { fetch } from 'undici'
 import { createServer as createProdServer } from './server/node/index.js'
 
 const workDir = cwd()
@@ -88,7 +89,7 @@ function rendererPlugin(): PluginOption {
     configureServer(server) {
       return () => {
         server.middlewares.use(async (req, res, next) => {
-          const pageContextInit = { url: req.originalUrl ?? '' }
+          const pageContextInit = { url: req.originalUrl ?? '', fetch }
           const pageContext = await renderPage(pageContextInit)
           const { httpResponse } = pageContext
           if (!httpResponse) return next()
