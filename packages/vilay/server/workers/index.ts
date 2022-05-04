@@ -31,7 +31,7 @@ function isAssetUrl(url: string) {
 import { renderPage } from 'vite-plugin-ssr'
 
 async function handleSsr(url: string) {
-  const pageContextInit = { url }
+  const pageContextInit = { url, fetch }
   const pageContext = await renderPage(pageContextInit)
   const { httpResponse } = pageContext
   if (!httpResponse) {

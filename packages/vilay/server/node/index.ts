@@ -2,6 +2,7 @@ import { join } from 'node:path'
 import { CompatibilityEvent, createApp, sendError } from 'h3'
 import serveStatic from 'serve-static'
 import { renderPage } from 'vite-plugin-ssr'
+import { fetch } from 'undici'
 
 export async function createServer(root: string) {
   const app = createApp({ onError })
@@ -10,8 +11,8 @@ export async function createServer(root: string) {
   app.use((req, res, next) => {
     if (req.method !== 'GET') return next()
     if (req.url == null) return next(new Error('url is null'))
-
-    renderPage({ url: req.url }).then((pageContext) => {
+    const pageContextInit = { url: req.url, fetch }
+    renderPage(pageContextInit).then((pageContext) => {
       const { httpResponse } = pageContext
       if (!httpResponse) return next()
       httpResponse.pipeToNodeWritable(res)

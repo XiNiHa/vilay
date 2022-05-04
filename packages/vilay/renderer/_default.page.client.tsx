@@ -23,6 +23,8 @@ export async function render(
     exports: { initRelayEnvironment, head },
   } = pageContext
 
+  pageContext.fetch = fetch
+
   if (!relayEnvironment)
     relayEnvironment = initRelayEnvironment(false, relayInitialData)
 

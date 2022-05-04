@@ -17,6 +17,7 @@ export type PageContext = {
     getQueryVariables: GetQueryVariables<unknown, Variables>
   }
   routeParams: Record<string, unknown>
+  fetch: typeof fetch
   relayInitialData: RecordMap
 }
 
