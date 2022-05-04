@@ -51,12 +51,12 @@ importers:
     specifiers:
       '@algolia/client-search': ^4.13.0
       '@astrojs/react': ^0.1.0
-      '@astrojs/solid-js': ^0.0.3
+      '@astrojs/solid-js': ^0.1.2
       '@babel/core': ^7.17.8
       '@docsearch/css': ^3.0.0
       '@docsearch/react': ^3.0.0
       '@types/react': ^17.0.43
-      astro: ^1.0.0-beta.0
+      astro: ^1.0.0-beta.23
       react: ^17.0.0
       react-dom: ^17.0.0
       solid-js: ^1.3.14
@@ -71,7 +71,7 @@ importers:
       solid-js: 1.3.17
     devDependencies:
       '@astrojs/react': 0.1.1_6nyponiwjib2clhkbtejle6l5y
-      '@astrojs/solid-js': 0.0.3_txjpuinqjnxvqs57hnau2nchoa
+      '@astrojs/solid-js': 0.1.2_txjpuinqjnxvqs57hnau2nchoa
       '@babel/core': 7.17.9
       astro: 1.0.0-beta.23
       typescript: 4.6.3
@@ -384,8 +384,8 @@ packages:
       - '@babel/core'
     dev: true
 
-  /@astrojs/solid-js/0.0.3_txjpuinqjnxvqs57hnau2nchoa:
-    resolution: {integrity: sha512-iuFimMyfM6IOb8Y+ZPAaynDIb4UJrig02EJaJrfUnsLWNJzUzXxMATU6mgcy9es5pRzdplxVqjCCMz9rRYkfpQ==}
+  /@astrojs/solid-js/0.1.2_txjpuinqjnxvqs57hnau2nchoa:
+    resolution: {integrity: sha512-xXrKwWprjMkZMVSmqfPJOlrwr3WvuoZckSN/VE5WZf8JYJBZrmsEh5xJg+s3Q9dJQQ2ZdsNhTer5pm3Gp+YbOg==}
     engines: {node: ^14.15.0 || >=16.0.0}
     peerDependencies:
       solid-js: ^1.3.6
