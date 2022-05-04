@@ -104,7 +104,7 @@ importers:
       react-relay: 13.2.0_react@18.1.0
       relay-runtime: 13.2.0
       vilay: link:../vilay
-      vite-plugin-ssr: 0.4.0-beta.15_vite@2.9.7
+      vite-plugin-ssr: 0.4.0-beta.16_vite@2.9.7
     devDependencies:
       '@types/react': 18.0.8
       '@types/react-dom': 18.0.3
@@ -163,7 +163,7 @@ importers:
       serve-static: 1.15.0
       undici: 5.1.1
       vite: 2.9.7
-      vite-plugin-ssr: 0.4.0-beta.15_vite@2.9.7
+      vite-plugin-ssr: 0.4.0-beta.16_vite@2.9.7
       yargs: 17.4.1
     devDependencies:
       '@cloudflare/workers-types': 3.8.0
@@ -6132,12 +6132,12 @@ packages:
       ufo: 0.8.3
     dev: false
 
-  /vite-plugin-ssr/0.4.0-beta.15_vite@2.9.7:
-    resolution: {integrity: sha512-cjkdUtlPQpKuugzruETX9TRP8Dz3DrsnSSdOuAH/Zm7WMEaagnA2BcssqPfPyP5SUwg/pK9sW83+ERJUa7snow==}
+  /vite-plugin-ssr/0.4.0-beta.16_vite@2.9.7:
+    resolution: {integrity: sha512-nwaN5Zm3EGnmTldltvEKu4UCEY+XMY0DjjGMAlrvqakvu2bMYLkXy0rTj28iGv39yBTEjBvRE4JBijkd2ajd/w==}
     engines: {node: '>=12.19.0'}
     hasBin: true
     peerDependencies:
-      vite: ^2.8.4
+      vite: '>=2.9.6'
     dependencies:
       '@brillout/json-s': 0.4.6
       '@brillout/libassert': 0.5.5
