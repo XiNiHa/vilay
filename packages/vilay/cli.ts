@@ -56,7 +56,7 @@ yargs(hideBin(argv))
           await buildWorker({
             entry: join(srcDir, '../server/workers/index.ts'),
             out: './dist/client/_worker.js',
-            debug: minify,
+            debug: noMinify,
           })
             .then(() =>
               console.log(
