@@ -43,17 +43,19 @@ yargs(hideBin(argv))
       yargs.positional('env', {
         choices: ['node', 'cloudflare'],
         default: 'node',
-      }),
-    async ({ env }) => {
+      }).option('no-minify', { default: false }),
+    async ({ env, noMinify }) => {
+      const minify = !noMinify
       switch (env) {
         case 'node': {
-          return void (await build({ root: workDir }))
+          return void (await build({ root: workDir, build: { minify } }))
         }
         case 'cloudflare': {
-          await build({ root: workDir })
+          await build({ root: workDir, build: { minify } })
           await buildWorker({
             entry: join(srcDir, '../server/workers/index.ts'),
             out: './dist/client/_worker.js',
+            debug: minify,
           })
             .then(() =>
               console.log(
