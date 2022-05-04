@@ -15,7 +15,7 @@ const MenuToggle: Component = () => {
       type="button"
       aria-pressed={sidebarShown ? 'true' : 'false'}
       id="menu-toggle"
-      onClick={() => setSidebarShown(!sidebarShown)}
+      onClick={() => setSidebarShown(prev => !prev)}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
