@@ -2210,7 +2210,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.14.0, esbuild@npm:^0.14.27, esbuild@npm:^0.14.38":
+"esbuild@npm:^0.14.0, esbuild@npm:^0.14.27":
   version: 0.14.38
   resolution: "esbuild@npm:0.14.38"
   dependencies:
@@ -5500,7 +5500,6 @@ __metadata:
     "@babel/core": ^7.17.8
     "@babel/runtime": "*"
     "@cloudflare/workers-types": ^3.8.0
-    "@esbuild-plugins/node-modules-polyfill": ^0.1.4
     "@types/babel__core": ^7.1.19
     "@types/glob": ^7.2.0
     "@types/node": ^16.11.13
@@ -5514,7 +5513,6 @@ __metadata:
     babel-plugin-relay: "*"
     build-worker: ^0.2.1
     deepmerge: ^4.2.2
-    esbuild: ^0.14.38
     glob: ^7.2.0
     h3: ^0.5.3
     listhen: ^0.2.6

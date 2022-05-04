@@ -9,8 +9,6 @@ import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import { renderPage } from 'vite-plugin-ssr'
 import { buildWorker } from 'build-worker'
-import esbuild from 'esbuild'
-import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import { listen } from 'listhen'
 import { createServer as createProdServer } from './server/node/index.js'
 
