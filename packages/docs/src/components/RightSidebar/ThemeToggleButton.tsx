@@ -54,7 +54,7 @@ const ThemeToggle: Component = () => {
     } else {
       root.classList.add('theme-dark')
     }
-  }, [theme])
+  })
 
   return (
     <div class="theme-toggle">
