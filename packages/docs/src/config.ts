@@ -46,8 +46,12 @@ export const SIDEBAR = {
     { text: 'Introduction', link: 'en/introduction' },
     { text: 'Try It Out', link: 'en/try-it-out' },
 
+    { text: 'Page Exports', header: true },
+    { text: 'About Page Exports', link: 'en/page-exports/about' },
+    { text: 'Basic', link: 'en/page-exports/basic' },
+    { text: 'Relay', link: 'en/page-exports/relay' },
+
     { text: 'Reference', header: true },
-    { text: 'Page Exports', link: 'en/page-exports' },
     { text: 'Vilay CLI', link: 'en/cli' },
   ],
 }
