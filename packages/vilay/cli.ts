@@ -42,7 +42,7 @@ yargs(hideBin(argv))
     'build for production',
     (yargs) =>
       yargs.positional('env', {
-        choices: ['node', 'cloudflare'],
+        choices: ['node', 'cloudflare-pages', 'cloudflare-workers'],
         default: 'node',
       }).option('no-minify', { default: false }),
     async ({ env, noMinify }) => {
@@ -51,12 +51,30 @@ yargs(hideBin(argv))
         case 'node': {
           return void (await build({ root: workDir, build: { minify } }))
         }
-        case 'cloudflare': {
+        case 'cloudflare-pages': {
           await build({ root: workDir, build: { minify } })
           await buildWorker({
-            entry: join(srcDir, '../server/workers/index.ts'),
+            entry: join(srcDir, '../server/cloudflare/pages.ts'),
             out: './dist/client/_worker.js',
             debug: noMinify,
+          })
+            .then(() =>
+              console.log(
+                'Application built successfully for Cloudflare Pages Fullstack!'
+              )
+            )
+            .catch((e) =>
+              console.log('Application build failed for Cloudflare Pages Fullstack.', e)
+            )
+          break
+        }
+        case 'cloudflare-workers': {
+          await build({ root: workDir, build: { minify } })
+          await buildWorker({
+            entry: join(srcDir, '../server/cloudflare/workers.ts'),
+            out: './dist/client/_worker.js',
+            debug: noMinify,
+            external: ['__STATIC_CONTENT_MANIFEST'],
           })
             .then(() =>
               console.log(
