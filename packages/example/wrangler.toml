@@ -1,0 +1,12 @@
+name = "vilay-example"
+main = "./dist/client/_worker.js"
+compatibility_date = "2022-05-04"
+account_id = ""
+workers_dev = true
+compatibility_flags = ["streams_enable_constructors"]
+
+[build]
+command = "pnpm build cloudflare-workers"
+
+[site]
+bucket = "./dist/client"

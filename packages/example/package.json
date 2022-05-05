@@ -5,7 +5,7 @@
   "scripts": {
     "relay": "relay-compiler",
     "dev": "vilay dev",
-    "build": "vilay build",
+    "build": "relay-compiler && vilay build",
     "start": "vilay start",
     "preview": "vilay preview"
   },
