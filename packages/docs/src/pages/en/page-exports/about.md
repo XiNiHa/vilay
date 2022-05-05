@@ -1,5 +1,5 @@
 ---
-title: Page Exports
+title: About Page Exports
 description: Documentation about Vilay's unique page exports
 layout: ../../../layouts/MainLayout.astro
 ---

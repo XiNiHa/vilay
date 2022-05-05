@@ -20,7 +20,7 @@ Build for production.
 
 **Options**
 
-- `env`: Target environment to run the app. Choices: `node`, `cloudflare`. Default: `node`
+- `env`: Target environment to run the app. Choices: `node`, `cloudflare-workers`, `cloudflare-pages`. Default: `node`
 - `--no-minify`: Skip minifying. Useful for debugging purposes. Default: `false`
 
 ## `start`
