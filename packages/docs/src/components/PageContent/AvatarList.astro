@@ -8,10 +8,10 @@ const commitsURL = `https://github.com/${CONFIG.GITHUB_REPO_NAME}/commits/${CONF
 
 async function getCommits(url) {
   try {
-    const token = import.meta.env.VITE_GITHUB_TOKEN
+    const token = process.env.GITHUB_TOKEN
     if (!token) {
       throw new Error(
-        'Cannot find "VITE_GITHUB_TOKEN" used for escaping rate-limiting.'
+        'Cannot find "GITHUB_TOKEN" used for escaping rate-limiting.'
       )
     }
 
