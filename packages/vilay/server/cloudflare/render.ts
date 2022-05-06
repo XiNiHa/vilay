@@ -6,7 +6,14 @@ export async function render(url: string) {
   const { httpResponse } = pageContext
   if (!httpResponse) {
     return null
-  } else {    
-    return new Response(httpResponse.getWebStream())
+  } else {
+    const { contentType, statusCode } = httpResponse
+    return new Response(httpResponse.getWebStream(), {
+      status: statusCode,
+      headers: {
+        'Content-Type': contentType,
+        'Transfer-Encoding': 'chunked',
+      },
+    })
   }
 }

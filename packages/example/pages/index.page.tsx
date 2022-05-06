@@ -1,5 +1,5 @@
-import React from 'react'
 import { graphql, usePreloadedQuery, type PreloadedQuery } from 'react-relay'
+import { defineVilay } from 'vilay'
 import { pagesPageQuery } from './__generated__/pagesPageQuery.graphql'
 
 interface Props {
@@ -22,37 +22,39 @@ export const query = graphql`
   }
 `
 
-// Basic data fetching example using Relay.
-export const Page: React.FC<Props> = ({ queryRef }) => {
-  // This will either pull the preloaded data or suspend.
-  const data = usePreloadedQuery<pagesPageQuery>(query, queryRef)
+export default defineVilay<{ PageProps: Props }>({
+  // Basic data fetching example using Relay.
+  Page: ({ queryRef }) => {
+    // This will either pull the preloaded data or suspend.
+    const data = usePreloadedQuery<pagesPageQuery>(query, queryRef)
 
-  const listItems = [
-    <>Name: {data.repository?.name}</>,
-    <>Stars: {data.repository?.stargazerCount}</>,
-    <>
-      Issues: {data.repository?.issues.totalCount} (
-      {data.repository?.openedIssues.totalCount} open)
-    </>,
-  ]
+    const listItems = [
+      <>Name: {data.repository?.name}</>,
+      <>Stars: {data.repository?.stargazerCount}</>,
+      <>
+        Issues: {data.repository?.issues.totalCount} (
+        {data.repository?.openedIssues.totalCount} open)
+      </>,
+    ]
 
-  return (
-    <>
-      <h2 className="text-2xl mb-4">Welcome!</h2>
-      <p>
-        This is the main page for the template, rendered with some of the actual
-        information about the template repository:
-      </p>
-      <ul className="pl-4">
-        {listItems.map((item, i) => (
-          <li
-            key={i}
-            className="my-2 w-fit list-disc border-b border-black border-dashed hover:bg-blue-50 transition-colors duration-400"
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
-    </>
-  )
-}
+    return (
+      <>
+        <h2 className="text-2xl mb-4">Welcome!</h2>
+        <p>
+          This is the main page for the template, rendered with some of the
+          actual information about the template repository:
+        </p>
+        <ul className="pl-4">
+          {listItems.map((item, i) => (
+            <li
+              key={i}
+              className="my-2 w-fit list-disc border-b border-black border-dashed hover:bg-blue-50 transition-colors duration-400"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  },
+})
