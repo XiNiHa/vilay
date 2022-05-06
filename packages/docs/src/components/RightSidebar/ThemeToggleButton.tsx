@@ -1,4 +1,4 @@
-import { Component, createEffect, createSignal } from 'solid-js'
+import { Component, createEffect, createSignal, For } from 'solid-js'
 import './ThemeToggleButton.css'
 
 const themes = ['light', 'dark']
@@ -58,27 +58,28 @@ const ThemeToggle: Component = () => {
 
   return (
     <div class="theme-toggle">
-      {themes.map((t, i) => {
-        const icon = icons[i]
-        const checked = t === theme()
-        return (
-          <label className={checked ? ' checked' : ''}>
-            {icon}
-            <input
-              type="radio"
-              name="theme-toggle"
-              checked={checked}
-              value={t}
-              title={`Use ${t} theme`}
-              aria-label={`Use ${t} theme`}
-              onChange={() => {
-                localStorage.setItem('theme', t)
-                setTheme(t)
-              }}
-            />
-          </label>
-        )
-      })}
+      <For each={themes}>
+        {(t, i) => {
+          const checked = t === theme()
+          return (
+            <label className={checked ? ' checked' : ''}>
+              {icons[i()]}
+              <input
+                type="radio"
+                name="theme-toggle"
+                checked={checked}
+                value={t}
+                title={`Use ${t} theme`}
+                aria-label={`Use ${t} theme`}
+                onChange={() => {
+                  localStorage.setItem('theme', t)
+                  setTheme(t)
+                }}
+              />
+            </label>
+          )
+        }}
+      </For>
     </div>
   )
 }
