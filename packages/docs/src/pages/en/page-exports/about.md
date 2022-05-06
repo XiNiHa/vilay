@@ -24,3 +24,17 @@ export const head = {
   title: 'Menu - My Vilay App', // This gets applied when visiting `/menu`
 }
 ```
+
+## TypeScript Support
+
+`defineVilay()` is provided for defining exports with types.
+
+```ts
+import { defineVilay } from 'vilay'
+
+export default defineVilay({
+  head: {
+    title: 'My Vilay App', // Type inferred
+  }
+})
+```

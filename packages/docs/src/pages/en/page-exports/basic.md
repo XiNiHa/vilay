@@ -4,7 +4,7 @@ description: Documentation about Vilay's basic page exports
 layout: ../../../layouts/MainLayout.astro
 ---
 
-## `page`
+## `Page`
 
 Vilay renders the component exported as `Page` for the route.
 
@@ -12,6 +12,27 @@ Vilay renders the component exported as `Page` for the route.
 // index.page.js
 export const Page = () => {
   return <h1>Hello world!</h1> // This will appear when visiting `/`
+}
+```
+
+## `PageLayout`
+
+Vilay uses `PageLayout` export to render the layout of the app.
+
+```tsx
+export const PageLayout = ({
+  children,
+  // true while the route is transitioning with `startTransition()`
+  routeTransitioning,
+}) => {
+  return (
+    <>
+      {routeTransitioning && 'Loading...'}
+      <Suspense fallback="Loading...">
+        {children}
+      </Suspense>
+    </>
+  )
 }
 ```
 
