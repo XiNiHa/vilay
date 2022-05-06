@@ -28,25 +28,22 @@ const icons = [
   </svg>,
 ]
 
-const ThemeToggle: Component = () => {
-  const [theme, setTheme] = createSignal(
-    (() => {
-      if (import.meta.env.SSR) {
-        return undefined
-      }
-      if (
-        typeof localStorage !== 'undefined' &&
-        localStorage.getItem('theme')
-      ) {
-        return localStorage.getItem('theme')
-      }
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark'
-      }
-      return 'light'
-    })()
-  )
+const [theme, setTheme] = createSignal(
+  (() => {
+    if (import.meta.env.SSR) {
+      return undefined
+    }
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme')
+    }
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark'
+    }
+    return 'light'
+  })()
+)
 
+const ThemeToggle: Component = () => {
   createEffect(() => {
     const root = document.documentElement
     if (theme() === 'light') {
@@ -59,26 +56,23 @@ const ThemeToggle: Component = () => {
   return (
     <div class="theme-toggle">
       <For each={themes}>
-        {(t, i) => {
-          const checked = t === theme()
-          return (
-            <label className={checked ? ' checked' : ''}>
-              {icons[i()]}
-              <input
-                type="radio"
-                name="theme-toggle"
-                checked={checked}
-                value={t}
-                title={`Use ${t} theme`}
-                aria-label={`Use ${t} theme`}
-                onChange={() => {
-                  localStorage.setItem('theme', t)
-                  setTheme(t)
-                }}
-              />
-            </label>
-          )
-        }}
+        {(t, i) => (
+          <label classList={{ checked: t === theme() }}>
+            {icons[i()]}
+            <input
+              type="radio"
+              name="theme-toggle"
+              checked={t === theme()}
+              value={t}
+              title={`Use ${t} theme`}
+              aria-label={`Use ${t} theme`}
+              onChange={() => {
+                localStorage.setItem('theme', t)
+                setTheme(t)
+              }}
+            />
+          </label>
+        )}
       </For>
     </div>
   )
