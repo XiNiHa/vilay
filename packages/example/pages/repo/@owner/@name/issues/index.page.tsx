@@ -1,8 +1,8 @@
 import React from 'react'
 import { graphql, usePreloadedQuery, type PreloadedQuery } from 'react-relay'
 import { defineVilay } from 'vilay'
-import { head as defaultHead } from '../renderer/_default.page'
-import IssueListComponent from '../components/issues/IssueList'
+import defaultDefines from '../../../../../renderer/_default.page'
+import IssueListComponent from '../../../../../components/issues/IssueList'
 import type {
   issuesPageQuery,
   issuesPageQuery$variables,
@@ -38,7 +38,7 @@ export default defineVilay<{
   QueryVariables: issuesPageQuery$variables
 }>({
   // This overrides the application-wide <head> tag definition in `_default.page.tsx`
-  head: { ...defaultHead, title: 'Issues: Vite SSR app' },
+  head: { ...defaultDefines.head, title: 'Issues: Vite SSR app' },
   // If a page has `getQueryVariables` exported, it'll be called to get the variables used for preloading the query.
   // If it's not exported, route params will be directly used as variables.
   getQueryVariables: (routeParams) => ({

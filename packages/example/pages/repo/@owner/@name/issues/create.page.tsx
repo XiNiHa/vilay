@@ -6,7 +6,7 @@ import {
   type PreloadedQuery,
 } from 'react-relay'
 import { defineVilay } from 'vilay'
-import Button from '../components/Button'
+import Button from '../../../../../components/Button'
 import type { createIssueQuery } from './__generated__/createIssueQuery.graphql'
 import type { createIssueMutation } from './__generated__/createIssueMutation.graphql'
 

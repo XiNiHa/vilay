@@ -111,7 +111,7 @@ function rendererPlugin(): PluginOption {
           const pageContext = await renderPage(pageContextInit)
           const { httpResponse } = pageContext
           if (!httpResponse) return next()
-          httpResponse.pipeToNodeWritable(res)
+          httpResponse.pipe(res)
         })
       }
     },

@@ -2,9 +2,10 @@ import {
   dangerouslySkipEscape,
   escapeInject,
   pipeNodeStream,
+  stampStreamPipe,
   type PageContextBuiltIn,
 } from 'vite-plugin-ssr'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import * as ReactDOMServer from 'react-dom/server'
 import type { Writable } from 'node:stream'
 import type { Store } from 'relay-runtime'
@@ -42,6 +43,8 @@ export async function render(
 
   const { pipe, stream } = await initialCompletion
 
+  if (pipe) stampStreamPipe(pipe, { pipeType: 'node' })
+
   const documentHtml = escapeInject`<!DOCTYPE html>
     <html lang="en">
       <head>
@@ -52,7 +55,7 @@ export async function render(
         <!-- vilay-head-end -->
       </head>
       <body>
-        <div id="page-view">${pipe ? pipeNodeStream(pipe) : stream ?? ''}</div>
+        <div id="page-view">${pipe || (stream ?? '')}</div>
         <script>let global = globalThis;</script>
       </body>
     </html>`

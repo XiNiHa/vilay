@@ -15,7 +15,7 @@ export async function createServer(root: string) {
     renderPage(pageContextInit).then((pageContext) => {
       const { httpResponse } = pageContext
       if (!httpResponse) return next()
-      httpResponse.pipeToNodeWritable(res)
+      httpResponse.pipe(res)
     })
   })
 
