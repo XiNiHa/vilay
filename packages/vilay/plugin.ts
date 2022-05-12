@@ -33,12 +33,7 @@ const relayPlugin: PluginOption = {
 const configPlugin = (config: RecursivePartial<Config>): PluginOption => {
   const virtualModuleId = 'virtual:vilay:config'
   const resolvedVirtualModuleId = '\0' + virtualModuleId
-  const defaultConfig: Config = {
-    ssr: {
-      initialSendTimeout: 0,
-      abortTimeout: 5000,
-    },
-  }
+  const defaultConfig: Config = {}
   const merged = deepmerge(defaultConfig, config)
 
   return {

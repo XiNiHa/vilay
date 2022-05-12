@@ -142,6 +142,7 @@ importers:
       react: '*'
       react-dom: '*'
       react-relay: '*'
+      react-streaming: ^0.2.3
       relay-runtime: '*'
       serve-static: ^1.15.0
       typescript: ^4.6.3
@@ -163,6 +164,7 @@ importers:
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
       react-relay: 13.2.0_react@18.1.0
+      react-streaming: 0.2.3_ef5jwxihqo6n7gxfmzogljlgcm
       relay-runtime: 13.2.0
       serve-static: 1.15.0
       undici: 5.1.1
@@ -3765,6 +3767,11 @@ packages:
     resolution: {integrity: sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=}
     dev: false
 
+  /isbot-fast/1.2.0:
+    resolution: {integrity: sha512-twjuQzy2gKMDVfKGQyQqrx6Uy4opu/fiVUTTpdqtFsd7OQijIp5oXvb27n5EemYXaijh5fomndJt/SPRLsEdSg==}
+    engines: {node: '>=6.0.0'}
+    dev: false
+
   /isexe/2.0.0:
     resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=}
 
@@ -5056,6 +5063,18 @@ packages:
       relay-runtime: 13.2.0
     transitivePeerDependencies:
       - encoding
+    dev: false
+
+  /react-streaming/0.2.3_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-mfSwXfUYZxkyfxfhAdH5qgtBoKMjAy/Txu1VuB4Ttnq2vWAznos3OOvT2fN2m/QIBL332owxgzy32C4Jtq9GsQ==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    dependencies:
+      '@brillout/json-s': 0.4.6
+      isbot-fast: 1.2.0
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
     dev: false
 
   /react/17.0.2:

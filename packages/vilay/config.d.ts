@@ -1,10 +1,5 @@
 declare module 'virtual:vilay:config' {
-  export interface Config {
-    ssr: {
-      initialSendTimeout: number
-      abortTimeout: number
-    }
-  }
+  export interface Config {}
   const config: Config
   export default config
 }
