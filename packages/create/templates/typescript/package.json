@@ -14,7 +14,7 @@
     "react-dom": "^18.1.0",
     "react-relay": "^13.2.0",
     "relay-runtime": "^13.2.0",
-    "vilay": "^0.0.17"
+    "vilay": "^0.0.20"
   },
   "devDependencies": {
     "@types/react": "^18.0.8",
