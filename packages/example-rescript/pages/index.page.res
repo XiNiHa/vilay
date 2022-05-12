@@ -22,5 +22,4 @@ let make = (~queryRef) => {
   </main>
 }
 
-let \"Page" = make
 let query = PagesIndexQuery_graphql.node
