@@ -1,0 +1,23 @@
+{
+  "name": "rescript-vilay",
+  "description": "ReScript bindings for Vilay, a Vite SSR framework",
+  "version": "0.0.20",
+  "author": "XiNiHa <me@xiniha.dev>",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "rescript": "^9.1.4"
+  },
+  "devDependencies": {
+    "@rescript/react": "^0.10.3",
+    "graphql": "^16.5.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-relay": "^13.2.0",
+    "relay-compiler": "^13.2.0",
+    "relay-config": "^12.0.1",
+    "relay-runtime": "^13.2.0",
+    "rescript-relay": "^0.23.0",
+    "rescript-webapi": "^0.6.1"
+  }
+}

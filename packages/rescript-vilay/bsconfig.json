@@ -1,0 +1,17 @@
+{
+  "name": "rescript-vilay",
+  "version": "0.0.20",
+  "namespace": false,
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "package-specs": [{
+    "module": "es6",
+    "in-source": true
+  }],
+  "bs-dependencies": ["@rescript/react", "rescript-webapi", "rescript-relay"],
+  "suffix": ".bs.js"
+}
