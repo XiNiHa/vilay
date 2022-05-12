@@ -11,7 +11,7 @@ export async function render(url: string) {
     return new Response(httpResponse.getWebStream(), {
       status: statusCode,
       headers: {
-        'Content-Type': contentType,
+        'Content-Type': `${contentType};charset=utf-8`,
         'Transfer-Encoding': 'chunked',
       },
     })

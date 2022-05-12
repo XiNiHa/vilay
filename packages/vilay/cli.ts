@@ -120,6 +120,10 @@ function rendererPlugin(): PluginOption {
           const pageContext = await renderPage(pageContextInit)
           const { httpResponse } = pageContext
           if (!httpResponse) return next()
+          const { contentType, statusCode } = httpResponse
+          res.writeHead(statusCode, {
+            'Content-Type': `${contentType};charset=utf-8`,
+          })
           httpResponse.pipe(res)
         })
       }

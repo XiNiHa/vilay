@@ -91,12 +91,13 @@ importers:
       react-dom: ^18.1.0
       react-error-boundary: ^3.1.4
       react-relay: ^13.2.0
+      react-streaming: ^0.2.3
       relay-compiler: ^13.2.0
       relay-runtime: ^13.2.0
       unocss: ^0.30.8
       vilay: workspace:^*
       vite: ^2.9.6
-      vite-plugin-ssr: ^0.4.0-beta.17
+      vite-plugin-ssr: ^0.4.0-beta.20
     dependencies:
       '@babel/runtime': 7.17.9
       babel-plugin-relay: 13.2.0
@@ -104,9 +105,10 @@ importers:
       react-dom: 18.1.0_react@18.1.0
       react-error-boundary: 3.1.4_react@18.1.0
       react-relay: 13.2.0_react@18.1.0
+      react-streaming: 0.2.3_ef5jwxihqo6n7gxfmzogljlgcm
       relay-runtime: 13.2.0
       vilay: link:../vilay
-      vite-plugin-ssr: 0.4.0-beta.17_vite@2.9.7
+      vite-plugin-ssr: 0.4.0-beta.20_vite@2.9.7
     devDependencies:
       '@types/react': 18.0.8
       '@types/react-dom': 18.0.3
@@ -148,7 +150,7 @@ importers:
       typescript: ^4.6.3
       undici: ^5.1.1
       vite: ^2.9.6
-      vite-plugin-ssr: ^0.4.0-beta.17
+      vite-plugin-ssr: ^0.4.0-beta.20
       yargs: ^17.4.0
     dependencies:
       '@babel/core': 7.17.10
@@ -169,7 +171,7 @@ importers:
       serve-static: 1.15.0
       undici: 5.1.1
       vite: 2.9.7
-      vite-plugin-ssr: 0.4.0-beta.17_vite@2.9.7
+      vite-plugin-ssr: 0.4.0-beta.20_vite@2.9.7
       yargs: 17.4.1
     devDependencies:
       '@cloudflare/workers-types': 3.8.0
@@ -6189,8 +6191,8 @@ packages:
       ufo: 0.8.3
     dev: false
 
-  /vite-plugin-ssr/0.4.0-beta.17_vite@2.9.7:
-    resolution: {integrity: sha512-onjqYqGEPYX1HogBrN3+5CPMwTddWpDEBwcUoy4K/5xaxRYqCc4ZML970ma7b95SZJZ6bFyMrk670s8wSQy8pA==}
+  /vite-plugin-ssr/0.4.0-beta.20_vite@2.9.7:
+    resolution: {integrity: sha512-P0Q/tCfmLgSIRbe3E09idSNX5MJ0+zRtLP9JvmGlb3e/FhkWcVASOzZvFIQ6eXm9u4P6pxc3cdOUWc4+1xyAyw==}
     engines: {node: '>=12.19.0'}
     hasBin: true
     peerDependencies:
