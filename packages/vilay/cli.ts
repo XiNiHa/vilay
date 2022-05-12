@@ -41,10 +41,12 @@ yargs(hideBin(argv))
     'build [env]',
     'build for production',
     (yargs) =>
-      yargs.positional('env', {
-        choices: ['node', 'cloudflare-pages', 'cloudflare-workers'],
-        default: 'node',
-      }).option('no-minify', { default: false }),
+      yargs
+        .positional('env', {
+          choices: ['node', 'cloudflare-pages', 'cloudflare-workers'],
+          default: 'node',
+        })
+        .option('no-minify', { default: false }),
     async ({ env, noMinify }) => {
       const minify = !noMinify
       switch (env) {
@@ -64,7 +66,10 @@ yargs(hideBin(argv))
               )
             )
             .catch((e) =>
-              console.log('Application build failed for Cloudflare Pages Fullstack.', e)
+              console.log(
+                'Application build failed for Cloudflare Pages Fullstack.',
+                e
+              )
             )
           break
         }
@@ -107,10 +112,18 @@ function rendererPlugin(): PluginOption {
     configureServer(server) {
       return () => {
         server.middlewares.use(async (req, res, next) => {
-          const pageContextInit = { url: req.originalUrl ?? '', fetch }
+          const pageContextInit = {
+            url: req.originalUrl ?? '',
+            userAgent: req.headers['user-agent'],
+            fetch,
+          }
           const pageContext = await renderPage(pageContextInit)
           const { httpResponse } = pageContext
           if (!httpResponse) return next()
+          const { contentType, statusCode } = httpResponse
+          res.writeHead(statusCode, {
+            'Content-Type': `${contentType};charset=utf-8`,
+          })
           httpResponse.pipe(res)
         })
       }

@@ -27,11 +27,12 @@
     "react": "*",
     "react-dom": "*",
     "react-relay": "*",
+    "react-streaming": "^0.2.3",
     "relay-runtime": "*",
     "serve-static": "^1.15.0",
     "undici": "^5.1.1",
     "vite": "^2.9.6",
-    "vite-plugin-ssr": "^0.4.0-beta.17",
+    "vite-plugin-ssr": "^0.4.0-beta.20",
     "yargs": "^17.4.0"
   },
   "peerDependencies": {

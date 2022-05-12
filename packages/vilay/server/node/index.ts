@@ -15,6 +15,10 @@ export async function createServer(root: string) {
     renderPage(pageContextInit).then((pageContext) => {
       const { httpResponse } = pageContext
       if (!httpResponse) return next()
+      const { contentType, statusCode } = httpResponse
+      res.writeHead(statusCode, {
+        'Content-Type': `${contentType};charset=utf-8`,
+      })
       httpResponse.pipe(res)
     })
   })
