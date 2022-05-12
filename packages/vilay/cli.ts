@@ -56,7 +56,7 @@ yargs(hideBin(argv))
         case 'cloudflare-pages': {
           await build({ root: workDir, build: { minify } })
           await buildWorker({
-            entry: join(srcDir, '../server/cloudflare/pages.ts'),
+            entry: join(srcDir, './cloudflare/pages.js'),
             out: './dist/client/_worker.js',
             debug: noMinify,
           })
@@ -76,7 +76,7 @@ yargs(hideBin(argv))
         case 'cloudflare-workers': {
           await build({ root: workDir, build: { minify } })
           await buildWorker({
-            entry: join(srcDir, '../server/cloudflare/workers.ts'),
+            entry: join(srcDir, './cloudflare/workers.js'),
             out: './dist/client/_worker.js',
             debug: noMinify,
             external: ['__STATIC_CONTENT_MANIFEST'],

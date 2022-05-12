@@ -16,10 +16,8 @@
     "react-dom": "^18.1.0",
     "react-error-boundary": "^3.1.4",
     "react-relay": "^13.2.0",
-    "react-streaming": "^0.2.3",
     "relay-runtime": "^13.2.0",
-    "vilay": "workspace:^*",
-    "vite-plugin-ssr": "^0.4.0-beta.20"
+    "vilay": "workspace:^*"
   },
   "devDependencies": {
     "@types/react": "^18.0.8",
