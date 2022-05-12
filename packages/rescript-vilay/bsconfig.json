@@ -1,6 +1,5 @@
 {
   "name": "rescript-vilay",
-  "version": "0.0.20",
   "namespace": false,
   "sources": [
     {
