@@ -5,7 +5,7 @@ exception Graphql_error(string)
 let init = (_, fetch, recordMap) => {
   RescriptRelay.Environment.make(
     ~network=RescriptRelay.Network.makePromiseBased(~fetchFunction=(operation, variables, _, _) => {
-      Vilay.fetchWithInit(.
+      Vilay.fetchWithInit(
         fetch,
         `https://beta.pokeapi.co/graphql/v1beta`,
         RequestInit.make(

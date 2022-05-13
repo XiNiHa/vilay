@@ -5,24 +5,23 @@ type pageLayoutProps = {
 
 type fetchFn
 
-let fetch: (
-  . fetchFn,
-  string,
-) => Js.Promise.t<Webapi.Fetch.response> = %raw(`(fetch, ...args) => fetch(...args)`)
-let fetchWithInit: (
-  . fetchFn,
+@module("./util.js")
+external fetch: (fetchFn, string) => Js.Promise.t<Webapi.Fetch.response> = "callWithArgs"
+@module("./util.js")
+external fetchWithInit: (
+  fetchFn,
   string,
   Webapi.Fetch.requestInit,
-) => Js.Promise.t<Webapi.Fetch.response> = %raw(`(fetch, ...args) => fetch(...args)`)
-let fetchWithRequest: (
-  . fetchFn,
-  Webapi.Fetch.request,
-) => Js.Promise.t<Webapi.Fetch.response> = %raw(`(fetch, ...args) => fetch(...args)`)
-let fetchWithRequestInit: (
+) => Js.Promise.t<Webapi.Fetch.response> = "callWithArgs"
+@module("./util.js")
+external fetchWithRequest: (fetchFn, Webapi.Fetch.request) => Js.Promise.t<Webapi.Fetch.response> =
+  "callWithArgs"
+@module("./util.js")
+external fetchWithRequestInit: (
   . fetchFn,
   Webapi.Fetch.request,
   Webapi.Fetch.requestInit,
-) => Js.Promise.t<Webapi.Fetch.response> = %raw(`(fetch, ...args) => fetch(...args)`)
+) => Js.Promise.t<Webapi.Fetch.response> = "callWithArgs"
 
 type exports
 
