@@ -14,6 +14,7 @@
     "babel-plugin-relay": "^13.2.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-error-boundary": "^3.1.4",
     "react-relay": "^13.2.0",
     "relay-runtime": "^13.2.0",
     "rescript-relay": "1.0.0-beta.21",
@@ -22,13 +23,11 @@
     "vilay": "^0.0.20"
   },
   "devDependencies": {
-    "@types/react": "^18.0.8",
-    "@types/react-dom": "^18.0.3",
-    "@types/react-relay": "^13.0.2",
-    "@types/relay-runtime": "^13.0.3",
+    "@unocss/reset": "^0.30.8",
     "concurrently": "^7.1.0",
     "relay-compiler": "^13.2.0",
     "rescript": "^9.1.4",
+    "unocss": "^0.30.8",
     "vite": "^2.9.6"
   }
 }

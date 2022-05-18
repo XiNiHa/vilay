@@ -119,14 +119,12 @@ importers:
     specifiers:
       '@babel/runtime': ^7.17.9
       '@rescript/react': ^0.10.3
-      '@types/react': ^18.0.8
-      '@types/react-dom': ^18.0.3
-      '@types/react-relay': ^13.0.2
-      '@types/relay-runtime': ^13.0.3
+      '@unocss/reset': ^0.30.8
       babel-plugin-relay: ^13.2.0
       concurrently: ^7.1.0
       react: ^18.1.0
       react-dom: ^18.1.0
+      react-error-boundary: ^3.1.4
       react-relay: ^13.2.0
       relay-compiler: ^13.2.0
       relay-runtime: ^13.2.0
@@ -134,6 +132,7 @@ importers:
       rescript-relay: 1.0.0-beta.21
       rescript-vilay: workspace:^*
       rescript-webapi: ^0.6.1
+      unocss: ^0.30.8
       vilay: ^0.0.20
       vite: ^2.9.6
     dependencies:
@@ -142,6 +141,7 @@ importers:
       babel-plugin-relay: 13.2.0
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
+      react-error-boundary: 3.1.4_react@18.1.0
       react-relay: 13.2.0_react@18.1.0
       relay-runtime: 13.2.0
       rescript-relay: 1.0.0-beta.21_kgqfpk4kser5wb4i6za4xqaoqe
@@ -149,13 +149,11 @@ importers:
       rescript-webapi: 0.6.1
       vilay: link:../vilay
     devDependencies:
-      '@types/react': 18.0.8
-      '@types/react-dom': 18.0.3
-      '@types/react-relay': 13.0.2
-      '@types/relay-runtime': 13.0.3
+      '@unocss/reset': 0.30.12
       concurrently: 7.1.0
       relay-compiler: 13.2.0
       rescript: 9.1.4
+      unocss: 0.30.12
       vite: 2.9.7
 
   packages/rescript-vilay:
@@ -963,21 +961,12 @@ packages:
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
 
-  /@rollup/pluginutils/4.2.0:
-    resolution: {integrity: sha512-2WUyJNRkyH5p487pGnn4tWAsxhEFKN/pT8CMgHshd5H+IXkOnKvKZwsz5ZWz+YCXkleZRAU5kwbfgF8CPfDRqA==}
-    engines: {node: '>= 8.0.0'}
-    dependencies:
-      estree-walker: 2.0.2
-      picomatch: 2.3.1
-    dev: true
-
   /@rollup/pluginutils/4.2.1:
     resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
     engines: {node: '>= 8.0.0'}
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.3.1
-    dev: false
 
   /@types/acorn/4.0.6:
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
@@ -1441,7 +1430,7 @@ packages:
   /@unocss/vite/0.30.12:
     resolution: {integrity: sha512-1XInn1ovPtLVGA+6xKEYI/yf5wlO3EVY85x1SJsi0aTqssd2YaD7LzLk9X+4lUbiTUKbF7cZ51UAmY69/W9TxA==}
     dependencies:
-      '@rollup/pluginutils': 4.2.0
+      '@rollup/pluginutils': 4.2.1
       '@unocss/config': 0.30.12
       '@unocss/core': 0.30.12
       '@unocss/inspector': 0.30.12

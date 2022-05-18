@@ -1,6 +1,6 @@
 type pageLayoutProps = {
-  children: React.element,
-  routeTransitioning: bool,
+  "children": React.element,
+  "routeTransitioning": bool,
 }
 
 type fetchFn
@@ -36,6 +36,6 @@ external make: (
   ~page: React.component<Js.Types.obj_val>=?,
   ~head: {..}=?,
   ~query: RescriptRelay.queryNode<Js.Types.obj_val>=?,
-  ~getQueryVariables: Js.Types.obj_val => Js.Types.obj_val=?,
+  ~getQueryVariables: {..} => 'a=?,
   unit,
 ) => exports = ""

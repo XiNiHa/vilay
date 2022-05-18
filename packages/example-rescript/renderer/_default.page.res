@@ -1,10 +1,6 @@
 let default = Vilay.make(
+  ~pageLayout=PageLayout.make,
   ~initRelayEnvironment=RelayEnvironment.init,
-  ~head={
-    "title": "New Vilay App",
-    "meta": {
-      "description": "Just created with create-vilay",
-    },
-  },
+  ~head=Head.head,
   (),
 )
