@@ -1,0 +1,40 @@
+{
+  "name": "vilay-example-rescript",
+  "sources": [
+    {
+      "dir": "components",
+      "subdirs": true
+    },
+    {
+      "dir": "pages",
+      "subdirs": true
+    },
+    {
+      "dir": "renderer",
+      "subdirs": true
+    },
+    {
+      "dir": "__generated__",
+      "subdirs": true
+    }
+  ],
+  "package-specs": [
+    {
+      "module": "es6",
+      "in-source": true
+    }
+  ],
+  "suffix": ".mjs",
+  "reason": {
+    "react-jsx": 3
+  },
+  "ppx-flags": [
+    "rescript-relay/ppx"
+  ],
+  "bs-dependencies": [
+    "@rescript/react",
+    "rescript-relay",
+    "rescript-vilay",
+    "rescript-webapi"
+  ]
+}

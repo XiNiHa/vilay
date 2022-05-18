@@ -20,7 +20,7 @@ export async function render(
     Page,
     relayInitialData,
     isHydration,
-    exports: { initRelayEnvironment, head },
+    exports: { make, initRelayEnvironment, head },
   } = pageContext
 
   pageContext.fetch = fetch
@@ -31,7 +31,7 @@ export async function render(
   const relayQueryRef = preloadQuery(pageContext, relayEnvironment)
 
   routeManager ??= new RouteManager()
-  routeManager.setPage(Page, relayQueryRef)
+  routeManager.setPage(Page ?? make, relayQueryRef)
 
   if (head && !isHydration) {
     const headTags: HTMLElement[] = []

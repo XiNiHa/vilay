@@ -60,7 +60,7 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
   const {
     Page,
     userAgent,
-    exports: { initRelayEnvironment },
+    exports: { make, initRelayEnvironment },
   } = pageContext
 
   const relayEnvironment = initRelayEnvironment(true, pageContext.fetch)
@@ -72,7 +72,7 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
       relayEnvironment={relayEnvironment}
       routeManager={
         new RouteManager({
-          initialPage: Page,
+          initialPage: Page ?? make,
           queryRef: relayQueryRef,
         })
       }

@@ -11,6 +11,7 @@ export type PageContext = {
     head?: HeadExports
     query?: GraphQLTaggedNode
     getQueryVariables: GetQueryVariables<unknown, Variables>
+    make?: Page
   }
   routeParams: Record<string, unknown>
   fetch: typeof fetch

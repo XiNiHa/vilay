@@ -1,0 +1,8 @@
+node_modules/
+dist/
+__generated__/
+*.local
+lib/
+.bsb.lock
+.merlin
+*.mjs

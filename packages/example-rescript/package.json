@@ -1,0 +1,33 @@
+{
+  "name": "vilay-example-rescript",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "relay": "rescript-relay-compiler",
+    "dev": "concurrently \"rescript-relay-compiler -w\" \"rescript build -w\" \"vilay dev\"",
+    "build": "rescript-relay-compiler && rescript && vilay build",
+    "start": "vilay start"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.17.9",
+    "@rescript/react": "^0.10.3",
+    "babel-plugin-relay": "^13.2.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-error-boundary": "^3.1.4",
+    "react-relay": "^13.2.0",
+    "relay-runtime": "^13.2.0",
+    "rescript-relay": "1.0.0-beta.21",
+    "rescript-vilay": "workspace:^*",
+    "rescript-webapi": "^0.6.1",
+    "vilay": "^0.0.20"
+  },
+  "devDependencies": {
+    "@unocss/reset": "^0.30.8",
+    "concurrently": "^7.1.0",
+    "relay-compiler": "^13.2.0",
+    "rescript": "^9.1.4",
+    "unocss": "^0.30.8",
+    "vite": "^2.9.6"
+  }
+}
