@@ -6,8 +6,9 @@ export type PageContext = {
   Page?: Page
   userAgent?: string
   exports?: {
-    PageLayout: React.FC<PageLayoutProps>
     initRelayEnvironment: InitRelayEnvironment
+    PageLayout?: React.FC<PageLayoutProps>
+    pageLayout?: React.FC<PageLayoutProps>
     head?: HeadExports
     query?: GraphQLTaggedNode
     getQueryVariables: GetQueryVariables<unknown, Variables>
