@@ -57,7 +57,7 @@ const viteConfigPlugin: PluginOption = {
     ...config,
     optimizeDeps: {
       ...config.optimizeDeps,
-      include: [...(config.optimizeDeps?.include ?? []), 'react-dom/client'],
+      include: [...(config.optimizeDeps?.include ?? []), 'react-dom/client', 'react-relay', 'react-streaming'],
     },
   }),
 }
