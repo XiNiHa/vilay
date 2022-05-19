@@ -5,6 +5,7 @@ import type { RecordMap } from 'relay-runtime/lib/store/RelayStoreTypes'
 export type PageContext = {
   Page?: Page
   userAgent?: string
+  cookies?: Record<string, string>
   exports?: {
     initRelayEnvironment: InitRelayEnvironment
     PageLayout?: React.FC<PageLayoutProps>

@@ -22,7 +22,7 @@ async function handleFetchEvent(
 ): Promise<Response> {
   const [request] = args
   if (!isAssetUrl(request.url)) {
-    const response = await render(request.url)
+    const response = await render(request)
     if (response !== null) return response
   }
 
