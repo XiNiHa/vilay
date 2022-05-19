@@ -72,7 +72,8 @@ export const Page = ({ queryRef }) => {
 ## `getQueryVariables`
 
 While using Relay, it's pretty common to pass query variables for fetching data.
-Vilay provides `getQueryVariables` to let users return variables to use, and also passes [route parameters](https://vite-plugin-ssr.com/filesystem-routing) to be used to figure out the right variables to use.
+Vilay provides `getQueryVariables` to let users return variables to use.
+It receives [route parameters](https://vite-plugin-ssr.com/filesystem-routing) which can be used to figure out the right query variables.
 
 ```tsx
 // /@category/index.page.js
