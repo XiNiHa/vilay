@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOMClient from 'react-dom/client'
 import type { Environment } from 'react-relay'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
@@ -18,7 +17,6 @@ export async function render(
 ) {
   const {
     Page,
-    relayInitialData,
     isHydration,
     exports: { initRelayEnvironment, head },
   } = pageContext
@@ -26,7 +24,10 @@ export async function render(
   pageContext.fetch = fetch
 
   if (!relayEnvironment)
-    relayEnvironment = initRelayEnvironment(false, pageContext.fetch, relayInitialData)
+    relayEnvironment = initRelayEnvironment({
+      isServer: false,
+      pageContext,
+    })
 
   const relayQueryRef = preloadQuery(pageContext, relayEnvironment)
 

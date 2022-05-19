@@ -8,11 +8,10 @@ import {
 import type { InitRelayEnvironment } from 'vilay'
 
 // Init relay environment
-export const initRelayEnvironment: InitRelayEnvironment = (
+export const initRelayEnvironment: InitRelayEnvironment = ({
   isServer,
-  fetch,
-  records
-): Environment => {
+  pageContext: { fetch, relayInitialData }
+}): Environment => {
   const network = Network.create(async ({ text: query }, variables) => {
     // Using GitHub API for example
     const response = await fetch('https://api.github.com/graphql', {
@@ -35,7 +34,7 @@ export const initRelayEnvironment: InitRelayEnvironment = (
     return (await response.json()) as GraphQLResponse
   })
 
-  const source = new RecordSource(records)
+  const source = new RecordSource(relayInitialData)
   const store = new Store(source, { gcReleaseBufferSize: 10 })
 
   // Client environment gets cached by the framework

@@ -7,11 +7,10 @@ import {
 } from 'relay-runtime'
 import type { InitRelayEnvironment } from 'vilay'
 
-export const initRelayEnvironment: InitRelayEnvironment = (
+export const initRelayEnvironment: InitRelayEnvironment = ({
   isServer,
-  fetch,
-  records
-) => {
+  pageContext: { fetch, relayInitialData },
+}) => {
   const network = Network.create(async ({ text: query }, variables) => {
     // Replace this with your backend API URL
     const response = await fetch(`https://beta.pokeapi.co/graphql/v1beta`, {
@@ -31,7 +30,7 @@ export const initRelayEnvironment: InitRelayEnvironment = (
     return (await response.json()) as GraphQLResponse
   })
 
-  const source = new RecordSource(records)
+  const source = new RecordSource(relayInitialData)
   const store = new Store(source, { gcReleaseBufferSize: 10 })
 
   return new Environment({

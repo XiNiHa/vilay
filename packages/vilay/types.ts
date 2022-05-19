@@ -37,13 +37,10 @@ export type PageLayoutProps = {
   routeTransitioning: boolean
 }
 
-type FetchFn = typeof fetch
-
-export type InitRelayEnvironment = (
-  isServer: boolean,
-  fetch: FetchFn,
-  records?: RecordMap
-) => Environment
+export type InitRelayEnvironment = (opts: {
+  pageContext: PageContext
+  isServer: boolean
+}) => Environment
 
 export const defineVilay = <
   T extends {

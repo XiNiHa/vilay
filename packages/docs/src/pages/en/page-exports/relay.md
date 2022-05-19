@@ -5,16 +5,16 @@ layout: ../../../layouts/MainLayout.astro
 ---
 
 Vilay provides various page exports that make integrating with Relay very easy and convenient.
+
 ## `initRelayEnvironment`
 
 `initRelayEnvironement` is used to tell Vilay the way to create a Relay Environment.
 
 ```ts
-export const initRelayEnvironment = (
+export const initRelayEnvironment = ({
   isServer,
-  fetch,
-  records,
-) => {
+  pageContext: { fetch, relayInitialData }, // cookies, ...
+}) => {
   const network = Network.create(async ({ text: query }, variables) => {
     // Replace this with your backend API URL
     const response = await fetch(`https://beta.pokeapi.co/graphql/v1beta`, {
@@ -34,7 +34,7 @@ export const initRelayEnvironment = (
     return (await response.json()) as GraphQLResponse
   })
 
-  const source = new RecordSource(records)
+  const source = new RecordSource(relayInitialData)
   const store = new Store(source, { gcReleaseBufferSize: 10 })
 
   return new Environment({
