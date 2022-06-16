@@ -17,9 +17,10 @@ const lang = currentPage && getLanguageFromURL(currentPage)
       <SidebarToggle client:idle />
     </div>
     <div class='logo flex'>
-      <!-- TODO: Add logo -->
       <a href='/'>
-        <h1>{CONFIG.SITE.title ?? 'Documentation'}</h1>
+        <h1>
+          <img src="/logo.svg" alt={CONFIG.SITE.title ?? 'Documentation'} width="96" height="96" />
+        </h1>
       </a>
     </div>
     <div style='flex-grow: 1;'></div>
@@ -50,7 +51,6 @@ const lang = currentPage && getLanguageFromURL(currentPage)
 
   .logo {
     display: flex;
-    overflow: hidden;
     width: auto;
     font-size: 2rem;
     flex-shrink: 0;
@@ -58,12 +58,13 @@ const lang = currentPage && getLanguageFromURL(currentPage)
     line-height: 1;
     color: hsla(var(--color-base-white), 100%, 1);
     gap: 0.25em;
-    z-index: -1;
+    z-index: 1;
   }
 
   .logo a {
+    display: flex;
+    align-items: flex-end;
     padding: 0.5em 0.25em;
-    margin: -0.5em -0.25em;
     text-decoration: none;
     font-weight: bold;
   }
@@ -102,7 +103,7 @@ const lang = currentPage && getLanguageFromURL(currentPage)
     .logo {
       width: auto;
       margin: 0;
-      z-index: 0;
+      z-index: 1;
     }
     .menu-toggle {
       display: none;

@@ -1,5 +1,7 @@
 # Vilay
 
+![Vilay Logo](https://raw.githubusercontent.com/XiNiHa/vilay/main/packages/docs/public/logo.svg)
+
 English | [한국어](README.ko.md)
 
 ## Main Features
