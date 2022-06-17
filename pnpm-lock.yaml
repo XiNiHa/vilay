@@ -81,31 +81,31 @@ importers:
   packages/example:
     specifiers:
       '@babel/runtime': ^7.17.8
-      '@types/react': ^18.0.8
-      '@types/react-dom': ^18.0.3
+      '@types/react': ^18.0.14
+      '@types/react-dom': ^18.0.5
       '@types/react-relay': ^13.0.2
       '@types/relay-runtime': ^13.0.3
       '@unocss/reset': ^0.30.8
       '@vilay/render': '*'
-      babel-plugin-relay: ^13.2.0
+      babel-plugin-relay: ^14.0.0
       react: ^18.2.0
-      react-dom: ^18.1.0
+      react-dom: ^18.2.0
       react-error-boundary: ^3.1.4
-      react-relay: ^13.2.0
-      relay-compiler: ^13.2.0
-      relay-runtime: ^13.2.0
+      react-relay: ^14.0.0
+      relay-compiler: ^14.0.0
+      relay-runtime: ^14.0.0
       unocss: ^0.30.8
       vilay: '*'
-      vite: ^2.9.6
+      vite: ^2.9.12
     dependencies:
       '@babel/runtime': 7.18.3
       '@vilay/render': link:../render
-      babel-plugin-relay: 13.2.0
+      babel-plugin-relay: 14.0.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-error-boundary: 3.1.4_react@18.2.0
-      react-relay: 13.2.0_react@18.2.0
-      relay-runtime: 13.2.0
+      react-relay: 14.0.0_react@18.2.0
+      relay-runtime: 14.0.0
       vilay: link:../vilay
     devDependencies:
       '@types/react': 18.0.14
@@ -113,7 +113,7 @@ importers:
       '@types/react-relay': 13.0.2
       '@types/relay-runtime': 13.0.3
       '@unocss/reset': 0.30.13
-      relay-compiler: 13.2.0
+      relay-compiler: 14.0.0
       unocss: 0.30.13
       vite: 2.9.12
 
@@ -159,14 +159,14 @@ importers:
       '@types/yargs': ^17.0.10
       '@vilay/render': '*'
       '@vitejs/plugin-react': ^1.3.0
-      babel-plugin-relay: ^13.2.0
+      babel-plugin-relay: ^14.0.0
       build-worker: ^0.2.2
       deepmerge: ^4.2.2
       glob: ^7.2.0
       h3: ^0.5.3
       listhen: ^0.2.6
       react: ^18.2.0
-      react-relay: ^13.2.0
+      react-relay: ^14.0.0
       serve-static: ^1.15.0
       typescript: ^4.6.3
       undici: ^5.1.1
@@ -200,9 +200,9 @@ importers:
       '@types/serve-static': 1.13.10
       '@types/yargs': 17.0.10
       '@vilay/render': link:../render
-      babel-plugin-relay: 13.2.0
+      babel-plugin-relay: 14.0.0
       react: 18.2.0
-      react-relay: 13.2.0_react@18.2.0
+      react-relay: 14.0.0_react@18.2.0
       typescript: 4.7.3
 
 packages:
@@ -1636,8 +1636,8 @@ packages:
       cosmiconfig: 6.0.0
       resolve: 1.22.0
 
-  /babel-plugin-relay/13.2.0:
-    resolution: {integrity: sha512-1jGcpu0aTHkbBNtMDq7F3ZQWtVPSJfIx83lW1Qce/AMElD27JEjXd9eRPwU0/9K6JQgjLESQMjurCwJAEF8Xxw==}
+  /babel-plugin-relay/14.0.0:
+    resolution: {integrity: sha512-lOZplk+U6kBM7BsqpexpEIyQbob/XjUDdRin93WMfZEfXc2P+a6UiegZaXv5XdpG61tLUnvqjs4Td+UQxtqb8g==}
     dependencies:
       babel-plugin-macros: 2.8.0
       cosmiconfig: 5.2.1
@@ -5046,8 +5046,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /react-relay/13.2.0_react@18.2.0:
-    resolution: {integrity: sha512-ldUMWZ5nIMhz1VpRylFhMGc8lEaufR0ZwwfW6YqTMU/Rsy5c5nHGN7hvktPvdUV+biy6pzdRzfFiny469gok4A==}
+  /react-relay/14.0.0_react@18.2.0:
+    resolution: {integrity: sha512-zqT8ZS1lq24p1R8nW5Vi03oB1Ix8aYJxyuSl4bB8XDjSNL0kFuAdN8R5LrundUd3vuKjkV1UBfb1xuuoRroUhA==}
     peerDependencies:
       react: ^16.9.0 || ^17 || ^18
     dependencies:
@@ -5056,7 +5056,7 @@ packages:
       invariant: 2.2.4
       nullthrows: 1.1.1
       react: 18.2.0
-      relay-runtime: 13.2.0
+      relay-runtime: 14.0.0
     transitivePeerDependencies:
       - encoding
 
@@ -5185,13 +5185,13 @@ packages:
       unified: 10.1.2
     dev: true
 
-  /relay-compiler/13.2.0:
-    resolution: {integrity: sha512-GGLWTJYqQ5jQLMXlq++Fl17f4gMuvmIi3+xU/TrD4UqWZLI3qhxE0NFAmOvg6xgBQ8xtCMhP066kv+3bhL+7Aw==}
+  /relay-compiler/14.0.0:
+    resolution: {integrity: sha512-1h4lwvHg5efhivqpMfG6SS4cGoCJH3BsRelihwD+GNiylBnLKArSE6zyW7LfEwSpuDfJ+l6rrRfSL8IVZwOZ0g==}
     hasBin: true
     dev: true
 
-  /relay-runtime/13.2.0:
-    resolution: {integrity: sha512-iDS/fy5iWg9EhySaPpeo4Fwy1cYwNJqLHdhdGncpJBtSogFFd3fI+K0SafUoxX7+Moj6a+aMQt/JKN78HdeLhA==}
+  /relay-runtime/14.0.0:
+    resolution: {integrity: sha512-Rnf6EgCl3QY85il/gTEh6GHAR9hoRkjYWgMR2Y3Afugb8qLR0vL6m/GBYqol8W3L8B+XqZ2U04/g624DRpEqAw==}
     dependencies:
       '@babel/runtime': 7.18.3
       fbjs: 3.0.4

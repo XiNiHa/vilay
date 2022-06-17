@@ -30,12 +30,12 @@
   },
   "peerDependencies": {
     "@babel/runtime": "7",
-    "@vilay/render": ">=0.0.22",
-    "babel-plugin-relay": "13",
+    "@vilay/render": ">=0.0.23",
+    "babel-plugin-relay": "14",
     "react": "18",
     "react-dom": "18",
-    "react-relay": "13",
-    "relay-runtime": "13"
+    "react-relay": "14",
+    "relay-runtime": "14"
   },
   "devDependencies": {
     "@babel/runtime": "^7.17.8",
@@ -50,9 +50,9 @@
     "@types/serve-static": "^1.13.10",
     "@types/yargs": "^17.0.10",
     "@vilay/render": "*",
-    "babel-plugin-relay": "^13.2.0",
+    "babel-plugin-relay": "^14.0.0",
     "react": "^18.2.0",
-    "react-relay": "^13.2.0",
+    "react-relay": "^14.0.0",
     "typescript": "^4.6.3"
   },
   "vite-plugin-ssr": {
