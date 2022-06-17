@@ -1,0 +1,74 @@
+name: Publish Canary
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  publish-vilay:
+    name: 'Publish Vilay'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.2.1
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm build
+        working-directory: 'packages/vilay'
+      - run: pnpm version "0.0.0-$(date +%y%m%d)-$(echo $RANDOM | md5sum | head -c 6; echo;)" --no-git-tag-version
+        working-directory: 'packages/vilay'
+      - run: pnpm publish --no-git-checks --tag canary
+        working-directory: 'packages/vilay'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish-create:
+    name: 'Publish create-vilay'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.2.1
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm build
+        working-directory: 'packages/create'
+      - run: pnpm version "0.0.0-$(date +%y%m%d)-$(echo $RANDOM | md5sum | head -c 6; echo;)" --no-git-tag-version
+        working-directory: 'packages/create'
+      - run: pnpm publish --no-git-checks --tag canary
+        working-directory: 'packages/create'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish-render:
+    name: 'Publish @vilay/render'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.2.1
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm build
+        working-directory: 'packages/render'
+      - run: pnpm version "0.0.0-$(date +%y%m%d)-$(echo $RANDOM | md5sum | head -c 6; echo;)" --no-git-tag-version
+        working-directory: 'packages/render'
+      - run: pnpm publish --no-git-checks --tag canary
+        working-directory: 'packages/render'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
