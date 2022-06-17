@@ -1,10 +1,10 @@
 import { join } from 'node:path'
 import { CompatibilityEvent, createApp, sendError, useCookies } from 'h3'
 import serveStatic from 'serve-static'
-import { renderPage } from 'vite-plugin-ssr'
 import { fetch } from 'undici'
+import type { renderPage } from 'vite-plugin-ssr'
 
-export async function createServer(root: string) {
+export async function createServer(root: string, render: typeof renderPage) {
   const app = createApp({ onError })
 
   app.use(serveStatic(join(root, 'dist', 'client')))
@@ -16,7 +16,7 @@ export async function createServer(root: string) {
       cookies: useCookies(req),
       fetch,
     }
-    renderPage(pageContextInit).then((pageContext) => {
+    render(pageContextInit).then((pageContext) => {
       const { httpResponse } = pageContext
       if (!httpResponse) return next()
       const { contentType, statusCode } = httpResponse

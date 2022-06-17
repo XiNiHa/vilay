@@ -1,3 +1,7 @@
-import { buildHandler } from './common'
+import { renderPage } from 'vite-plugin-ssr'
+import { buildCloudflareHandler } from '@vilay/render'
 
-export default buildHandler((request, env) => env.ASSETS.fetch(request))
+export default buildCloudflareHandler(
+  (request, env) => env.ASSETS.fetch(request),
+  renderPage
+)

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "NodeNext",
+    "moduleResolution": "Node",
+    "outDir": "./dist",
+    "types": ["@cloudflare/workers-types"]
+  }
+}

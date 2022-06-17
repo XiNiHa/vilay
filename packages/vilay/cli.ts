@@ -56,7 +56,7 @@ yargs(hideBin(argv))
         case 'cloudflare-pages': {
           await build({ root: workDir, build: { minify } })
           await buildWorker({
-            entry: join(srcDir, './cloudflare/pages.js'),
+            entry: join(srcDir, '../server/cloudflare/pages.ts'),
             out: './dist/client/_worker.js',
             debug: noMinify,
           })
@@ -76,7 +76,7 @@ yargs(hideBin(argv))
         case 'cloudflare-workers': {
           await build({ root: workDir, build: { minify } })
           await buildWorker({
-            entry: join(srcDir, './cloudflare/workers.js'),
+            entry: join(srcDir, '../server/cloudflare/workers.ts'),
             out: './dist/client/_worker.js',
             debug: noMinify,
             external: ['__STATIC_CONTENT_MANIFEST'],
@@ -101,7 +101,7 @@ yargs(hideBin(argv))
     if (!existsSync(`${workDir}/dist`)) {
       throw new Error('Call `build` before calling `start`.')
     }
-    const app = await createProdServer(workDir)
+    const app = await createProdServer(workDir, renderPage)
     await listen(app, { port: 3000 })
   })
   .parse()

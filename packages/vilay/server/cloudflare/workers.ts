@@ -1,10 +1,11 @@
+import { renderPage } from 'vite-plugin-ssr'
 import { getAssetFromKV, NotFoundError } from '@cloudflare/kv-asset-handler'
+import { buildCloudflareHandler } from '@vilay/render'
 import manifestJSON from '__STATIC_CONTENT_MANIFEST'
-import { buildHandler } from './common'
 
 const assetManifest = JSON.parse(manifestJSON)
 
-export default buildHandler(async (request, env, ctx) => {
+export default buildCloudflareHandler(async (request, env, ctx) => {
   try {
     const asset = await getAssetFromKV(
       {
@@ -26,4 +27,4 @@ export default buildHandler(async (request, env, ctx) => {
     }
     return new Response(null, { status: 500 })
   }
-})
+}, renderPage)

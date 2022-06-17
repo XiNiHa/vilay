@@ -1,0 +1,43 @@
+{
+  "name": "@vilay/render",
+  "description": "Core renderer of Vilay framework",
+  "version": "0.0.22",
+  "author": "XiNiHa <me@xiniha.dev>",
+  "license": "MIT",
+  "source": "./index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "nanobundle build"
+  },
+  "types": "./dist/index.d.ts",
+  "imports": {
+    "debug": {
+      "node": "debug/src/node.js",
+      "default": "debug/src/browser.js"
+    }
+  },
+  "exports": {
+    "node": {
+      "require": "./dist/node/index.cjs",
+      "default": "./dist/node/index.mjs"
+    },
+    "default": "./dist/index.mjs"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
+    "vite-plugin-ssr": ">=0.4.0-beta.20"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^3.8.0",
+    "cookie-es": "^0.5.0",
+    "debug": "^4.3.4",
+    "nanobundle": "^0.0.28",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-streaming": "^0.2.13",
+    "typescript": "^4.7",
+    "vite": "^2.9.12",
+    "vite-plugin-ssr": "0.4.0-beta.20"
+  }
+}

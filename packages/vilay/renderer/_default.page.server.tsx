@@ -3,7 +3,7 @@ import {
   escapeInject,
   type PageContextBuiltIn,
 } from 'vite-plugin-ssr'
-import { renderToStream } from 'react-streaming/server'
+import { renderToStream } from '@vilay/render'
 import preloadQuery from './preloadQuery'
 import { PageShell } from './PageShell'
 import { RouteManager } from './routeManager'

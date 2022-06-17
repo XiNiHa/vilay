@@ -1,14 +1,14 @@
-import { renderPage } from 'vite-plugin-ssr'
 import * as cookie from 'cookie-es'
+import type { renderPage } from 'vite-plugin-ssr'
 
-export async function render(req: Request) {
+export async function render(req: Request, renderVps: typeof renderPage) {
   const cookieHeader = req.headers.get('Cookie')
   const pageContextInit = {
     url: req.url,
     cookies: cookieHeader != null ? cookie.parse(cookieHeader) : undefined,
     fetch,
   }
-  const pageContext = await renderPage(pageContextInit)
+  const pageContext = await renderVps(pageContextInit)
   const { httpResponse } = pageContext
   if (!httpResponse) {
     return null

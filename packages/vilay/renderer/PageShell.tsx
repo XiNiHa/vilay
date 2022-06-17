@@ -16,7 +16,10 @@ export const PageShell: React.FC<Props> = ({
   relayEnvironment,
   routeManager,
 }) => {
-  const PageLayout = pageContext.exports?.PageLayout ?? pageContext.exports?.pageLayout ?? Passthrough
+  const PageLayout =
+    pageContext.exports?.PageLayout ??
+    pageContext.exports?.pageLayout ??
+    Passthrough
   const [CurrentPage, queryRef, routeTransitioning] =
     useRouteManager(routeManager)
 
