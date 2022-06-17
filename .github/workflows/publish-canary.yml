@@ -22,9 +22,9 @@ jobs:
       - run: pnpm install
       - run: pnpm build
         working-directory: 'packages/vilay'
-      - run: pnpm version "0.0.0-$(date +%y%m%d)-$(echo $RANDOM | md5sum | head -c 6; echo;)" --no-git-tag-version
+      - run: npm pkg set version="0.0.0-$(date +%y%m%d)-${{ github.sha }}"
         working-directory: 'packages/vilay'
-      - run: pnpm publish --no-git-checks --tag canary
+      - run: pnpm publish --no-git-checks --access public --tag canary
         working-directory: 'packages/vilay'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -44,9 +44,9 @@ jobs:
       - run: pnpm install
       - run: pnpm build
         working-directory: 'packages/create'
-      - run: pnpm version "0.0.0-$(date +%y%m%d)-$(echo $RANDOM | md5sum | head -c 6; echo;)" --no-git-tag-version
+      - run: npm pkg set version="0.0.0-$(date +%y%m%d)-${{ github.sha }}"
         working-directory: 'packages/create'
-      - run: pnpm publish --no-git-checks --tag canary
+      - run: pnpm publish --no-git-checks --access public --tag canary
         working-directory: 'packages/create'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -66,9 +66,9 @@ jobs:
       - run: pnpm install
       - run: pnpm build
         working-directory: 'packages/render'
-      - run: pnpm version "0.0.0-$(date +%y%m%d)-$(echo $RANDOM | md5sum | head -c 6; echo;)" --no-git-tag-version
+      - run: npm pkg set version="0.0.0-$(date +%y%m%d)-${{ github.sha }}"
         working-directory: 'packages/render'
-      - run: pnpm publish --no-git-checks --tag canary
+      - run: pnpm publish --no-git-checks --access public --tag canary
         working-directory: 'packages/render'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
