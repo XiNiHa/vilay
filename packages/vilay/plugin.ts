@@ -1,9 +1,10 @@
+import { cwd } from 'node:process'
 import type { PluginOption } from 'vite'
 import react from '@vitejs/plugin-react'
 import ssr from 'vite-plugin-ssr/plugin'
-import relay from 'babel-plugin-relay'
-import { transformSync } from '@babel/core'
+import swc from 'unplugin-swc'
 import deepmerge from 'deepmerge'
+import type { Config as RelayPluginConfig } from '@swc/plugin-relay'
 import type { Config } from 'virtual:vilay:config'
 
 type RecursivePartial<T> = {
@@ -12,22 +13,6 @@ type RecursivePartial<T> = {
     : T[P] extends object
     ? RecursivePartial<T[P]>
     : T[P]
-}
-
-const relayPlugin: PluginOption = {
-  name: 'vilay:relay',
-  transform(src, id) {
-    let code = src
-    if (/.(t|j)sx?/.test(id) && src.includes('graphql`')) {
-      const out = transformSync(src, {
-        plugins: [[relay, { eagerEsModules: true }]],
-        code: true,
-      })
-      if (!out?.code) throw new Error('Vite Relay transpilation failed')
-      code = out.code
-    }
-    return { code, map: null }
-  },
 }
 
 const configPlugin = (config: RecursivePartial<Config>): PluginOption => {
@@ -57,7 +42,12 @@ const viteConfigPlugin: PluginOption = {
     ...config,
     optimizeDeps: {
       ...config.optimizeDeps,
-      include: [...(config.optimizeDeps?.include ?? []), 'react-dom/client', 'react-relay', '@vilay/render'],
+      include: [
+        ...(config.optimizeDeps?.include ?? []),
+        'react-dom/client',
+        'react-relay',
+        '@vilay/render',
+      ],
     },
   }),
 }
@@ -65,7 +55,21 @@ const viteConfigPlugin: PluginOption = {
 const plugin = (config: RecursivePartial<Config> = {}): PluginOption[] => [
   react(),
   ssr({ pageFiles: { include: ['vilay'] } }),
-  relayPlugin,
+  swc.vite({
+    jsc: {
+      experimental: {
+        plugins: [
+          [
+            '@swc/plugin-relay',
+            {
+              rootDir: cwd(),
+              language: 'typescript',
+            } as RelayPluginConfig,
+          ],
+        ],
+      },
+    },
+  }),
   configPlugin(config),
   viteConfigPlugin,
 ]
