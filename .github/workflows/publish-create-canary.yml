@@ -1,15 +1,15 @@
-name: Publish Canary
+name: Publish Canary of create-vilay
 
 on:
   push:
     branches:
       - 'main'
     paths:
-      - packages/vilay/**
+      - 'packages/create/**'
 
 jobs:
-  publish-vilay:
-    name: 'Publish Vilay'
+  publish-create:
+    name: 'Publish create-vilay'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -23,10 +23,10 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm build
-        working-directory: 'packages/vilay'
+        working-directory: 'packages/create'
       - run: npm pkg set version="0.0.0-$(date +%y%m%d)-${{ github.sha }}"
-        working-directory: 'packages/vilay'
+        working-directory: 'packages/create'
       - run: pnpm publish --no-git-checks --access public --tag canary
-        working-directory: 'packages/vilay'
+        working-directory: 'packages/create'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
