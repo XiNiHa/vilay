@@ -49,7 +49,7 @@
     "@types/relay-runtime": "^13.0.3",
     "@types/serve-static": "^1.13.10",
     "@types/yargs": "^17.0.10",
-    "@vilay/render": "workspace:*",
+    "@vilay/render": "*",
     "babel-plugin-relay": "^13.2.0",
     "react": "^18.2.0",
     "react-relay": "^13.2.0",
