@@ -2,6 +2,8 @@
 
 ![Vilay Logo](https://raw.githubusercontent.com/XiNiHa/vilay/main/packages/docs/public/logo.svg)
 
+[![npm version](https://badge.fury.io/js/vilay.svg)](https://badge.fury.io/js/vilay)
+
 English | [한국어](README.ko.md)
 
 ## Main Features
