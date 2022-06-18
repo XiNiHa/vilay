@@ -12,4 +12,4 @@
 This example can be deployed to Cloudflare Workers.
 
 1. Add your `account_id` in `wrangler.toml`.
-2. Run `pnpx wrangler@beta publish`.
+2. Run `pnpx wrangler publish`.
