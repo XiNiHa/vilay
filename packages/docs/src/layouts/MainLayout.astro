@@ -19,7 +19,7 @@ const githubEditUrl = `https://github.com/${CONFIG.GITHUB_REPO_NAME}/blob/${CONF
     <HeadSEO {content} canonicalURL={Astro.canonicalURL} />
     <title
       >{content.title
-        ? `${content.title} 🚀 ${CONFIG.SITE.title}`
+        ? `${content.title} | ${CONFIG.SITE.title}`
         : CONFIG.SITE.title}</title
     >
     <style>
