@@ -6,6 +6,7 @@ export async function render(req: Request, renderVps: typeof renderPage) {
   const pageContextInit = {
     url: req.url,
     cookies: cookieHeader != null ? cookie.parse(cookieHeader) : undefined,
+    userAgent: req.headers.get('User-Agent'),
     fetch,
   }
   const pageContext = await renderVps(pageContextInit)

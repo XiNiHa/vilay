@@ -11,6 +11,7 @@ import { renderPage } from 'vite-plugin-ssr'
 import esbuild from 'esbuild'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import { fetch } from 'undici'
+import * as Cookie from 'cookie-es'
 
 const workDir = cwd()
 const srcDir = dirname(fileURLToPath(import.meta.url))
@@ -154,6 +155,7 @@ function rendererPlugin(): PluginOption {
         server.middlewares.use(async (req, res, next) => {
           const pageContextInit = {
             url: req.originalUrl ?? '',
+            cookies: Cookie.parse(req.headers.cookie ?? ''),
             userAgent: req.headers['user-agent'],
             fetch,
           }

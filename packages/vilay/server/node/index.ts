@@ -16,6 +16,7 @@ export async function createServer(root: string) {
     const pageContextInit = {
       url: req.url,
       cookies: useCookies(req),
+      userAgent: req.headers['user-agent'],
       fetch,
     }
     renderPage(pageContextInit).then((pageContext) => {
