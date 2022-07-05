@@ -8,15 +8,14 @@ import { createServer as createDevServer, build, type PluginOption } from 'vite'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import { renderPage } from 'vite-plugin-ssr'
-import { buildWorker } from 'build-worker'
-import { listen } from 'listhen'
+import esbuild from 'esbuild'
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import { fetch } from 'undici'
-import { createServer as createProdServer } from './server/node/index.js'
 
 const workDir = cwd()
 const srcDir = dirname(fileURLToPath(import.meta.url))
 
-if (!existsSync(`${workDir}/package.json`)) {
+if (!existsSync(join(workDir, 'package.json'))) {
   throw new Error(
     "The CLI should be called from your project's root directory."
   )
@@ -51,14 +50,44 @@ yargs(hideBin(argv))
       const minify = !noMinify
       switch (env) {
         case 'node': {
-          return void (await build({ root: workDir, build: { minify } }))
+          await build({ root: workDir, build: { minify } })
+          await esbuild
+            .build({
+              platform: 'node',
+              entryPoints: [join(srcDir, '../server/node/index.ts')],
+              sourcemap: true,
+              outfile: './dist/server/node.js',
+              logLevel: 'warning',
+              format: 'cjs',
+              target: 'es2020',
+              bundle: true,
+              minify: !noMinify,
+            })
+            .then(() =>
+              console.log('Application build successfully for Node.js!')
+            )
+            .catch((e) =>
+              console.log('Application build failed for Node.js.', e)
+            )
+          break
         }
         case 'cloudflare-pages': {
           await build({ root: workDir, build: { minify } })
-          await buildWorker({
-            entry: join(srcDir, '../server/cloudflare/pages.ts'),
-            out: './dist/client/_worker.js',
-            debug: noMinify,
+          await esbuild.build({
+            plugins: [NodeModulesPolyfillPlugin()],
+            platform: 'browser',
+            conditions: ['worker', 'browser'],
+            entryPoints: [join(srcDir, '../server/cloudflare/pages.ts')],
+            sourcemap: true,
+            outfile: './dist/client/_worker.js',
+            logLevel: 'warning',
+            format: 'esm',
+            target: 'es2020',
+            bundle: true,
+            minify: !noMinify,
+            define: {
+              IS_CLOUDFLARE_WORKER: 'true'
+            },
           })
             .then(() =>
               console.log(
@@ -75,11 +104,22 @@ yargs(hideBin(argv))
         }
         case 'cloudflare-workers': {
           await build({ root: workDir, build: { minify } })
-          await buildWorker({
-            entry: join(srcDir, '../server/cloudflare/workers.ts'),
-            out: './dist/client/_worker.js',
-            debug: noMinify,
+          await esbuild.build({
+            plugins: [NodeModulesPolyfillPlugin()],
+            platform: 'browser',
+            conditions: ['worker', 'browser'],
+            entryPoints: [join(srcDir, '../server/cloudflare/workers.ts')],
+            sourcemap: true,
+            outfile: './dist/client/_worker.js',
             external: ['__STATIC_CONTENT_MANIFEST'],
+            logLevel: 'warning',
+            format: 'esm',
+            target: 'es2020',
+            bundle: true,
+            minify: !noMinify,
+            define: {
+              IS_CLOUDFLARE_WORKER: 'true'
+            },
           })
             .then(() =>
               console.log(
@@ -98,11 +138,11 @@ yargs(hideBin(argv))
     }
   )
   .command('start', 'launch production SSR server', async () => {
-    if (!existsSync(`${workDir}/dist`)) {
+    const scriptPath = join(workDir, 'dist/server/node.js')
+    if (!existsSync(scriptPath)) {
       throw new Error('Call `build` before calling `start`.')
     }
-    const app = await createProdServer(workDir, renderPage)
-    await listen(app, { port: 3000 })
+    await import(scriptPath)
   })
   .parse()
 
