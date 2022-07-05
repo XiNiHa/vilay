@@ -1,9 +1,9 @@
 import { cwd } from 'node:process'
-import type { PluginOption } from 'vite'
 import react from '@vitejs/plugin-react'
 import ssr from 'vite-plugin-ssr/plugin'
 import swc from 'unplugin-swc'
 import deepmerge from 'deepmerge'
+import type { PluginOption } from 'vite'
 import type { Config as RelayPluginConfig } from '@swc/plugin-relay'
 import type { Config } from 'virtual:vilay:config'
 
@@ -61,10 +61,11 @@ const plugin = (config: RecursivePartial<Config> = {}): PluginOption[] => [
         plugins: [
           [
             '@swc/plugin-relay',
-            {
+            <RelayPluginConfig>{
               rootDir: cwd(),
+              module: 'esm',
               language: 'typescript',
-            } as RelayPluginConfig,
+            },
           ],
         ],
       },

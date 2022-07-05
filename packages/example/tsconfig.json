@@ -3,11 +3,12 @@
     "strict": true,
     "module": "ESNext",
     "moduleResolution": "Node",
-    "target": "ES2017",
+    "target": "es2017",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "types": ["vite/client", "react-dom/next", "react/next"],
     "jsx": "react-jsx",
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   }
 }
