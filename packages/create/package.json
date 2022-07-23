@@ -7,6 +7,7 @@
   "type": "module",
   "bin": "./dist/cli.js",
   "scripts": {
+    "prepublish": "pnpm build",
     "build": "tsc"
   },
   "dependencies": {

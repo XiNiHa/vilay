@@ -22,8 +22,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm build
-        working-directory: 'packages/render'
       - run: npm pkg set version="0.0.0-$(date +%y%m%d)-${{ github.sha }}"
         working-directory: 'packages/render'
       - run: pnpm publish --no-git-checks --access public --tag canary
