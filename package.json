@@ -5,7 +5,8 @@
   ],
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,astro}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,astro}\"",
+    "release": "changeset publish"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.17.0",
