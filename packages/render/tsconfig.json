@@ -3,7 +3,9 @@
     "strict": true,
     "module": "NodeNext",
     "moduleResolution": "Node",
+    "declaration": true,
     "outDir": "./dist",
+    "skipLibCheck": true,
     "types": ["@cloudflare/workers-types"]
   }
 }
