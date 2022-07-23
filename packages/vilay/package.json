@@ -28,12 +28,12 @@
     "serve-static": "^1.15.0",
     "undici": "^5.1.1",
     "vite": "^2.9.6",
-    "vite-plugin-ssr": "^0.4.0-beta.20",
+    "vite-plugin-ssr": "^0.4.11",
     "yargs": "^17.4.0"
   },
   "peerDependencies": {
     "@babel/runtime": "7",
-    "@vilay/render": ">=0.0.23",
+    "@vilay/render": ">=0.0.25",
     "babel-plugin-relay": "14",
     "react": "18",
     "react-dom": "18",

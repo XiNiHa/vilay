@@ -131,7 +131,7 @@ importers:
       react-streaming: ^0.2.13
       typescript: ^4.7
       vite: ^2.9.12
-      vite-plugin-ssr: 0.4.0-beta.20
+      vite-plugin-ssr: 0.4.11
     devDependencies:
       '@cloudflare/workers-types': 3.8.0
       '@esbuild-plugins/node-modules-polyfill': 0.1.4_esbuild@0.14.48
@@ -142,7 +142,7 @@ importers:
       react-streaming: 0.2.17_biqbaboplfbrettd7655fr4n2y
       typescript: 4.7.3
       vite: 2.9.12
-      vite-plugin-ssr: 0.4.0-beta.20_vite@2.9.12
+      vite-plugin-ssr: 0.4.11_vite@2.9.12
 
   packages/vilay:
     specifiers:
@@ -175,7 +175,7 @@ importers:
       typescript: ^4.6.3
       undici: ^5.1.1
       vite: ^2.9.6
-      vite-plugin-ssr: ^0.4.0-beta.20
+      vite-plugin-ssr: ^0.4.11
       yargs: ^17.4.0
     dependencies:
       '@babel/core': 7.18.5
@@ -191,7 +191,7 @@ importers:
       serve-static: 1.15.0
       undici: 5.5.1
       vite: 2.9.12
-      vite-plugin-ssr: 0.4.0-beta.20_vite@2.9.12
+      vite-plugin-ssr: 0.4.11_vite@2.9.12
       yargs: 17.5.1
     devDependencies:
       '@babel/runtime': 7.18.3
@@ -716,8 +716,8 @@ packages:
   /@brillout/json-s/0.4.6:
     resolution: {integrity: sha512-mDgMMNFSKyN9Fy0G4yQTcWwQ1BXUE65D3i3RXPX44xD5AuIU4QQDQBi+DKiEDCS6L6nEa2frC2lCUa/ob700Aw==}
 
-  /@brillout/libassert/0.5.5:
-    resolution: {integrity: sha512-GohLlIu361SMQZzzcu4izLG7Tafc4L5cYTmYt+Gy5tihQFA8ifY0+bsaaIJQQaPUHLbFU/ygZoMmxTqW7Bukcg==}
+  /@brillout/libassert/0.5.8:
+    resolution: {integrity: sha512-u/fu+jTRUdNdbLONGq1plCfh+k2/XjSbGVTfnF3rHnSPZd+ABWp0XinR5ifrFkyGOzMbzv8IiQ44lZ4U6ZGrGA==}
 
   /@changesets/apply-release-plan/6.0.1:
     resolution: {integrity: sha512-KGtai19+Uo7k8uco9m+hIPGoet9E6eZq15RIeHoivvgwwI66AC6ievbUO5h0NqGlZjBWnYJQNkuT66kvBYzxsA==}
@@ -6026,12 +6026,8 @@ packages:
     resolution: {integrity: sha512-IT3q0lPvtkqQ8toHQN/BkOi4VIqoqheqM1FnkNWT9y0G8B3xJhwnoKBu5OHx8zHDOvveQzfKuFowJ0VSARiIDg==}
     dev: false
 
-  /ufo/0.8.3:
-    resolution: {integrity: sha512-AIkk06G21y/P+NCatfU+1qldCmI0XCszZLn8AkuKotffF3eqCvlce0KuwM7ZemLE/my0GSYADOAeM5zDYWMB+A==}
-
   /ufo/0.8.4:
     resolution: {integrity: sha512-/+BmBDe8GvlB2nIflWasLLAInjYG0bC9HRnfEpNi4sw77J2AJNnEVnTDReVrehoh825+Q/evF3THXTAweyam2g==}
-    dev: false
 
   /unbox-primitive/1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
@@ -6232,37 +6228,41 @@ packages:
       vfile-message: 3.1.2
     dev: true
 
-  /vite-plugin-dist-importer/0.1.8:
-    resolution: {integrity: sha512-QDUlwEA/ZF24m1KU16F5sFDpiFPQGoOhHHTiALdj/nDZOr84V14+Bvbw3/ITCq3aAq5pvLYNc2OrIKp+o8yp4w==}
+  /vite-plugin-dist-importer/0.3.2:
+    resolution: {integrity: sha512-pjK0KK8rYBTckvNniBknvqGir77HgKwA0qQZ7W1oOjOHklgeY+Sgi6rpg0vVZbft5alG0ij19IqrPoeT4e76VQ==}
 
-  /vite-plugin-glob/0.2.7:
-    resolution: {integrity: sha512-eP7lM72q1IbQxhXNbks6WCzU1s81fkiLuTffV4g8H/Ls6NgB7HYSe+pcN7ECTRj+JBTz/4xtm00eeL7dheL8Bg==}
+  /vite-plugin-glob/0.2.8:
+    resolution: {integrity: sha512-Xs9rlEdDW33yfs72Iugu/y3H0AK48DkldM8t5i+LAlXF3GaKA9oFerWZih7qp5cibg4JI99wnMSYHcj/awP7Eg==}
     dependencies:
       acorn: 8.7.1
       fast-glob: 3.2.11
       magic-string: 0.26.1
       micromatch: 4.0.5
-      ufo: 0.8.3
+      ufo: 0.8.4
 
-  /vite-plugin-ssr/0.4.0-beta.20_vite@2.9.12:
-    resolution: {integrity: sha512-P0Q/tCfmLgSIRbe3E09idSNX5MJ0+zRtLP9JvmGlb3e/FhkWcVASOzZvFIQ6eXm9u4P6pxc3cdOUWc4+1xyAyw==}
+  /vite-plugin-ssr/0.4.11_vite@2.9.12:
+    resolution: {integrity: sha512-NfdVW1xSZh6T6TpbEB+yhmxIuA7pJqpyN4kEByCcFZGoXMBl9vQOcwM6NWUmJjNcBAOFfy3hA/s7WJCMiFK41w==}
     engines: {node: '>=12.19.0'}
     hasBin: true
     peerDependencies:
-      vite: '>=2.9.6'
+      vite: '>=2.9.10'
     dependencies:
       '@brillout/json-s': 0.4.6
-      '@brillout/libassert': 0.5.5
+      '@brillout/libassert': 0.5.8
       cac: 6.7.12
+      debug: 4.3.4
       es-module-lexer: 0.10.5
       fast-glob: 3.2.11
       kolorist: 1.5.1
       p-limit: 3.1.0
+      picocolors: 1.0.0
       resolve: 1.22.0
       symlink-dir: 5.0.1
       vite: 2.9.12
-      vite-plugin-dist-importer: 0.1.8
-      vite-plugin-glob: 0.2.7
+      vite-plugin-dist-importer: 0.3.2
+      vite-plugin-glob: 0.2.8
+    transitivePeerDependencies:
+      - supports-color
 
   /vite/2.9.12:
     resolution: {integrity: sha512-suxC36dQo9Rq1qMB2qiRorNJtJAdxguu5TMvBHOc/F370KvqAe9t48vYp+/TbPKRNrMh/J55tOUmkuIqstZaew==}

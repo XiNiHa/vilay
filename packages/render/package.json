@@ -12,16 +12,13 @@
   },
   "types": "./dist/index.d.ts",
   "exports": {
-    "node": {
-      "require": "./dist/node/index.cjs",
-      "default": "./dist/node/index.mjs"
-    },
+    "node": "./dist/node/index.cjs",
     "default": "./dist/index.mjs"
   },
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
-    "vite-plugin-ssr": ">=0.4.0-beta.20"
+    "vite-plugin-ssr": ">=0.4"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^3.8.0",
@@ -33,6 +30,6 @@
     "react-streaming": "^0.2.13",
     "typescript": "^4.7",
     "vite": "^2.9.12",
-    "vite-plugin-ssr": "0.4.0-beta.20"
+    "vite-plugin-ssr": "0.4.11"
   }
 }
