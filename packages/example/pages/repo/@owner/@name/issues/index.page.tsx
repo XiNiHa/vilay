@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql, usePreloadedQuery, type PreloadedQuery } from 'react-relay'
 import { defineVilay } from 'vilay'
-import defaultDefines from '../../../../../renderer/_default.page'
 import IssueListComponent from '../../../../../components/issues/IssueList'
 import type {
   issuesPageQuery,
@@ -17,7 +16,7 @@ interface RouteParams {
   name: string
 }
 
-// Variables used in this query is constructed using the `getQueryVariables()` on preload.
+// Variables used in this query are constructed using the `getQueryVariables()` on preload.
 export const query = graphql`
   query issuesPageQuery(
     $owner: String!
@@ -37,15 +36,22 @@ export default defineVilay<{
   RouteParams: RouteParams
   QueryVariables: issuesPageQuery$variables
 }>({
-  // This overrides the application-wide <head> tag definition in `_default.page.tsx`
-  head: { ...defaultDefines.head, title: 'Issues: Vite SSR app' },
+  query,
   // If a page has `getQueryVariables` exported, it'll be called to get the variables used for preloading the query.
   // If it's not exported, route params will be directly used as variables.
-  getQueryVariables: (routeParams) => ({
-    ...routeParams,
-    first: 10,
-    filter: {},
-  }),
+  getQueryVariables: ({ routeParams, urlParsed }) => {
+    return {
+      ...routeParams,
+      first: urlParsed?.search?.first ? parseInt(urlParsed?.search?.first) : 10,
+      filter: {},
+    }
+  },
+  // This overrides the application-wide <head> tag definition in `_default.page.tsx`
+  getPageHead: ({ routeParams }) => {
+    return {
+      title: `Issues for ${routeParams.owner}/${routeParams.name}`
+    }
+  },
   // Relay pagination example.
   Page: ({ queryRef }) => {
     const data = usePreloadedQuery<issuesPageQuery>(query, queryRef)

@@ -73,14 +73,14 @@ export const Page = ({ queryRef }) => {
 
 While using Relay, it's pretty common to pass query variables for fetching data.
 Vilay provides `getQueryVariables` to let users return variables to use.
-It receives [route parameters](https://vite-plugin-ssr.com/filesystem-routing) which can be used to figure out the right query variables.
+It receives [page context](https://vite-plugin-ssr.com/pageContext) such as [route parameters](https://vite-plugin-ssr.com/filesystem-routing) which can be used to figure out the right query variables.
 
 ```tsx
 // /@category/index.page.js
 import { graphql, usePreloadedQuery } from 'react-relay'
 import ItemsList from '../../components/ItemsList'
 
-export const getQueryVariables = (routeParams) => ({
+export const getQueryVariables = ({ routeParams }) => ({
   ...routeParams,
   first: 10,
 })
