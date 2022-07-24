@@ -12,7 +12,10 @@
   },
   "types": "./dist/index.d.ts",
   "exports": {
-    "node": "./dist/node/index.cjs",
+    "node": {
+      "require": "./dist/node/index.cjs",
+      "default": "./dist/node/index.mjs"
+    },
     "default": "./dist/index.mjs"
   },
   "peerDependencies": {

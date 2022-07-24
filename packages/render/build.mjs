@@ -25,6 +25,9 @@ await Promise.all([
     platform: 'node',
     entryPoints: ['index.ts'],
     outfile: './dist/node/index.mjs',
+    banner: {
+      js: `import { createRequire } from 'module';const require=createRequire(import.meta.url);`
+    },
     format: 'esm',
     target: 'es2020',
     bundle: true,
