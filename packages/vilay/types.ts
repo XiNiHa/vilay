@@ -4,7 +4,7 @@ import type { RecordMap } from 'relay-runtime/lib/store/RelayStoreTypes'
 
 import type { PageContextUrls } from 'vite-plugin-ssr/dist/cjs/shared/addComputedUrlProps'
 
-export type PageContext<T = Record<string, unknown>, V = unknown> = {
+export type PageContext<T = Record<string, unknown>, V = Variables> = {
   Page?: Page
   userAgent?: string
   cookies?: Record<string, string>
@@ -62,11 +62,6 @@ export const defineVilay = <
   PageLayout?: React.FC<PageLayoutProps>
   initRelayEnvironment?: InitRelayEnvironment
   Page?: Page<T['PageProps']>
-  /**
-   * Specify a static object literal for the `<head>` tag content for this page
-   * Overridden by `getPageHead`.
-   */
-  head?: HeadExports
   query?: GraphQLTaggedNode
   /**
    * Build the variables for the preloaded relay query from `pageContext`.
