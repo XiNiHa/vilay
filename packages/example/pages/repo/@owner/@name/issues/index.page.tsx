@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql, usePreloadedQuery, type PreloadedQuery } from 'react-relay'
 import { defineVilay } from 'vilay'
-import defaultDefines from '../../../../../renderer/_default.page'
 import IssueListComponent from '../../../../../components/issues/IssueList'
 import type {
   issuesPageQuery,
@@ -50,7 +49,6 @@ export default defineVilay<{
   // This overrides the application-wide <head> tag definition in `_default.page.tsx`
   getPageHead: ({ routeParams }) => {
     return {
-      ...defaultDefines.head,
       title: `Issues for ${routeParams.owner}/${routeParams.name}`
     }
   },

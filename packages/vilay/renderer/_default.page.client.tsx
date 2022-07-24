@@ -21,7 +21,7 @@ export async function render(
     Page,
     redirectTo,
     isHydration,
-    exports: { initRelayEnvironment, head, getPageHead },
+    exports: { initRelayEnvironment, getPageHead },
   } = pageContext
 
   if (redirectTo) return navigate(redirectTo)
@@ -39,15 +39,10 @@ export async function render(
   routeManager ??= new RouteManager()
   routeManager.setPage(Page, relayQueryRef)
 
-  let finalHead = head;
 
-  if(getPageHead) {
-    finalHead = getPageHead(pageContext)
-  }
-
-  if (finalHead && !isHydration) {
+  if (getPageHead && !isHydration) {
     const headTags: HTMLElement[] = []
-    for (const [tag, value] of Object.entries(finalHead)) {
+    for (const [tag, value] of Object.entries(getPageHead(pageContext))) {
       if (tag === 'meta') {
         for (const [name, content] of Object.entries(value)) {
           const node = document.createElement('meta')

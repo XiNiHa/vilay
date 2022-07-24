@@ -10,10 +10,10 @@ export default defineVilay({
   // Application-wide <head> tags
   // Meta tags are inserted as <meta name="${KEY}" content="${VALUE}">.
   // Other tags are inserted as <${KEY}>${VALUE}</${KEY}>.
-  head: {
+  getPageHead: () => ({
     title: 'Vite SSR app',
     meta: {
       description: 'App using Vite + vite-plugin-ssr',
-    },
-  },
+    }
+  }),
 })

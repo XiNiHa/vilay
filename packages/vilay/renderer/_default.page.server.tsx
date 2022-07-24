@@ -24,14 +24,12 @@ export async function render(pageContext: PageContextBuiltIn & PageContext) {
     }
   }
 
-  const head = exports?.getPageHead
-    ? exports?.getPageHead(pageContext)
-    : exports?.head
-
   const headTags: string[] = []
 
-  if (head) {
-    for (const [tag, value] of Object.entries(head)) {
+  if (exports.getPageHead) {
+    for (const [tag, value] of Object.entries(
+      exports.getPageHead(pageContext)
+    )) {
       if (tag === 'meta') {
         for (const [name, content] of Object.entries(value)) {
           headTags.push(`<meta name="${name}" content="${content}">`)

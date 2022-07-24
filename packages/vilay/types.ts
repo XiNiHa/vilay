@@ -13,7 +13,6 @@ export type PageContext<T = Record<string, unknown>, V = Variables> = {
     initRelayEnvironment: InitRelayEnvironment
     PageLayout?: React.FC<PageLayoutProps>
     pageLayout?: React.FC<PageLayoutProps>
-    head?: HeadExports
     query?: GraphQLTaggedNode
     getQueryVariables: GetQueryVariables<T, V>
     getPageHead?: GetPageHead<T>
