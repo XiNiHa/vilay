@@ -1,7 +1,8 @@
 import React from 'react'
 import { RelayEnvironmentProvider, type Environment } from 'react-relay'
-import type { PageContext } from '../types'
-import { RouteManager, useRouteManager } from './routeManager'
+import { useRouteManager } from 'vilay'
+
+import type { PageContext, RouteManager } from 'vilay'
 
 import { PageContextProvider } from './usePageContext'
 
@@ -11,7 +12,7 @@ export interface PageShellProps {
   routeManager: RouteManager
 }
 
-// Page root component
+// Custom Page root component
 export const PageShell: React.FC<PageShellProps> = ({
   pageContext,
   relayEnvironment,
@@ -23,7 +24,6 @@ export const PageShell: React.FC<PageShellProps> = ({
     Passthrough
   const [CurrentPage, queryRef, routeTransitioning] =
     useRouteManager(routeManager)
-
   return (
     <React.StrictMode>
       <RelayEnvironmentProvider environment={relayEnvironment}>

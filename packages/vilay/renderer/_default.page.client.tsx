@@ -4,7 +4,7 @@ import { navigate } from 'vite-plugin-ssr/client/router'
 import type { Environment } from 'react-relay'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
 import preloadQuery from './preloadQuery'
-import { PageShell } from './PageShell'
+import { PageShell as DefaultPageShell } from './PageShell'
 import { RouteManager } from './routeManager'
 import type { PageContext } from '../types'
 
@@ -21,7 +21,11 @@ export async function render(
     Page,
     redirectTo,
     isHydration,
-    exports: { initRelayEnvironment, getPageHead },
+    exports: {
+      initRelayEnvironment,
+      getPageHead,
+      PageShell: ProvidedPageShell,
+    },
   } = pageContext
 
   if (redirectTo) return navigate(redirectTo)
@@ -38,7 +42,6 @@ export async function render(
 
   routeManager ??= new RouteManager()
   routeManager.setPage(Page, relayQueryRef)
-
 
   if (getPageHead && !isHydration) {
     const headTags: HTMLElement[] = []
@@ -77,6 +80,8 @@ export async function render(
       }
     }
   }
+
+  const PageShell = ProvidedPageShell ?? DefaultPageShell
 
   if (!containerRoot) {
     const page = (
