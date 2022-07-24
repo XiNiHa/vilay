@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
 import type { PageLayoutProps } from 'vilay'
 import '@unocss/reset/tailwind.css'
@@ -19,17 +19,6 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
 
   const context = usePageContext()
 
-  const [currentPath, setPath] = useState(context?.urlParsed?.pathname)
-
-  // TODO: shouldn't context update automatically when the route changes?
-  // I don't even think the useEffect should be necessary, let alone using location.pathname
-  // why does context.urlParsed.pathname remain the same?!
-  useEffect(() => {
-    if(routeTransitioning) {
-      setPath(location.pathname)
-    }
-  }, [routeTransitioning])
-
   return (
     <>
       <LoadingIndicator transitioning={routeTransitioning} />
@@ -42,7 +31,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
               key={href}
               className={`text-base hover:text-1.05rem transition-all duration-300 border-b-1px ${
                 // show a basic active state based on currentPath state
-                currentPath === href ? 'border-b-dark' : 'border-b-transparent'
+                context?.urlParsed?.pathname === href ? 'border-b-dark' : 'border-b-transparent'
               } `}
             >
               {text}
