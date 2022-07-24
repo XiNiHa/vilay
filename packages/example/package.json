@@ -18,6 +18,7 @@
     "react-error-boundary": "^3.1.4",
     "react-relay": "^14.0.0",
     "relay-runtime": "^14.0.0",
+    "vite-plugin-ssr": "^0.4.11",
     "vilay": "*"
   },
   "devDependencies": {
