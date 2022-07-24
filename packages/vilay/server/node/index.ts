@@ -1,10 +1,11 @@
+import { cwd } from 'node:process'
 import { join } from 'node:path'
 import { CompatibilityEvent, createApp, sendError, useCookies } from 'h3'
 import serveStatic from 'serve-static'
 import { fetch } from 'undici'
 import { renderPage } from 'vite-plugin-ssr'
-import { cwd } from 'node:process'
 import { listen } from 'listhen'
+import type { PageContext } from '../../types'
 
 export async function createServer(root: string) {
   const app = createApp({ onError })
@@ -19,15 +20,20 @@ export async function createServer(root: string) {
       userAgent: req.headers['user-agent'],
       fetch,
     }
-    renderPage(pageContextInit).then((pageContext) => {
-      const { httpResponse } = pageContext
-      if (!httpResponse) return next()
-      const { contentType, statusCode } = httpResponse
-      res.writeHead(statusCode, {
-        'Content-Type': `${contentType};charset=utf-8`,
-      })
-      httpResponse.pipe(res)
-    })
+    renderPage<PageContext, typeof pageContextInit>(pageContextInit).then(
+      (pageContext) => {
+        const { redirectTo, httpResponse } = pageContext
+        if (redirectTo) {
+          return res.writeHead(307, { Location: redirectTo }).end()
+        }
+        if (!httpResponse) return next()
+        const { contentType, statusCode } = httpResponse
+        res.writeHead(statusCode, {
+          'Content-Type': `${contentType};charset=utf-8`,
+        })
+        httpResponse.pipe(res)
+      }
+    )
   })
 
   return app
@@ -41,4 +47,4 @@ function onError(error: Error, event: CompatibilityEvent) {
   sendError(event, error, false)
 }
 
-createServer(cwd()).then(app => listen(app, { port: 3000 }))
+createServer(cwd()).then((app) => listen(app, { port: 3000 }))

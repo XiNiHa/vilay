@@ -9,8 +9,17 @@ export async function render(req: Request, renderVps: typeof renderPage) {
     userAgent: req.headers.get('User-Agent'),
     fetch,
   }
-  const pageContext = await renderVps(pageContextInit)
-  const { httpResponse } = pageContext
+  const pageContext = await renderVps<
+    { redirectTo?: string },
+    typeof pageContextInit
+  >(pageContextInit)
+  const { redirectTo, httpResponse } = pageContext
+  if (redirectTo) {
+    return new Response(null, {
+      status: 307,
+      headers: { Location: redirectTo },
+    })
+  }
   if (!httpResponse) {
     return null
   } else {

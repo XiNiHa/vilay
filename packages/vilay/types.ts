@@ -6,6 +6,7 @@ export type PageContext = {
   Page?: Page
   userAgent?: string
   cookies?: Record<string, string>
+  redirectTo?: string
   exports?: {
     initRelayEnvironment: InitRelayEnvironment
     PageLayout?: React.FC<PageLayoutProps>

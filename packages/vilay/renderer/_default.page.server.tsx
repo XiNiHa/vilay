@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   dangerouslySkipEscape,
   escapeInject,
@@ -9,12 +10,20 @@ import { PageShell } from './PageShell'
 import { RouteManager } from './routeManager'
 import type { PageContext } from '../types'
 
-export const passToClient = ['routeParams', 'relayInitialData']
+export const passToClient = ['routeParams', 'relayInitialData', 'redirectTo']
 
 export async function render(pageContext: PageContextBuiltIn & PageContext) {
   const { initialCompletion, getStoreSource } = renderReact(pageContext)
 
-  const { exports } = pageContext
+  const { exports, redirectTo } = pageContext
+
+  if (redirectTo) {
+    return {
+      documentHtml: null,
+      pageContext: { redirectTo },
+    }
+  }
+
   const headTags: string[] = []
 
   if (exports.head) {

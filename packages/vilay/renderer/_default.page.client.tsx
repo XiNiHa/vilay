@@ -1,10 +1,12 @@
+import React from 'react'
 import ReactDOMClient from 'react-dom/client'
+import { navigate } from 'vite-plugin-ssr/client/router'
 import type { Environment } from 'react-relay'
 import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'
-import type { PageContext } from '../types'
 import preloadQuery from './preloadQuery'
 import { PageShell } from './PageShell'
 import { RouteManager } from './routeManager'
+import type { PageContext } from '../types'
 
 let containerRoot: ReactDOMClient.Root | null = null
 let relayEnvironment: Environment | null = null
@@ -17,9 +19,12 @@ export async function render(
 ) {
   const {
     Page,
+    redirectTo,
     isHydration,
     exports: { initRelayEnvironment, head },
   } = pageContext
+
+  if (redirectTo) return navigate(redirectTo)
 
   pageContext.fetch = fetch
 

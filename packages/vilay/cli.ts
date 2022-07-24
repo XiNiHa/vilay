@@ -12,6 +12,7 @@ import esbuild from 'esbuild'
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 import { fetch } from 'undici'
 import * as Cookie from 'cookie-es'
+import type { PageContext } from './types'
 
 const workDir = cwd()
 const srcDir = dirname(fileURLToPath(import.meta.url))
@@ -74,22 +75,23 @@ yargs(hideBin(argv))
         }
         case 'cloudflare-pages': {
           await build({ root: workDir, build: { minify } })
-          await esbuild.build({
-            plugins: [NodeModulesPolyfillPlugin()],
-            platform: 'browser',
-            conditions: ['worker', 'browser'],
-            entryPoints: [join(srcDir, '../server/cloudflare/pages.ts')],
-            sourcemap: true,
-            outfile: './dist/client/_worker.js',
-            logLevel: 'warning',
-            format: 'esm',
-            target: 'es2020',
-            bundle: true,
-            minify: !noMinify,
-            define: {
-              IS_CLOUDFLARE_WORKER: 'true'
-            },
-          })
+          await esbuild
+            .build({
+              plugins: [NodeModulesPolyfillPlugin()],
+              platform: 'browser',
+              conditions: ['worker', 'browser'],
+              entryPoints: [join(srcDir, '../server/cloudflare/pages.ts')],
+              sourcemap: true,
+              outfile: './dist/client/_worker.js',
+              logLevel: 'warning',
+              format: 'esm',
+              target: 'es2020',
+              bundle: true,
+              minify: !noMinify,
+              define: {
+                IS_CLOUDFLARE_WORKER: 'true',
+              },
+            })
             .then(() =>
               console.log(
                 'Application built successfully for Cloudflare Pages Fullstack!'
@@ -105,23 +107,24 @@ yargs(hideBin(argv))
         }
         case 'cloudflare-workers': {
           await build({ root: workDir, build: { minify } })
-          await esbuild.build({
-            plugins: [NodeModulesPolyfillPlugin()],
-            platform: 'browser',
-            conditions: ['worker', 'browser'],
-            entryPoints: [join(srcDir, '../server/cloudflare/workers.ts')],
-            sourcemap: true,
-            outfile: './dist/client/_worker.js',
-            external: ['__STATIC_CONTENT_MANIFEST'],
-            logLevel: 'warning',
-            format: 'esm',
-            target: 'es2020',
-            bundle: true,
-            minify: !noMinify,
-            define: {
-              IS_CLOUDFLARE_WORKER: 'true'
-            },
-          })
+          await esbuild
+            .build({
+              plugins: [NodeModulesPolyfillPlugin()],
+              platform: 'browser',
+              conditions: ['worker', 'browser'],
+              entryPoints: [join(srcDir, '../server/cloudflare/workers.ts')],
+              sourcemap: true,
+              outfile: './dist/client/_worker.js',
+              external: ['__STATIC_CONTENT_MANIFEST'],
+              logLevel: 'warning',
+              format: 'esm',
+              target: 'es2020',
+              bundle: true,
+              minify: !noMinify,
+              define: {
+                IS_CLOUDFLARE_WORKER: 'true',
+              },
+            })
             .then(() =>
               console.log(
                 'Application built successfully for Cloudflare Workers!'
@@ -159,8 +162,14 @@ function rendererPlugin(): PluginOption {
             userAgent: req.headers['user-agent'],
             fetch,
           }
-          const pageContext = await renderPage(pageContextInit)
-          const { httpResponse } = pageContext
+          const pageContext = await renderPage<
+            PageContext,
+            typeof pageContextInit
+          >(pageContextInit)
+          const { redirectTo, httpResponse } = pageContext
+          if (redirectTo) {
+            return res.writeHead(307, { Location: redirectTo }).end()
+          }
           if (!httpResponse) return next()
           const { contentType, statusCode } = httpResponse
           res.writeHead(statusCode, {
