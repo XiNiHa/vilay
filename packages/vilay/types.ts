@@ -2,7 +2,9 @@ import type React from 'react'
 import type { Environment, GraphQLTaggedNode, Variables } from 'relay-runtime'
 import type { RecordMap } from 'relay-runtime/lib/store/RelayStoreTypes'
 
-export type PageContext = {
+import type { PageContextUrls } from 'vite-plugin-ssr/dist/cjs/shared/addComputedUrlProps'
+
+export type PageContext<T = Record<string, unknown>, V = unknown> = {
   Page?: Page
   userAgent?: string
   cookies?: Record<string, string>
@@ -13,12 +15,13 @@ export type PageContext = {
     pageLayout?: React.FC<PageLayoutProps>
     head?: HeadExports
     query?: GraphQLTaggedNode
-    getQueryVariables: GetQueryVariables<unknown, Variables>
+    getQueryVariables: GetQueryVariables<T, V>
+    getPageHead?: GetPageHead<T>
   }
-  routeParams: Record<string, unknown>
+  routeParams: T
   fetch: typeof fetch
   relayInitialData: RecordMap
-}
+} & PageContextUrls
 
 export type Page<Props = Record<string, unknown>> = React.FC<Props>
 
@@ -29,9 +32,11 @@ export type HeadExports = {
   } & Record<string, unknown>
 } & Record<string, unknown>
 
-export type GetQueryVariables<RouteParams, Variables> = (
-  routeParams: RouteParams
+export type GetQueryVariables<T, V> = (
+  pageContext: PageContext<T, V>
 ) => Variables
+
+export type GetPageHead<T> = (pageContext: PageContext<T>) => HeadExports
 
 export type PageLayoutProps = {
   children: React.ReactNode
@@ -49,15 +54,40 @@ export const defineVilay = <
     RouteParams?: unknown
     QueryVariables?: Variables
   } = {
-    PageProps: Record<string, never>,
-    RouteParams: Record<string, never>,
+    PageProps: Record<string, never>
+    RouteParams: Record<string, never>
     QueryVariables: Variables
   }
 >(pageExports: {
   PageLayout?: React.FC<PageLayoutProps>
   initRelayEnvironment?: InitRelayEnvironment
   Page?: Page<T['PageProps']>
+  /**
+   * Specify a static object literal for the `<head>` tag content for this page
+   * Overridden by `getPageHead`.
+   */
   head?: HeadExports
   query?: GraphQLTaggedNode
+  /**
+   * Build the variables for the preloaded relay query from `pageContext`.
+   * 
+   * @example
+   * ```ts
+   * getQueryVariables: ({ routeParams, urlParsed }) => {
+   *  return {
+   *    ...routeParams,
+   *    first: urlParsed?.search?.first ? parseInt(urlParsed?.search?.first) : 10,
+   *    filter: {},
+   *  }
+   *},
+   *```
+   */
   getQueryVariables?: GetQueryVariables<T['RouteParams'], T['QueryVariables']>
+  // TODO: optional typed params for search params would be cool here as well
+  // for anyone who has to implement a faceted search it would be everything!
+  /**
+   * Build the page head tags from page context for the preloaded relay query.
+   * Overrides `head` if defined.
+   */
+  getPageHead?: GetPageHead<T['RouteParams']>
 }) => pageExports

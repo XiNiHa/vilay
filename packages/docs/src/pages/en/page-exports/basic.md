@@ -28,9 +28,7 @@ export const PageLayout = ({
   return (
     <>
       {routeTransitioning && 'Loading...'}
-      <Suspense fallback="Loading...">
-        {children}
-      </Suspense>
+      <Suspense fallback="Loading...">{children}</Suspense>
     </>
   )
 }
@@ -52,4 +50,29 @@ export const head = {
     description: 'App built with Vilay',
   },
 }
+```
+
+## `getPageHead`
+
+A dynamic equivalent of `head` module
+This method provides the full page context so that you can construct head tags from full page context before the stream is initiated
+
+Expects a return object like above
+
+```tsx
+// /@location/index.page.js
+import { graphql, usePreloadedQuery } from 'react-relay'
+import ItemsList from '../../components/ItemsList'
+
+export const getPageHead = ({ routeParams, urlParsed }) => {
+  const firstVisit = urlParsed?.search?.firstVisit
+
+  return {
+    title: firstVisit
+        ? `Welcome to ${routeParams.location}!`
+        : `Welcome back to ${routeParams.location}!`,
+    },
+  }
+}
+
 ```

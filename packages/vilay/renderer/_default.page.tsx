@@ -4,4 +4,5 @@ export const customExports = [
   'head',
   'query',
   'getQueryVariables',
+  'getPageHead'
 ]

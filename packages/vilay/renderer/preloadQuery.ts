@@ -16,7 +16,7 @@ export default (
     loadQuery(
       relayEnvironment,
       query,
-      getQueryVariables?.(routeParams) ?? routeParams
+      getQueryVariables?.(pageContext) ?? routeParams
     )
   )
 }
