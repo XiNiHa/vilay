@@ -100,6 +100,7 @@ importers:
       unocss: ^0.30.8
       vilay: '*'
       vite: ^2.9.12
+      vite-plugin-ssr: ^0.4.11
     dependencies:
       '@babel/runtime': 7.18.3
       '@vilay/render': link:../render
@@ -110,6 +111,7 @@ importers:
       react-relay: 14.0.0_react@18.2.0
       relay-runtime: 14.0.0
       vilay: link:../vilay
+      vite-plugin-ssr: 0.4.11_vite@2.9.12
     devDependencies:
       '@types/react': 18.0.14
       '@types/react-dom': 18.0.5
