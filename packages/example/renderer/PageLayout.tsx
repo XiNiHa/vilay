@@ -1,10 +1,9 @@
 import React from 'react'
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
+import { usePageContext } from 'vilay'
 import type { PageLayoutProps } from 'vilay'
 import '@unocss/reset/tailwind.css'
 import 'uno.css'
-
-import { usePageContext } from './usePageContext'
 
 export const PageLayout: React.FC<PageLayoutProps> = ({
   children,
