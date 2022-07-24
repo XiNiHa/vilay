@@ -8,16 +8,16 @@ English | [한국어](README.ko.md)
 
 ## Main Features
 
-- Based on Vite and vite-plugin-ssr
+- Based on Vite and [vite-plugin-ssr](https://vite-plugin-ssr.com/)
 - Uses React 18, Suspense SSR Streaming enabled by default
 - Deep integration with Relay (Supports render-as-you-fetch)
 - Easy to use
 
 ## TODO
 
-- React 18 selective hydration
-- Runtimes for edge enviroments like Cloudflare Workers
-- Image optimization
-- Improve usability
+- [ ] React 18 selective hydration
+- [x] Runtimes for edge environments like Cloudflare Workers
+- [ ] Image optimization
+- [ ] Improve usability
 
-Look at [the example](/packages/example) to see how the framework work.
+Look at [the example](/packages/example) to see how the framework works.
