@@ -1,19 +1,17 @@
 import type React from 'react'
-
 import type { Environment, GraphQLTaggedNode, Variables } from 'relay-runtime'
 import type { RecordMap } from 'relay-runtime/lib/store/RelayStoreTypes'
 import type { PageContextUrls } from 'vite-plugin-ssr/dist/cjs/shared/addComputedUrlProps'
-
 import type { PageShellProps } from './renderer/PageShell'
 
 export type PageContext<T = Record<string, unknown>, V = Variables> = {
   Page?: Page
-  PageShell?: React.FC<PageShellProps>
   userAgent?: string
   cookies?: Record<string, string>
   redirectTo?: string
   exports?: {
     initRelayEnvironment: InitRelayEnvironment
+    PageShell?: React.FC<PageShellProps>
     PageLayout?: React.FC<PageLayoutProps>
     pageLayout?: React.FC<PageLayoutProps>
     query?: GraphQLTaggedNode

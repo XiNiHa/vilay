@@ -83,11 +83,11 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
 
   const children = (
     <PageShell
-      pageContext={pageContext}
       relayEnvironment={relayEnvironment}
       routeManager={
         new RouteManager({
           initialPage: Page,
+          pageContext,
           queryRef: relayQueryRef,
         })
       }

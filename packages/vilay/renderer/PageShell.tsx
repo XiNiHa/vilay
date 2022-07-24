@@ -6,36 +6,50 @@ import { RouteManager, useRouteManager } from './routeManager'
 import { PageContextProvider } from './usePageContext'
 
 export interface PageShellProps {
-  pageContext: PageContext
   relayEnvironment: Environment
   routeManager: RouteManager
 }
 
+export interface VilayAppProps {
+  pageContext: PageContext | null
+  relayEnvironment: Environment
+  children: React.ReactNode
+}
+
 // Page root component
 export const PageShell: React.FC<PageShellProps> = ({
-  pageContext,
   relayEnvironment,
   routeManager,
 }) => {
-  const PageLayout =
-    pageContext.exports?.PageLayout ??
-    pageContext.exports?.pageLayout ??
-    Passthrough
-  const [CurrentPage, queryRef, routeTransitioning] =
+  const [CurrentPage, pageContext, queryRef, routeTransitioning] =
     useRouteManager(routeManager)
+  const PageLayout =
+    pageContext?.exports?.PageLayout ??
+    pageContext?.exports?.pageLayout ??
+    Passthrough
 
   return (
     <React.StrictMode>
-      <RelayEnvironmentProvider environment={relayEnvironment}>
-        <PageContextProvider pageContext={pageContext}>
-          <PageLayout routeTransitioning={routeTransitioning}>
-            {CurrentPage && <CurrentPage queryRef={queryRef} />}
-          </PageLayout>
-        </PageContextProvider>
-      </RelayEnvironmentProvider>
+      <VilayApp relayEnvironment={relayEnvironment} pageContext={pageContext}>
+        <PageLayout routeTransitioning={routeTransitioning}>
+          {CurrentPage && <CurrentPage queryRef={queryRef} />}
+        </PageLayout>
+      </VilayApp>
     </React.StrictMode>
   )
 }
+
+export const VilayApp: React.FC<VilayAppProps> = ({
+  relayEnvironment,
+  pageContext,
+  children,
+}) => (
+  <RelayEnvironmentProvider environment={relayEnvironment}>
+    <PageContextProvider pageContext={pageContext}>
+      {children}
+    </PageContextProvider>
+  </RelayEnvironmentProvider>
+)
 
 const Passthrough: React.FC<{ children?: React.ReactNode }> = ({
   children,
