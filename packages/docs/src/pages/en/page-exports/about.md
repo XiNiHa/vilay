@@ -15,14 +15,14 @@ Users can export any kind of page exports in every page file (`.page.js/jsx/ts/t
 
 ```tsx
 // _default.page.js
-export const head = {
+export const getPageHead = () => {
   title: 'My Vilay App', // This gets applied by default
 }
 
 // menu.page.js
-export const head = {
+export const getPageHead = () => ({
   title: 'Menu - My Vilay App', // This gets applied when visiting `/menu`
-}
+})
 ```
 
 ## TypeScript Support
@@ -33,7 +33,7 @@ export const head = {
 import { defineVilay } from 'vilay'
 
 export default defineVilay({
-  head: {
+  getPageHead: () => {
     title: 'My Vilay App', // Type inferred
   }
 })

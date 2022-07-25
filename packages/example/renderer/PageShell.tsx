@@ -1,7 +1,10 @@
 import React from 'react'
 import { useRouteManager, VilayApp, type PageShellProps } from 'vilay'
 
-// Custom Page root component
+// a do-nothing example
+const ExampleContext = React.createContext(null)
+
+// Custom PageShell component - add your contexts here!
 export const PageShell: React.FC<PageShellProps> = ({
   relayEnvironment,
   routeManager,
@@ -14,11 +17,15 @@ export const PageShell: React.FC<PageShellProps> = ({
     Passthrough
   return (
     <React.StrictMode>
-      <VilayApp relayEnvironment={relayEnvironment} pageContext={pageContext}>
-        <PageLayout routeTransitioning={routeTransitioning}>
-          {CurrentPage && <CurrentPage queryRef={queryRef} />}
-        </PageLayout>
-      </VilayApp>
+      {/* Place a provider above the relay provider so 
+          you can pass auth credentials to pageContext for requests */}
+      <ExampleContext.Provider value={null}>
+        <VilayApp relayEnvironment={relayEnvironment} pageContext={pageContext}>
+          <PageLayout routeTransitioning={routeTransitioning}>
+            {CurrentPage && <CurrentPage queryRef={queryRef} />}
+          </PageLayout>
+        </VilayApp>
+      </ExampleContext.Provider>
     </React.StrictMode>
   )
 }
