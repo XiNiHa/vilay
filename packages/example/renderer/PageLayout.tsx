@@ -1,5 +1,6 @@
 import React from 'react'
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary'
+import { usePageContext } from 'vilay'
 import type { PageLayoutProps } from 'vilay'
 import '@unocss/reset/tailwind.css'
 import 'uno.css'
@@ -15,6 +16,8 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
     '/repo/xiniha/vilay/issues/create': 'Create Issue',
   }
 
+  const context = usePageContext()
+
   return (
     <>
       <LoadingIndicator transitioning={routeTransitioning} />
@@ -25,7 +28,10 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
             <a
               href={href}
               key={href}
-              className="text-base hover:text-1.05rem transition-all duration-300"
+              className={`text-base hover:text-1.05rem transition-all duration-300 border-b-1px ${
+                // show a basic active state based on currentPath state
+                context?.urlParsed?.pathname === href ? 'border-b-dark' : 'border-b-transparent'
+              } `}
             >
               {text}
             </a>

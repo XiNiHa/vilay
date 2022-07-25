@@ -6,7 +6,7 @@ import {
 } from 'vite-plugin-ssr'
 import { renderToStream } from '@vilay/render'
 import preloadQuery from './preloadQuery'
-import { PageShell } from './PageShell'
+import { PageShell as DefaultPageShell } from './PageShell'
 import { RouteManager } from './routeManager'
 import type { PageContext } from '../types'
 
@@ -71,9 +71,10 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
   const {
     Page,
     userAgent,
-    exports: { initRelayEnvironment },
+    exports: { initRelayEnvironment, PageShell: ProvidedPageShell },
   } = pageContext
 
+  const PageShell = ProvidedPageShell ?? DefaultPageShell
   const relayEnvironment = initRelayEnvironment({
     isServer: true,
     pageContext,
@@ -82,11 +83,11 @@ const renderReact = (pageContext: PageContextBuiltIn & PageContext) => {
 
   const children = (
     <PageShell
-      pageContext={pageContext}
       relayEnvironment={relayEnvironment}
       routeManager={
         new RouteManager({
           initialPage: Page,
+          pageContext,
           queryRef: relayQueryRef,
         })
       }

@@ -1,8 +1,8 @@
 import type React from 'react'
 import type { Environment, GraphQLTaggedNode, Variables } from 'relay-runtime'
 import type { RecordMap } from 'relay-runtime/lib/store/RelayStoreTypes'
-
 import type { PageContextUrls } from 'vite-plugin-ssr/dist/cjs/shared/addComputedUrlProps'
+import type { PageShellProps } from './renderer/PageShell'
 
 export type PageContext<T = Record<string, unknown>, V = Variables> = {
   Page?: Page
@@ -11,6 +11,7 @@ export type PageContext<T = Record<string, unknown>, V = Variables> = {
   redirectTo?: string
   exports?: {
     initRelayEnvironment: InitRelayEnvironment
+    PageShell?: React.FC<PageShellProps>
     PageLayout?: React.FC<PageLayoutProps>
     pageLayout?: React.FC<PageLayoutProps>
     query?: GraphQLTaggedNode
@@ -37,6 +38,7 @@ export type GetQueryVariables<T, V> = (
 
 export type GetPageHead<T> = (pageContext: PageContext<T>) => HeadExports
 
+
 export type PageLayoutProps = {
   children: React.ReactNode
   routeTransitioning: boolean
@@ -58,6 +60,10 @@ export const defineVilay = <
     QueryVariables: Variables
   }
 >(pageExports: {
+  /**
+   * Override to provide custom providers for the react render
+   */
+  PageShell?: React.FC<PageShellProps>
   PageLayout?: React.FC<PageLayoutProps>
   initRelayEnvironment?: InitRelayEnvironment
   Page?: Page<T['PageProps']>

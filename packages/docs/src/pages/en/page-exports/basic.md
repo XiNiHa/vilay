@@ -17,7 +17,7 @@ export const Page = () => {
 
 ## `PageLayout`
 
-Vilay uses `PageLayout` export to render the layout of the app.
+Vilay uses `PageLayout` export to render the layout of the app. Like other page exports, this is completely overridden from values defined in your `_default`.
 
 ```tsx
 export const PageLayout = ({
@@ -31,24 +31,6 @@ export const PageLayout = ({
       <Suspense fallback="Loading...">{children}</Suspense>
     </>
   )
-}
-```
-
-## `head`
-
-Useful for setting `<head>` contents inside the page file. Updated in every page navigation.
-
-- Meta tags are inserted as `<meta name="${KEY}" content="${VALUE}">`.
-- Other tags are inserted as `<${KEY}>${VALUE}</${KEY}>`.
-
-```tsx
-export const head = {
-  // <title>My Vilay App</title>
-  title: 'My Vilay App',
-  meta: {
-    // <meta name="description" content="App built with Vilay">
-    description: 'App built with Vilay',
-  },
 }
 ```
 
@@ -74,5 +56,4 @@ export const getPageHead = ({ routeParams, urlParsed }) => {
     },
   }
 }
-
 ```

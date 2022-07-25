@@ -49,6 +49,7 @@ export const SIDEBAR = {
     { text: 'Page Exports', header: true },
     { text: 'About Page Exports', link: 'en/page-exports/about' },
     { text: 'Basic', link: 'en/page-exports/basic' },
+    { text: 'Advanced', link: 'en/page-exports/advanced' },
     { text: 'Relay', link: 'en/page-exports/relay' },
 
     { text: 'Reference', header: true },
