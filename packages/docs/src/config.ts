@@ -48,9 +48,9 @@ export const SIDEBAR = {
 
     { text: 'Page Exports', header: true },
     { text: 'About Page Exports', link: 'en/page-exports/about' },
-    { text: 'Page Exports - Basic', link: 'en/page-exports/basic' },
-    { text: 'Page Exports - Advanced', link: 'en/page-exports/advanced' },
-    { text: 'Page Exports - Relay', link: 'en/page-exports/relay' },
+    { text: 'Basic', link: 'en/page-exports/basic' },
+    { text: 'Advanced', link: 'en/page-exports/advanced' },
+    { text: 'Relay', link: 'en/page-exports/relay' },
 
     { text: 'Reference', header: true },
     { text: 'Vilay CLI', link: 'en/cli' },
