@@ -1,3 +1,9 @@
+---
+title: Advanced
+description: Documentation about Vilay's advanced page exports
+layout: ../../../layouts/MainLayout.astro
+---
+
 ## `PageShell`
 
 If you need to provide custom react provider composition, then `PageShell` is what you want to use. You probably only need it at the root level, but you could completely override the vilay `PageShell` and thus your providers for any other page.
