@@ -1,5 +1,11 @@
 # @vilay/render
 
+## 0.0.27
+
+### Patch Changes
+
+- 1ef7975: Add pageContext.redirectTo support
+
 ## 0.0.26
 
 ### Patch Changes
