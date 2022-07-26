@@ -4,7 +4,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "pnpm --filter=!docs -r build",
+    "build": "pnpm --filter=!docs --filter=!vilay-example -r build",
     "postinstall": "pnpm build",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,astro}\"",
