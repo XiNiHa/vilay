@@ -1,5 +1,11 @@
 # vilay
 
+## 0.0.27
+
+### Patch Changes
+
+- 770d597: Fix import without extension in ESM
+
 ## 0.0.26
 
 ### Patch Changes
