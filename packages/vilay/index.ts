@@ -1,17 +1,17 @@
-export { usePageContext } from './renderer/usePageContext.js'
-export { RouteManager, useRouteManager } from './renderer/routeManager.js'
+export { usePageContext } from './renderer/usePageContext'
+export { RouteManager, useRouteManager } from './renderer/routeManager'
 
-export { defineVilay } from './types.js'
+export { defineVilay } from './types'
 
 export {
   VilayApp,
   type PageShellProps,
   type VilayAppProps,
-} from './renderer/PageShell.js'
+} from './renderer/PageShell'
 
 export type {
   PageContext,
   PageLayoutProps,
   GetQueryVariables,
   InitRelayEnvironment,
-} from './types.js'
+} from './types'
