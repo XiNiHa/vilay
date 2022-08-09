@@ -1,5 +1,11 @@
 # vilay
 
+## 0.0.28
+
+### Patch Changes
+
+- af1e417: Export TS on Vilay root
+
 ## 0.0.27
 
 ### Patch Changes
